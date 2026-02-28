@@ -117,8 +117,10 @@ def plot_corner_heatmap(
         df = pd.DataFrame(X, columns=feature_names if feature_names is not None else [f"f{i}" for i in range(X.shape[1])])
     else:
         df = X.copy()
-        if feature_names is not None:
-            df.columns = feature_names
+    if feature_names is not None:
+        plot_features = [f for f in feature_names if f in df.columns]
+    else:
+        plot_features = df.columns.tolist()
     if hue is not None:
         df["_hue"] = hue
         hue_col = "_hue"
@@ -126,7 +128,7 @@ def plot_corner_heatmap(
         hue_col = None
 
     # Correlation matrix for color scale
-    X_vals = df[feature_names if feature_names is not None else df.columns].to_numpy()
+    X_vals = df[plot_features].to_numpy()
     C = np.corrcoef(X_vals, rowvar=False)
     tri = C[np.triu_indices_from(C, k=1)]
     vmin, vmax = float(tri.min()), float(tri.max())
@@ -162,7 +164,7 @@ def plot_corner_heatmap(
     # PairGrid
     g = sns.PairGrid(
         data=df,
-        vars=feature_names if feature_names is not None else df.columns,
+        vars=plot_features,
         hue=hue_col,
         palette=palette,
         diag_sharey=False
@@ -184,7 +186,7 @@ def plot_corner_heatmap(
     g.map_upper(corr_cell)
 
     # Styling/layout
-    n = len(feature_names if feature_names is not None else df.columns)
+    n = len(plot_features)
     g.fig.set_size_inches(figsize)
     right_margin = 0.20
     g.fig.subplots_adjust(

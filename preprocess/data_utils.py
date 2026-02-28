@@ -2,7 +2,11 @@ import pandas as pd
 def import_orginal_dataset():
     df = pd.read_excel("./data/airline_ticket_dataset.xlsx")
     return df
-
+def import_unit_removed_dataset():
+    df = import_orginal_dataset()
+    df['fare'] = df['fare'].astype(str).str.replace('$', '', regex=False).astype(float)
+    df['fare_lg'] = df['fare_lg'].astype(str).str.replace('$', '', regex=False).astype(float)
+    return df
 COLUMN_UNIT_MAP = {
     "Year": "year",
     "quarter": "quarter",
