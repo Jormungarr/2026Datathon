@@ -1,8 +1,6 @@
 import pandas as pd
 def import_orginal_dataset():
     df = pd.read_excel("./data/airline_ticket_dataset.xlsx")
-    df['fare'] = df['fare'].astype(str).str.replace('$', '', regex=False)
-    df['fare_lg'] = df['fare_lg'].astype(str).str.replace('$', '', regex=False)
     return df
 
 COLUMN_UNIT_MAP = {
