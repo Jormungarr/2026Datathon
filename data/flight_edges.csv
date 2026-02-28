@@ -1,0 +1,1247 @@
+city1,city2,count
+"Albany, NY","Atlanta, GA (Metropolitan Area)",8
+"Albany, NY","Chicago, IL",11
+"Albany, NY","Denver, CO",3
+"Albany, NY","Los Angeles, CA (Metropolitan Area)",3
+"Albany, NY","Miami, FL (Metropolitan Area)",14
+"Albany, NY","Orlando, FL",14
+"Albany, NY","Tampa, FL (Metropolitan Area)",14
+"Albany, NY","Washington, DC (Metropolitan Area)",14
+"Albuquerque, NM","Atlanta, GA (Metropolitan Area)",6
+"Albuquerque, NM","Austin, TX",14
+"Albuquerque, NM","Boston, MA (Metropolitan Area)",2
+"Albuquerque, NM","Chicago, IL",14
+"Albuquerque, NM","Dallas/Fort Worth, TX",14
+"Albuquerque, NM","Denver, CO",14
+"Albuquerque, NM","Houston, TX",14
+"Albuquerque, NM","Las Vegas, NV",14
+"Albuquerque, NM","Los Angeles, CA (Metropolitan Area)",14
+"Albuquerque, NM","New York City, NY (Metropolitan Area)",14
+"Albuquerque, NM","Orlando, FL",5
+"Albuquerque, NM","Phoenix, AZ",14
+"Albuquerque, NM","Portland, OR",12
+"Albuquerque, NM","San Diego, CA",14
+"Albuquerque, NM","San Francisco, CA (Metropolitan Area)",14
+"Albuquerque, NM","Seattle, WA",14
+"Albuquerque, NM","Washington, DC (Metropolitan Area)",14
+"Allentown/Bethlehem/Easton, PA","Sanford, FL",14
+"Allentown/Bethlehem/Easton, PA","Tampa, FL (Metropolitan Area)",7
+"Amarillo, TX","Dallas/Fort Worth, TX",14
+"Appleton, WI","Phoenix, AZ",4
+"Appleton, WI","Punta Gorda, FL",1
+"Appleton, WI","Sanford, FL",2
+"Appleton, WI","Tampa, FL (Metropolitan Area)",1
+"Asheville, NC","Boston, MA (Metropolitan Area)",4
+"Asheville, NC","Chicago, IL",4
+"Asheville, NC","Denver, CO",1
+"Asheville, NC","Miami, FL (Metropolitan Area)",14
+"Asheville, NC","New York City, NY (Metropolitan Area)",13
+"Asheville, NC","Sanford, FL",4
+"Asheville, NC","Tampa, FL (Metropolitan Area)",8
+"Aspen, CO","Los Angeles, CA (Metropolitan Area)",4
+"Aspen, CO","New York City, NY (Metropolitan Area)",4
+"Atlanta, GA (Metropolitan Area)","Austin, TX",14
+"Atlanta, GA (Metropolitan Area)","Boston, MA (Metropolitan Area)",14
+"Atlanta, GA (Metropolitan Area)","Buffalo, NY",14
+"Atlanta, GA (Metropolitan Area)","Charleston, SC",12
+"Atlanta, GA (Metropolitan Area)","Charlotte, NC",14
+"Atlanta, GA (Metropolitan Area)","Chicago, IL",14
+"Atlanta, GA (Metropolitan Area)","Cincinnati, OH",14
+"Atlanta, GA (Metropolitan Area)","Cleveland, OH (Metropolitan Area)",14
+"Atlanta, GA (Metropolitan Area)","Columbus, OH",14
+"Atlanta, GA (Metropolitan Area)","Dallas/Fort Worth, TX",14
+"Atlanta, GA (Metropolitan Area)","Denver, CO",14
+"Atlanta, GA (Metropolitan Area)","Detroit, MI",14
+"Atlanta, GA (Metropolitan Area)","Fort Myers, FL",14
+"Atlanta, GA (Metropolitan Area)","Grand Rapids, MI",14
+"Atlanta, GA (Metropolitan Area)","Greensboro/High Point, NC",4
+"Atlanta, GA (Metropolitan Area)","Hartford, CT",14
+"Atlanta, GA (Metropolitan Area)","Houston, TX",14
+"Atlanta, GA (Metropolitan Area)","Indianapolis, IN",14
+"Atlanta, GA (Metropolitan Area)","Jackson/Vicksburg, MS",4
+"Atlanta, GA (Metropolitan Area)","Jacksonville, FL",14
+"Atlanta, GA (Metropolitan Area)","Kansas City, MO",14
+"Atlanta, GA (Metropolitan Area)","Las Vegas, NV",14
+"Atlanta, GA (Metropolitan Area)","Little Rock, AR",10
+"Atlanta, GA (Metropolitan Area)","Los Angeles, CA (Metropolitan Area)",14
+"Atlanta, GA (Metropolitan Area)","Louisville, KY",14
+"Atlanta, GA (Metropolitan Area)","Memphis, TN",14
+"Atlanta, GA (Metropolitan Area)","Miami, FL (Metropolitan Area)",14
+"Atlanta, GA (Metropolitan Area)","Milwaukee, WI",14
+"Atlanta, GA (Metropolitan Area)","Minneapolis/St. Paul, MN",14
+"Atlanta, GA (Metropolitan Area)","Nashville, TN",14
+"Atlanta, GA (Metropolitan Area)","New Orleans, LA",14
+"Atlanta, GA (Metropolitan Area)","New York City, NY (Metropolitan Area)",14
+"Atlanta, GA (Metropolitan Area)","Norfolk, VA (Metropolitan Area)",14
+"Atlanta, GA (Metropolitan Area)","Oklahoma City, OK",14
+"Atlanta, GA (Metropolitan Area)","Omaha, NE",14
+"Atlanta, GA (Metropolitan Area)","Orlando, FL",14
+"Atlanta, GA (Metropolitan Area)","Philadelphia, PA",14
+"Atlanta, GA (Metropolitan Area)","Phoenix, AZ",14
+"Atlanta, GA (Metropolitan Area)","Pittsburgh, PA",14
+"Atlanta, GA (Metropolitan Area)","Portland, ME",4
+"Atlanta, GA (Metropolitan Area)","Portland, OR",14
+"Atlanta, GA (Metropolitan Area)","Raleigh/Durham, NC",14
+"Atlanta, GA (Metropolitan Area)","Richmond, VA",14
+"Atlanta, GA (Metropolitan Area)","Rochester, NY",5
+"Atlanta, GA (Metropolitan Area)","Sacramento, CA",14
+"Atlanta, GA (Metropolitan Area)","Salt Lake City, UT",14
+"Atlanta, GA (Metropolitan Area)","San Antonio, TX",14
+"Atlanta, GA (Metropolitan Area)","San Diego, CA",14
+"Atlanta, GA (Metropolitan Area)","San Francisco, CA (Metropolitan Area)",14
+"Atlanta, GA (Metropolitan Area)","Sarasota/Bradenton, FL",14
+"Atlanta, GA (Metropolitan Area)","Seattle, WA",14
+"Atlanta, GA (Metropolitan Area)","St. Louis, MO",14
+"Atlanta, GA (Metropolitan Area)","Syracuse, NY",11
+"Atlanta, GA (Metropolitan Area)","Tampa, FL (Metropolitan Area)",14
+"Atlanta, GA (Metropolitan Area)","Trenton, NJ",2
+"Atlanta, GA (Metropolitan Area)","Washington, DC (Metropolitan Area)",14
+"Atlanta, GA (Metropolitan Area)","West Palm Beach/Palm Beach, FL",14
+"Atlantic City, NJ","Fort Myers, FL",8
+"Atlantic City, NJ","Miami, FL (Metropolitan Area)",14
+"Atlantic City, NJ","Myrtle Beach, SC",1
+"Atlantic City, NJ","Orlando, FL",14
+"Atlantic City, NJ","Tampa, FL (Metropolitan Area)",3
+"Atlantic City, NJ","West Palm Beach/Palm Beach, FL",3
+"Austin, TX","Boston, MA (Metropolitan Area)",14
+"Austin, TX","Charlotte, NC",14
+"Austin, TX","Chicago, IL",14
+"Austin, TX","Cincinnati, OH",11
+"Austin, TX","Cleveland, OH (Metropolitan Area)",5
+"Austin, TX","Columbus, OH",13
+"Austin, TX","Dallas/Fort Worth, TX",14
+"Austin, TX","Denver, CO",14
+"Austin, TX","Detroit, MI",14
+"Austin, TX","El Paso, TX",14
+"Austin, TX","Houston, TX",2
+"Austin, TX","Indianapolis, IN",14
+"Austin, TX","Kansas City, MO",14
+"Austin, TX","Las Vegas, NV",14
+"Austin, TX","Los Angeles, CA (Metropolitan Area)",14
+"Austin, TX","Miami, FL (Metropolitan Area)",14
+"Austin, TX","Minneapolis/St. Paul, MN",14
+"Austin, TX","Nashville, TN",14
+"Austin, TX","New Orleans, LA",14
+"Austin, TX","New York City, NY (Metropolitan Area)",14
+"Austin, TX","Orlando, FL",14
+"Austin, TX","Philadelphia, PA",14
+"Austin, TX","Phoenix, AZ",14
+"Austin, TX","Pittsburgh, PA",10
+"Austin, TX","Portland, OR",14
+"Austin, TX","Raleigh/Durham, NC",14
+"Austin, TX","Sacramento, CA",14
+"Austin, TX","Salt Lake City, UT",14
+"Austin, TX","San Diego, CA",14
+"Austin, TX","San Francisco, CA (Metropolitan Area)",14
+"Austin, TX","Seattle, WA",14
+"Austin, TX","St. Louis, MO",14
+"Austin, TX","Tampa, FL (Metropolitan Area)",14
+"Austin, TX","Washington, DC (Metropolitan Area)",14
+"Bangor, ME","New York City, NY (Metropolitan Area)",3
+"Bangor, ME","Tampa, FL (Metropolitan Area)",1
+"Belleville, IL","Valparaiso, FL",3
+"Bellingham, WA","Las Vegas, NV",12
+"Bellingham, WA","Los Angeles, CA (Metropolitan Area)",1
+"Bellingham, WA","San Francisco, CA (Metropolitan Area)",4
+"Bend/Redmond, OR","Los Angeles, CA (Metropolitan Area)",14
+"Bend/Redmond, OR","San Francisco, CA (Metropolitan Area)",8
+"Bend/Redmond, OR","Seattle, WA",9
+"Billings, MT","Phoenix, AZ",2
+"Birmingham, AL","Chicago, IL",14
+"Birmingham, AL","Dallas/Fort Worth, TX",14
+"Birmingham, AL","Denver, CO",14
+"Birmingham, AL","Houston, TX",14
+"Birmingham, AL","Las Vegas, NV",4
+"Birmingham, AL","Los Angeles, CA (Metropolitan Area)",9
+"Birmingham, AL","Miami, FL (Metropolitan Area)",4
+"Birmingham, AL","New York City, NY (Metropolitan Area)",14
+"Birmingham, AL","Orlando, FL",14
+"Birmingham, AL","Tampa, FL (Metropolitan Area)",11
+"Birmingham, AL","Washington, DC (Metropolitan Area)",14
+"Bismarck/Mandan, ND","Phoenix, AZ",4
+"Boise, ID","Chicago, IL",7
+"Boise, ID","Dallas/Fort Worth, TX",14
+"Boise, ID","Denver, CO",14
+"Boise, ID","Las Vegas, NV",14
+"Boise, ID","Los Angeles, CA (Metropolitan Area)",14
+"Boise, ID","Orlando, FL",2
+"Boise, ID","Phoenix, AZ",14
+"Boise, ID","Portland, OR",14
+"Boise, ID","Sacramento, CA",14
+"Boise, ID","Salt Lake City, UT",3
+"Boise, ID","San Diego, CA",14
+"Boise, ID","San Francisco, CA (Metropolitan Area)",14
+"Boise, ID","Seattle, WA",14
+"Boise, ID","Spokane, WA",14
+"Boston, MA (Metropolitan Area)","Bozeman, MT",5
+"Boston, MA (Metropolitan Area)","Buffalo, NY",14
+"Boston, MA (Metropolitan Area)","Charleston, SC",14
+"Boston, MA (Metropolitan Area)","Charlotte, NC",14
+"Boston, MA (Metropolitan Area)","Chicago, IL",14
+"Boston, MA (Metropolitan Area)","Cincinnati, OH",14
+"Boston, MA (Metropolitan Area)","Cleveland, OH (Metropolitan Area)",14
+"Boston, MA (Metropolitan Area)","Columbus, OH",14
+"Boston, MA (Metropolitan Area)","Dallas/Fort Worth, TX",14
+"Boston, MA (Metropolitan Area)","Denver, CO",14
+"Boston, MA (Metropolitan Area)","Detroit, MI",14
+"Boston, MA (Metropolitan Area)","Fort Myers, FL",14
+"Boston, MA (Metropolitan Area)","Grand Rapids, MI",3
+"Boston, MA (Metropolitan Area)","Greenville/Spartanburg, SC",2
+"Boston, MA (Metropolitan Area)","Houston, TX",14
+"Boston, MA (Metropolitan Area)","Indianapolis, IN",14
+"Boston, MA (Metropolitan Area)","Jacksonville, FL",14
+"Boston, MA (Metropolitan Area)","Kansas City, MO",14
+"Boston, MA (Metropolitan Area)","Key West, FL",4
+"Boston, MA (Metropolitan Area)","Knoxville, TN",3
+"Boston, MA (Metropolitan Area)","Las Vegas, NV",14
+"Boston, MA (Metropolitan Area)","Los Angeles, CA (Metropolitan Area)",14
+"Boston, MA (Metropolitan Area)","Louisville, KY",9
+"Boston, MA (Metropolitan Area)","Memphis, TN",10
+"Boston, MA (Metropolitan Area)","Miami, FL (Metropolitan Area)",14
+"Boston, MA (Metropolitan Area)","Milwaukee, WI",13
+"Boston, MA (Metropolitan Area)","Minneapolis/St. Paul, MN",14
+"Boston, MA (Metropolitan Area)","Myrtle Beach, SC",14
+"Boston, MA (Metropolitan Area)","Nashville, TN",14
+"Boston, MA (Metropolitan Area)","New Orleans, LA",14
+"Boston, MA (Metropolitan Area)","New York City, NY (Metropolitan Area)",14
+"Boston, MA (Metropolitan Area)","Norfolk, VA (Metropolitan Area)",14
+"Boston, MA (Metropolitan Area)","Orlando, FL",14
+"Boston, MA (Metropolitan Area)","Philadelphia, PA",14
+"Boston, MA (Metropolitan Area)","Phoenix, AZ",14
+"Boston, MA (Metropolitan Area)","Pittsburgh, PA",14
+"Boston, MA (Metropolitan Area)","Portland, OR",14
+"Boston, MA (Metropolitan Area)","Raleigh/Durham, NC",14
+"Boston, MA (Metropolitan Area)","Richmond, VA",14
+"Boston, MA (Metropolitan Area)","Rochester, NY",4
+"Boston, MA (Metropolitan Area)","Sacramento, CA",10
+"Boston, MA (Metropolitan Area)","Salt Lake City, UT",14
+"Boston, MA (Metropolitan Area)","San Antonio, TX",14
+"Boston, MA (Metropolitan Area)","San Diego, CA",14
+"Boston, MA (Metropolitan Area)","San Francisco, CA (Metropolitan Area)",14
+"Boston, MA (Metropolitan Area)","Sarasota/Bradenton, FL",14
+"Boston, MA (Metropolitan Area)","Savannah, GA",14
+"Boston, MA (Metropolitan Area)","Seattle, WA",14
+"Boston, MA (Metropolitan Area)","St. Louis, MO",14
+"Boston, MA (Metropolitan Area)","Tampa, FL (Metropolitan Area)",14
+"Boston, MA (Metropolitan Area)","Washington, DC (Metropolitan Area)",14
+"Boston, MA (Metropolitan Area)","West Palm Beach/Palm Beach, FL",14
+"Boston, MA (Metropolitan Area)","Wilmington, NC",1
+"Bozeman, MT","Chicago, IL",5
+"Bozeman, MT","Dallas/Fort Worth, TX",2
+"Bozeman, MT","Denver, CO",14
+"Bozeman, MT","Las Vegas, NV",1
+"Bozeman, MT","Los Angeles, CA (Metropolitan Area)",14
+"Bozeman, MT","Minneapolis/St. Paul, MN",4
+"Bozeman, MT","New York City, NY (Metropolitan Area)",9
+"Bozeman, MT","Phoenix, AZ",4
+"Bozeman, MT","San Francisco, CA (Metropolitan Area)",10
+"Bozeman, MT","Seattle, WA",13
+"Bozeman, MT","Washington, DC (Metropolitan Area)",3
+"Buffalo, NY","Charlotte, NC",11
+"Buffalo, NY","Chicago, IL",14
+"Buffalo, NY","Dallas/Fort Worth, TX",9
+"Buffalo, NY","Denver, CO",7
+"Buffalo, NY","Fort Myers, FL",5
+"Buffalo, NY","Houston, TX",3
+"Buffalo, NY","Las Vegas, NV",14
+"Buffalo, NY","Los Angeles, CA (Metropolitan Area)",14
+"Buffalo, NY","Miami, FL (Metropolitan Area)",14
+"Buffalo, NY","Minneapolis/St. Paul, MN",2
+"Buffalo, NY","New York City, NY (Metropolitan Area)",14
+"Buffalo, NY","Orlando, FL",14
+"Buffalo, NY","Phoenix, AZ",7
+"Buffalo, NY","San Francisco, CA (Metropolitan Area)",3
+"Buffalo, NY","Tampa, FL (Metropolitan Area)",14
+"Buffalo, NY","Washington, DC (Metropolitan Area)",14
+"Burlington, VT","Chicago, IL",2
+"Burlington, VT","Denver, CO",1
+"Burlington, VT","New York City, NY (Metropolitan Area)",11
+"Burlington, VT","Orlando, FL",1
+"Burlington, VT","Washington, DC (Metropolitan Area)",13
+"Cedar Rapids/Iowa City, IA","Denver, CO",10
+"Cedar Rapids/Iowa City, IA","Phoenix, AZ",14
+"Cedar Rapids/Iowa City, IA","Punta Gorda, FL",2
+"Cedar Rapids/Iowa City, IA","Tampa, FL (Metropolitan Area)",1
+"Charleston, SC","Chicago, IL",14
+"Charleston, SC","Cleveland, OH (Metropolitan Area)",5
+"Charleston, SC","Dallas/Fort Worth, TX",14
+"Charleston, SC","Denver, CO",14
+"Charleston, SC","Detroit, MI",6
+"Charleston, SC","Hartford, CT",1
+"Charleston, SC","Houston, TX",13
+"Charleston, SC","Las Vegas, NV",3
+"Charleston, SC","Los Angeles, CA (Metropolitan Area)",14
+"Charleston, SC","Miami, FL (Metropolitan Area)",14
+"Charleston, SC","Minneapolis/St. Paul, MN",6
+"Charleston, SC","Nashville, TN",14
+"Charleston, SC","New York City, NY (Metropolitan Area)",14
+"Charleston, SC","Philadelphia, PA",14
+"Charleston, SC","Phoenix, AZ",1
+"Charleston, SC","Pittsburgh, PA",3
+"Charleston, SC","Seattle, WA",12
+"Charleston, SC","Tampa, FL (Metropolitan Area)",2
+"Charleston, SC","Washington, DC (Metropolitan Area)",14
+"Charlotte, NC","Chicago, IL",14
+"Charlotte, NC","Cincinnati, OH",4
+"Charlotte, NC","Cleveland, OH (Metropolitan Area)",14
+"Charlotte, NC","Columbus, OH",3
+"Charlotte, NC","Dallas/Fort Worth, TX",14
+"Charlotte, NC","Denver, CO",14
+"Charlotte, NC","Detroit, MI",14
+"Charlotte, NC","Fort Myers, FL",11
+"Charlotte, NC","Hartford, CT",14
+"Charlotte, NC","Houston, TX",14
+"Charlotte, NC","Indianapolis, IN",14
+"Charlotte, NC","Jacksonville, FL",1
+"Charlotte, NC","Kansas City, MO",14
+"Charlotte, NC","Las Vegas, NV",14
+"Charlotte, NC","Los Angeles, CA (Metropolitan Area)",14
+"Charlotte, NC","Memphis, TN",12
+"Charlotte, NC","Miami, FL (Metropolitan Area)",14
+"Charlotte, NC","Milwaukee, WI",8
+"Charlotte, NC","Minneapolis/St. Paul, MN",14
+"Charlotte, NC","Nashville, TN",14
+"Charlotte, NC","New Orleans, LA",14
+"Charlotte, NC","New York City, NY (Metropolitan Area)",14
+"Charlotte, NC","Orlando, FL",14
+"Charlotte, NC","Philadelphia, PA",14
+"Charlotte, NC","Phoenix, AZ",14
+"Charlotte, NC","Pittsburgh, PA",14
+"Charlotte, NC","Portland, OR",8
+"Charlotte, NC","Sacramento, CA",6
+"Charlotte, NC","Salt Lake City, UT",14
+"Charlotte, NC","San Antonio, TX",14
+"Charlotte, NC","San Diego, CA",14
+"Charlotte, NC","San Francisco, CA (Metropolitan Area)",14
+"Charlotte, NC","Seattle, WA",14
+"Charlotte, NC","St. Louis, MO",14
+"Charlotte, NC","Syracuse, NY",1
+"Charlotte, NC","Tampa, FL (Metropolitan Area)",14
+"Charlotte, NC","Washington, DC (Metropolitan Area)",14
+"Charlotte, NC","West Palm Beach/Palm Beach, FL",10
+"Charlottesville, VA","New York City, NY (Metropolitan Area)",4
+"Chicago, IL","Cincinnati, OH",14
+"Chicago, IL","Cleveland, OH (Metropolitan Area)",14
+"Chicago, IL","Colorado Springs, CO",7
+"Chicago, IL","Columbus, OH",14
+"Chicago, IL","Dallas/Fort Worth, TX",14
+"Chicago, IL","Denver, CO",14
+"Chicago, IL","Des Moines, IA",4
+"Chicago, IL","Detroit, MI",14
+"Chicago, IL","El Paso, TX",14
+"Chicago, IL","Fayetteville, AR",11
+"Chicago, IL","Fort Myers, FL",14
+"Chicago, IL","Fresno, CA",1
+"Chicago, IL","Greensboro/High Point, NC",6
+"Chicago, IL","Greenville/Spartanburg, SC",12
+"Chicago, IL","Harrisburg, PA",4
+"Chicago, IL","Hartford, CT",14
+"Chicago, IL","Houston, TX",14
+"Chicago, IL","Indianapolis, IN",2
+"Chicago, IL","Jacksonville, FL",14
+"Chicago, IL","Kansas City, MO",14
+"Chicago, IL","Key West, FL",3
+"Chicago, IL","Knoxville, TN",13
+"Chicago, IL","Las Vegas, NV",14
+"Chicago, IL","Little Rock, AR",3
+"Chicago, IL","Los Angeles, CA (Metropolitan Area)",14
+"Chicago, IL","Louisville, KY",14
+"Chicago, IL","Memphis, TN",14
+"Chicago, IL","Miami, FL (Metropolitan Area)",14
+"Chicago, IL","Minneapolis/St. Paul, MN",14
+"Chicago, IL","Myrtle Beach, SC",9
+"Chicago, IL","Nashville, TN",14
+"Chicago, IL","New Orleans, LA",14
+"Chicago, IL","New York City, NY (Metropolitan Area)",14
+"Chicago, IL","Norfolk, VA (Metropolitan Area)",14
+"Chicago, IL","Oklahoma City, OK",14
+"Chicago, IL","Omaha, NE",14
+"Chicago, IL","Orlando, FL",14
+"Chicago, IL","Palm Springs, CA",11
+"Chicago, IL","Panama City, FL",1
+"Chicago, IL","Pensacola, FL",13
+"Chicago, IL","Philadelphia, PA",14
+"Chicago, IL","Phoenix, AZ",14
+"Chicago, IL","Pittsburgh, PA",14
+"Chicago, IL","Portland, ME",8
+"Chicago, IL","Portland, OR",14
+"Chicago, IL","Raleigh/Durham, NC",14
+"Chicago, IL","Reno, NV",5
+"Chicago, IL","Richmond, VA",14
+"Chicago, IL","Rochester, NY",10
+"Chicago, IL","Sacramento, CA",14
+"Chicago, IL","Salt Lake City, UT",14
+"Chicago, IL","San Antonio, TX",14
+"Chicago, IL","San Diego, CA",14
+"Chicago, IL","San Francisco, CA (Metropolitan Area)",14
+"Chicago, IL","Sarasota/Bradenton, FL",14
+"Chicago, IL","Savannah, GA",14
+"Chicago, IL","Seattle, WA",14
+"Chicago, IL","St. Louis, MO",14
+"Chicago, IL","Syracuse, NY",9
+"Chicago, IL","Tampa, FL (Metropolitan Area)",14
+"Chicago, IL","Tucson, AZ",14
+"Chicago, IL","Tulsa, OK",10
+"Chicago, IL","Washington, DC (Metropolitan Area)",14
+"Chicago, IL","West Palm Beach/Palm Beach, FL",12
+"Cincinnati, OH","Dallas/Fort Worth, TX",14
+"Cincinnati, OH","Denver, CO",14
+"Cincinnati, OH","Fort Myers, FL",14
+"Cincinnati, OH","Houston, TX",14
+"Cincinnati, OH","Las Vegas, NV",14
+"Cincinnati, OH","Los Angeles, CA (Metropolitan Area)",14
+"Cincinnati, OH","Miami, FL (Metropolitan Area)",14
+"Cincinnati, OH","Minneapolis/St. Paul, MN",14
+"Cincinnati, OH","New York City, NY (Metropolitan Area)",14
+"Cincinnati, OH","Orlando, FL",14
+"Cincinnati, OH","Philadelphia, PA",13
+"Cincinnati, OH","Phoenix, AZ",14
+"Cincinnati, OH","Punta Gorda, FL",5
+"Cincinnati, OH","Salt Lake City, UT",10
+"Cincinnati, OH","San Francisco, CA (Metropolitan Area)",14
+"Cincinnati, OH","Sanford, FL",5
+"Cincinnati, OH","Sarasota/Bradenton, FL",8
+"Cincinnati, OH","Seattle, WA",14
+"Cincinnati, OH","Tampa, FL (Metropolitan Area)",14
+"Cincinnati, OH","Valparaiso, FL",7
+"Cincinnati, OH","Washington, DC (Metropolitan Area)",14
+"Cleveland, OH (Metropolitan Area)","Dallas/Fort Worth, TX",14
+"Cleveland, OH (Metropolitan Area)","Denver, CO",14
+"Cleveland, OH (Metropolitan Area)","Fort Myers, FL",14
+"Cleveland, OH (Metropolitan Area)","Houston, TX",14
+"Cleveland, OH (Metropolitan Area)","Las Vegas, NV",14
+"Cleveland, OH (Metropolitan Area)","Los Angeles, CA (Metropolitan Area)",14
+"Cleveland, OH (Metropolitan Area)","Miami, FL (Metropolitan Area)",14
+"Cleveland, OH (Metropolitan Area)","Minneapolis/St. Paul, MN",14
+"Cleveland, OH (Metropolitan Area)","Myrtle Beach, SC",4
+"Cleveland, OH (Metropolitan Area)","Nashville, TN",14
+"Cleveland, OH (Metropolitan Area)","New Orleans, LA",2
+"Cleveland, OH (Metropolitan Area)","New York City, NY (Metropolitan Area)",14
+"Cleveland, OH (Metropolitan Area)","Orlando, FL",14
+"Cleveland, OH (Metropolitan Area)","Philadelphia, PA",10
+"Cleveland, OH (Metropolitan Area)","Phoenix, AZ",14
+"Cleveland, OH (Metropolitan Area)","Raleigh/Durham, NC",2
+"Cleveland, OH (Metropolitan Area)","San Diego, CA",11
+"Cleveland, OH (Metropolitan Area)","San Francisco, CA (Metropolitan Area)",14
+"Cleveland, OH (Metropolitan Area)","Sarasota/Bradenton, FL",6
+"Cleveland, OH (Metropolitan Area)","Seattle, WA",11
+"Cleveland, OH (Metropolitan Area)","St. Louis, MO",7
+"Cleveland, OH (Metropolitan Area)","Tampa, FL (Metropolitan Area)",14
+"Cleveland, OH (Metropolitan Area)","Washington, DC (Metropolitan Area)",14
+"Colorado Springs, CO","Dallas/Fort Worth, TX",14
+"Colorado Springs, CO","Houston, TX",1
+"Colorado Springs, CO","Las Vegas, NV",14
+"Colorado Springs, CO","Los Angeles, CA (Metropolitan Area)",14
+"Colorado Springs, CO","Phoenix, AZ",14
+"Colorado Springs, CO","Washington, DC (Metropolitan Area)",7
+"Columbia, SC","New York City, NY (Metropolitan Area)",9
+"Columbia, SC","Washington, DC (Metropolitan Area)",13
+"Columbus, OH","Dallas/Fort Worth, TX",14
+"Columbus, OH","Denver, CO",14
+"Columbus, OH","Fort Myers, FL",14
+"Columbus, OH","Houston, TX",14
+"Columbus, OH","Las Vegas, NV",14
+"Columbus, OH","Los Angeles, CA (Metropolitan Area)",14
+"Columbus, OH","Miami, FL (Metropolitan Area)",14
+"Columbus, OH","Minneapolis/St. Paul, MN",14
+"Columbus, OH","Nashville, TN",1
+"Columbus, OH","New York City, NY (Metropolitan Area)",14
+"Columbus, OH","Orlando, FL",14
+"Columbus, OH","Philadelphia, PA",12
+"Columbus, OH","Phoenix, AZ",14
+"Columbus, OH","San Diego, CA",4
+"Columbus, OH","San Francisco, CA (Metropolitan Area)",14
+"Columbus, OH","Sarasota/Bradenton, FL",10
+"Columbus, OH","Seattle, WA",14
+"Columbus, OH","Tampa, FL (Metropolitan Area)",14
+"Columbus, OH","Washington, DC (Metropolitan Area)",14
+"Dallas/Fort Worth, TX","Denver, CO",14
+"Dallas/Fort Worth, TX","Des Moines, IA",13
+"Dallas/Fort Worth, TX","Detroit, MI",14
+"Dallas/Fort Worth, TX","El Paso, TX",14
+"Dallas/Fort Worth, TX","Fort Myers, FL",14
+"Dallas/Fort Worth, TX","Fresno, CA",4
+"Dallas/Fort Worth, TX","Grand Rapids, MI",14
+"Dallas/Fort Worth, TX","Greensboro/High Point, NC",3
+"Dallas/Fort Worth, TX","Greenville/Spartanburg, SC",13
+"Dallas/Fort Worth, TX","Harlingen/San Benito, TX",10
+"Dallas/Fort Worth, TX","Hartford, CT",14
+"Dallas/Fort Worth, TX","Houston, TX",14
+"Dallas/Fort Worth, TX","Indianapolis, IN",14
+"Dallas/Fort Worth, TX","Jacksonville, FL",14
+"Dallas/Fort Worth, TX","Kansas City, MO",14
+"Dallas/Fort Worth, TX","Knoxville, TN",8
+"Dallas/Fort Worth, TX","Las Vegas, NV",14
+"Dallas/Fort Worth, TX","Little Rock, AR",14
+"Dallas/Fort Worth, TX","Los Angeles, CA (Metropolitan Area)",14
+"Dallas/Fort Worth, TX","Louisville, KY",14
+"Dallas/Fort Worth, TX","Lubbock, TX",14
+"Dallas/Fort Worth, TX","Memphis, TN",14
+"Dallas/Fort Worth, TX","Miami, FL (Metropolitan Area)",14
+"Dallas/Fort Worth, TX","Midland/Odessa, TX",14
+"Dallas/Fort Worth, TX","Milwaukee, WI",14
+"Dallas/Fort Worth, TX","Minneapolis/St. Paul, MN",14
+"Dallas/Fort Worth, TX","Nashville, TN",14
+"Dallas/Fort Worth, TX","New Orleans, LA",14
+"Dallas/Fort Worth, TX","New York City, NY (Metropolitan Area)",14
+"Dallas/Fort Worth, TX","Norfolk, VA (Metropolitan Area)",14
+"Dallas/Fort Worth, TX","Omaha, NE",14
+"Dallas/Fort Worth, TX","Orlando, FL",14
+"Dallas/Fort Worth, TX","Palm Springs, CA",6
+"Dallas/Fort Worth, TX","Panama City, FL",11
+"Dallas/Fort Worth, TX","Pensacola, FL",14
+"Dallas/Fort Worth, TX","Philadelphia, PA",14
+"Dallas/Fort Worth, TX","Phoenix, AZ",14
+"Dallas/Fort Worth, TX","Pittsburgh, PA",14
+"Dallas/Fort Worth, TX","Portland, OR",14
+"Dallas/Fort Worth, TX","Raleigh/Durham, NC",14
+"Dallas/Fort Worth, TX","Reno, NV",14
+"Dallas/Fort Worth, TX","Richmond, VA",14
+"Dallas/Fort Worth, TX","Sacramento, CA",14
+"Dallas/Fort Worth, TX","Salt Lake City, UT",14
+"Dallas/Fort Worth, TX","San Antonio, TX",14
+"Dallas/Fort Worth, TX","San Diego, CA",14
+"Dallas/Fort Worth, TX","San Francisco, CA (Metropolitan Area)",14
+"Dallas/Fort Worth, TX","Sarasota/Bradenton, FL",2
+"Dallas/Fort Worth, TX","Savannah, GA",14
+"Dallas/Fort Worth, TX","Seattle, WA",14
+"Dallas/Fort Worth, TX","Spokane, WA",1
+"Dallas/Fort Worth, TX","St. Louis, MO",14
+"Dallas/Fort Worth, TX","Tampa, FL (Metropolitan Area)",14
+"Dallas/Fort Worth, TX","Tucson, AZ",14
+"Dallas/Fort Worth, TX","Tulsa, OK",14
+"Dallas/Fort Worth, TX","Valparaiso, FL",11
+"Dallas/Fort Worth, TX","Washington, DC (Metropolitan Area)",14
+"Dallas/Fort Worth, TX","West Palm Beach/Palm Beach, FL",13
+"Dayton, OH","Washington, DC (Metropolitan Area)",12
+"Denver, CO","Des Moines, IA",14
+"Denver, CO","Detroit, MI",14
+"Denver, CO","El Paso, TX",14
+"Denver, CO","Eugene, OR",1
+"Denver, CO","Fargo, ND",2
+"Denver, CO","Fayetteville, AR",2
+"Denver, CO","Fort Myers, FL",14
+"Denver, CO","Fresno, CA",6
+"Denver, CO","Grand Rapids, MI",14
+"Denver, CO","Hartford, CT",14
+"Denver, CO","Houston, TX",14
+"Denver, CO","Indianapolis, IN",14
+"Denver, CO","Jacksonville, FL",14
+"Denver, CO","Kansas City, MO",14
+"Denver, CO","Knoxville, TN",11
+"Denver, CO","Las Vegas, NV",14
+"Denver, CO","Little Rock, AR",12
+"Denver, CO","Los Angeles, CA (Metropolitan Area)",14
+"Denver, CO","Louisville, KY",14
+"Denver, CO","Madison, WI",14
+"Denver, CO","Memphis, TN",14
+"Denver, CO","Miami, FL (Metropolitan Area)",14
+"Denver, CO","Milwaukee, WI",14
+"Denver, CO","Minneapolis/St. Paul, MN",14
+"Denver, CO","Missoula, MT",1
+"Denver, CO","Nashville, TN",14
+"Denver, CO","New Orleans, LA",14
+"Denver, CO","New York City, NY (Metropolitan Area)",14
+"Denver, CO","Norfolk, VA (Metropolitan Area)",14
+"Denver, CO","Oklahoma City, OK",14
+"Denver, CO","Omaha, NE",14
+"Denver, CO","Orlando, FL",14
+"Denver, CO","Palm Springs, CA",11
+"Denver, CO","Pensacola, FL",14
+"Denver, CO","Philadelphia, PA",14
+"Denver, CO","Phoenix, AZ",14
+"Denver, CO","Pittsburgh, PA",14
+"Denver, CO","Portland, ME",3
+"Denver, CO","Portland, OR",14
+"Denver, CO","Raleigh/Durham, NC",14
+"Denver, CO","Reno, NV",14
+"Denver, CO","Richmond, VA",14
+"Denver, CO","Sacramento, CA",14
+"Denver, CO","Salt Lake City, UT",14
+"Denver, CO","San Antonio, TX",14
+"Denver, CO","San Diego, CA",14
+"Denver, CO","San Francisco, CA (Metropolitan Area)",14
+"Denver, CO","Santa Barbara, CA",13
+"Denver, CO","Sarasota/Bradenton, FL",3
+"Denver, CO","Savannah, GA",7
+"Denver, CO","Seattle, WA",14
+"Denver, CO","Sioux Falls, SD",2
+"Denver, CO","Spokane, WA",14
+"Denver, CO","St. Louis, MO",14
+"Denver, CO","Syracuse, NY",5
+"Denver, CO","Tampa, FL (Metropolitan Area)",14
+"Denver, CO","Tucson, AZ",14
+"Denver, CO","Tulsa, OK",14
+"Denver, CO","Washington, DC (Metropolitan Area)",14
+"Denver, CO","West Palm Beach/Palm Beach, FL",3
+"Denver, CO","Wichita, KS",1
+"Des Moines, IA","Houston, TX",2
+"Des Moines, IA","Las Vegas, NV",14
+"Des Moines, IA","Los Angeles, CA (Metropolitan Area)",12
+"Des Moines, IA","Miami, FL (Metropolitan Area)",4
+"Des Moines, IA","New York City, NY (Metropolitan Area)",12
+"Des Moines, IA","Orlando, FL",4
+"Des Moines, IA","Phoenix, AZ",14
+"Des Moines, IA","Punta Gorda, FL",2
+"Des Moines, IA","Tampa, FL (Metropolitan Area)",5
+"Des Moines, IA","Washington, DC (Metropolitan Area)",11
+"Detroit, MI","Fort Myers, FL",14
+"Detroit, MI","Hartford, CT",5
+"Detroit, MI","Houston, TX",14
+"Detroit, MI","Jacksonville, FL",14
+"Detroit, MI","Kansas City, MO",14
+"Detroit, MI","Las Vegas, NV",14
+"Detroit, MI","Los Angeles, CA (Metropolitan Area)",14
+"Detroit, MI","Miami, FL (Metropolitan Area)",14
+"Detroit, MI","Minneapolis/St. Paul, MN",14
+"Detroit, MI","Myrtle Beach, SC",9
+"Detroit, MI","Nashville, TN",14
+"Detroit, MI","New Orleans, LA",14
+"Detroit, MI","New York City, NY (Metropolitan Area)",14
+"Detroit, MI","Orlando, FL",14
+"Detroit, MI","Philadelphia, PA",14
+"Detroit, MI","Phoenix, AZ",14
+"Detroit, MI","Portland, OR",10
+"Detroit, MI","Raleigh/Durham, NC",14
+"Detroit, MI","Salt Lake City, UT",14
+"Detroit, MI","San Antonio, TX",14
+"Detroit, MI","San Diego, CA",14
+"Detroit, MI","San Francisco, CA (Metropolitan Area)",14
+"Detroit, MI","Sarasota/Bradenton, FL",4
+"Detroit, MI","Seattle, WA",14
+"Detroit, MI","St. Louis, MO",14
+"Detroit, MI","Tampa, FL (Metropolitan Area)",14
+"Detroit, MI","Washington, DC (Metropolitan Area)",14
+"Detroit, MI","West Palm Beach/Palm Beach, FL",9
+"Eagle, CO","Miami, FL (Metropolitan Area)",4
+"Eagle, CO","New York City, NY (Metropolitan Area)",4
+"El Paso, TX","Houston, TX",14
+"El Paso, TX","Las Vegas, NV",14
+"El Paso, TX","Los Angeles, CA (Metropolitan Area)",14
+"El Paso, TX","Miami, FL (Metropolitan Area)",1
+"El Paso, TX","New York City, NY (Metropolitan Area)",12
+"El Paso, TX","Orlando, FL",8
+"El Paso, TX","Phoenix, AZ",14
+"El Paso, TX","San Antonio, TX",14
+"El Paso, TX","San Diego, CA",1
+"El Paso, TX","San Francisco, CA (Metropolitan Area)",2
+"El Paso, TX","Seattle, WA",5
+"El Paso, TX","Washington, DC (Metropolitan Area)",14
+"Eugene, OR","Las Vegas, NV",7
+"Eugene, OR","Los Angeles, CA (Metropolitan Area)",14
+"Eugene, OR","Phoenix, AZ",13
+"Eugene, OR","San Francisco, CA (Metropolitan Area)",14
+"Eureka/Arcata, CA","Los Angeles, CA (Metropolitan Area)",3
+"Everett, WA","Las Vegas, NV",10
+"Everett, WA","Los Angeles, CA (Metropolitan Area)",8
+"Everett, WA","Phoenix, AZ",13
+"Everett, WA","San Francisco, CA (Metropolitan Area)",4
+"Fargo, ND","Las Vegas, NV",2
+"Fargo, ND","Phoenix, AZ",13
+"Fayetteville, AR","Los Angeles, CA (Metropolitan Area)",11
+"Fayetteville, AR","New York City, NY (Metropolitan Area)",14
+"Flint, MI","Punta Gorda, FL",4
+"Flint, MI","Sanford, FL",4
+"Flint, MI","Sarasota/Bradenton, FL",4
+"Flint, MI","Tampa, FL (Metropolitan Area)",4
+"Fort Myers, FL","Grand Rapids, MI",3
+"Fort Myers, FL","Hartford, CT",11
+"Fort Myers, FL","Houston, TX",10
+"Fort Myers, FL","Indianapolis, IN",14
+"Fort Myers, FL","Kansas City, MO",5
+"Fort Myers, FL","Las Vegas, NV",6
+"Fort Myers, FL","Los Angeles, CA (Metropolitan Area)",9
+"Fort Myers, FL","Louisville, KY",1
+"Fort Myers, FL","Madison, WI",4
+"Fort Myers, FL","Milwaukee, WI",11
+"Fort Myers, FL","Minneapolis/St. Paul, MN",14
+"Fort Myers, FL","Nashville, TN",10
+"Fort Myers, FL","New Haven, CT",7
+"Fort Myers, FL","New York City, NY (Metropolitan Area)",14
+"Fort Myers, FL","Omaha, NE",1
+"Fort Myers, FL","Philadelphia, PA",14
+"Fort Myers, FL","Phoenix, AZ",4
+"Fort Myers, FL","Pittsburgh, PA",14
+"Fort Myers, FL","Portland, ME",1
+"Fort Myers, FL","Raleigh/Durham, NC",4
+"Fort Myers, FL","San Francisco, CA (Metropolitan Area)",2
+"Fort Myers, FL","Seattle, WA",2
+"Fort Myers, FL","St. Louis, MO",14
+"Fort Myers, FL","Syracuse, NY",2
+"Fort Myers, FL","Trenton, NJ",1
+"Fort Myers, FL","Washington, DC (Metropolitan Area)",14
+"Fort Wayne, IN","Punta Gorda, FL",4
+"Fort Wayne, IN","Tampa, FL (Metropolitan Area)",1
+"Fresno, CA","Las Vegas, NV",14
+"Fresno, CA","Phoenix, AZ",7
+"Fresno, CA","San Diego, CA",14
+"Fresno, CA","Seattle, WA",14
+"Grand Rapids, MI","Houston, TX",1
+"Grand Rapids, MI","Las Vegas, NV",14
+"Grand Rapids, MI","Los Angeles, CA (Metropolitan Area)",13
+"Grand Rapids, MI","Miami, FL (Metropolitan Area)",7
+"Grand Rapids, MI","Minneapolis/St. Paul, MN",9
+"Grand Rapids, MI","New York City, NY (Metropolitan Area)",14
+"Grand Rapids, MI","Orlando, FL",14
+"Grand Rapids, MI","Phoenix, AZ",14
+"Grand Rapids, MI","Punta Gorda, FL",7
+"Grand Rapids, MI","Sanford, FL",10
+"Grand Rapids, MI","Sarasota/Bradenton, FL",4
+"Grand Rapids, MI","Tampa, FL (Metropolitan Area)",14
+"Grand Rapids, MI","Washington, DC (Metropolitan Area)",10
+"Greensboro/High Point, NC","New York City, NY (Metropolitan Area)",14
+"Greenville/Spartanburg, SC","Miami, FL (Metropolitan Area)",2
+"Greenville/Spartanburg, SC","New York City, NY (Metropolitan Area)",14
+"Greenville/Spartanburg, SC","Washington, DC (Metropolitan Area)",14
+"Harlingen/San Benito, TX","Houston, TX",14
+"Harlingen/San Benito, TX","Minneapolis/St. Paul, MN",7
+"Harrisburg, PA","Sanford, FL",3
+"Hartford, CT","Houston, TX",3
+"Hartford, CT","Jacksonville, FL",2
+"Hartford, CT","Las Vegas, NV",14
+"Hartford, CT","Los Angeles, CA (Metropolitan Area)",14
+"Hartford, CT","Miami, FL (Metropolitan Area)",14
+"Hartford, CT","Minneapolis/St. Paul, MN",9
+"Hartford, CT","Myrtle Beach, SC",7
+"Hartford, CT","Nashville, TN",11
+"Hartford, CT","Orlando, FL",14
+"Hartford, CT","Phoenix, AZ",11
+"Hartford, CT","Raleigh/Durham, NC",6
+"Hartford, CT","San Francisco, CA (Metropolitan Area)",10
+"Hartford, CT","Tampa, FL (Metropolitan Area)",14
+"Hartford, CT","Vero Beach, FL",1
+"Hartford, CT","Washington, DC (Metropolitan Area)",14
+"Hartford, CT","West Palm Beach/Palm Beach, FL",13
+"Houston, TX","Indianapolis, IN",14
+"Houston, TX","Jackson/Vicksburg, MS",2
+"Houston, TX","Jacksonville, FL",14
+"Houston, TX","Kansas City, MO",14
+"Houston, TX","Knoxville, TN",5
+"Houston, TX","Las Vegas, NV",14
+"Houston, TX","Little Rock, AR",2
+"Houston, TX","Los Angeles, CA (Metropolitan Area)",14
+"Houston, TX","Louisville, KY",13
+"Houston, TX","Lubbock, TX",14
+"Houston, TX","Memphis, TN",14
+"Houston, TX","Miami, FL (Metropolitan Area)",14
+"Houston, TX","Midland/Odessa, TX",14
+"Houston, TX","Milwaukee, WI",14
+"Houston, TX","Minneapolis/St. Paul, MN",14
+"Houston, TX","Nashville, TN",14
+"Houston, TX","New Orleans, LA",14
+"Houston, TX","New York City, NY (Metropolitan Area)",14
+"Houston, TX","Norfolk, VA (Metropolitan Area)",14
+"Houston, TX","Oklahoma City, OK",14
+"Houston, TX","Omaha, NE",14
+"Houston, TX","Orlando, FL",14
+"Houston, TX","Panama City, FL",4
+"Houston, TX","Pensacola, FL",3
+"Houston, TX","Philadelphia, PA",14
+"Houston, TX","Phoenix, AZ",14
+"Houston, TX","Pittsburgh, PA",14
+"Houston, TX","Portland, OR",14
+"Houston, TX","Raleigh/Durham, NC",14
+"Houston, TX","Reno, NV",2
+"Houston, TX","Richmond, VA",11
+"Houston, TX","Sacramento, CA",14
+"Houston, TX","Salt Lake City, UT",14
+"Houston, TX","San Antonio, TX",12
+"Houston, TX","San Diego, CA",14
+"Houston, TX","San Francisco, CA (Metropolitan Area)",14
+"Houston, TX","Savannah, GA",5
+"Houston, TX","Seattle, WA",14
+"Houston, TX","St. Louis, MO",14
+"Houston, TX","Tampa, FL (Metropolitan Area)",14
+"Houston, TX","Tucson, AZ",3
+"Houston, TX","Tulsa, OK",14
+"Houston, TX","Washington, DC (Metropolitan Area)",14
+"Houston, TX","West Palm Beach/Palm Beach, FL",2
+"Huntsville, AL","Orlando, FL",3
+"Huntsville, AL","Washington, DC (Metropolitan Area)",14
+"Indianapolis, IN","Las Vegas, NV",14
+"Indianapolis, IN","Los Angeles, CA (Metropolitan Area)",14
+"Indianapolis, IN","Miami, FL (Metropolitan Area)",14
+"Indianapolis, IN","Minneapolis/St. Paul, MN",14
+"Indianapolis, IN","New York City, NY (Metropolitan Area)",14
+"Indianapolis, IN","Orlando, FL",14
+"Indianapolis, IN","Philadelphia, PA",14
+"Indianapolis, IN","Phoenix, AZ",14
+"Indianapolis, IN","Punta Gorda, FL",2
+"Indianapolis, IN","Raleigh/Durham, NC",7
+"Indianapolis, IN","Salt Lake City, UT",3
+"Indianapolis, IN","San Diego, CA",14
+"Indianapolis, IN","San Francisco, CA (Metropolitan Area)",14
+"Indianapolis, IN","Sarasota/Bradenton, FL",9
+"Indianapolis, IN","Seattle, WA",14
+"Indianapolis, IN","Tampa, FL (Metropolitan Area)",14
+"Indianapolis, IN","Washington, DC (Metropolitan Area)",14
+"Jackson, WY","Los Angeles, CA (Metropolitan Area)",1
+"Jackson, WY","New York City, NY (Metropolitan Area)",7
+"Jackson/Vicksburg, MS","Washington, DC (Metropolitan Area)",11
+"Jacksonville, FL","Las Vegas, NV",14
+"Jacksonville, FL","Los Angeles, CA (Metropolitan Area)",14
+"Jacksonville, FL","Miami, FL (Metropolitan Area)",14
+"Jacksonville, FL","Minneapolis/St. Paul, MN",13
+"Jacksonville, FL","Nashville, TN",14
+"Jacksonville, FL","New York City, NY (Metropolitan Area)",14
+"Jacksonville, FL","Norfolk, VA (Metropolitan Area)",8
+"Jacksonville, FL","Philadelphia, PA",14
+"Jacksonville, FL","Phoenix, AZ",9
+"Jacksonville, FL","San Diego, CA",1
+"Jacksonville, FL","San Francisco, CA (Metropolitan Area)",7
+"Jacksonville, FL","Seattle, WA",2
+"Jacksonville, FL","St. Louis, MO",2
+"Jacksonville, FL","Washington, DC (Metropolitan Area)",14
+"Kalispell, MT","Los Angeles, CA (Metropolitan Area)",3
+"Kansas City, MO","Las Vegas, NV",14
+"Kansas City, MO","Los Angeles, CA (Metropolitan Area)",14
+"Kansas City, MO","Miami, FL (Metropolitan Area)",14
+"Kansas City, MO","Minneapolis/St. Paul, MN",14
+"Kansas City, MO","Nashville, TN",14
+"Kansas City, MO","New Orleans, LA",11
+"Kansas City, MO","New York City, NY (Metropolitan Area)",14
+"Kansas City, MO","Orlando, FL",14
+"Kansas City, MO","Philadelphia, PA",14
+"Kansas City, MO","Phoenix, AZ",14
+"Kansas City, MO","Portland, OR",10
+"Kansas City, MO","Raleigh/Durham, NC",6
+"Kansas City, MO","Sacramento, CA",1
+"Kansas City, MO","Salt Lake City, UT",14
+"Kansas City, MO","San Antonio, TX",4
+"Kansas City, MO","San Diego, CA",14
+"Kansas City, MO","San Francisco, CA (Metropolitan Area)",14
+"Kansas City, MO","Seattle, WA",14
+"Kansas City, MO","Tampa, FL (Metropolitan Area)",14
+"Kansas City, MO","Washington, DC (Metropolitan Area)",14
+"Key West, FL","New York City, NY (Metropolitan Area)",12
+"Key West, FL","Philadelphia, PA",4
+"Key West, FL","Washington, DC (Metropolitan Area)",4
+"Knoxville, TN","Las Vegas, NV",1
+"Knoxville, TN","Miami, FL (Metropolitan Area)",14
+"Knoxville, TN","New York City, NY (Metropolitan Area)",14
+"Knoxville, TN","Orlando, FL",1
+"Knoxville, TN","Sanford, FL",10
+"Knoxville, TN","Tampa, FL (Metropolitan Area)",12
+"Knoxville, TN","Washington, DC (Metropolitan Area)",13
+"Las Vegas, NV","Los Angeles, CA (Metropolitan Area)",14
+"Las Vegas, NV","Louisville, KY",14
+"Las Vegas, NV","Memphis, TN",14
+"Las Vegas, NV","Miami, FL (Metropolitan Area)",14
+"Las Vegas, NV","Milwaukee, WI",14
+"Las Vegas, NV","Minneapolis/St. Paul, MN",14
+"Las Vegas, NV","Mission/McAllen/Edinburg, TX",14
+"Las Vegas, NV","Nashville, TN",14
+"Las Vegas, NV","New Orleans, LA",14
+"Las Vegas, NV","New York City, NY (Metropolitan Area)",14
+"Las Vegas, NV","Norfolk, VA (Metropolitan Area)",14
+"Las Vegas, NV","Oklahoma City, OK",14
+"Las Vegas, NV","Omaha, NE",14
+"Las Vegas, NV","Orlando, FL",14
+"Las Vegas, NV","Philadelphia, PA",14
+"Las Vegas, NV","Phoenix, AZ",14
+"Las Vegas, NV","Pittsburgh, PA",14
+"Las Vegas, NV","Portland, OR",14
+"Las Vegas, NV","Raleigh/Durham, NC",14
+"Las Vegas, NV","Reno, NV",14
+"Las Vegas, NV","Richmond, VA",14
+"Las Vegas, NV","Sacramento, CA",14
+"Las Vegas, NV","Salt Lake City, UT",14
+"Las Vegas, NV","San Antonio, TX",14
+"Las Vegas, NV","San Diego, CA",14
+"Las Vegas, NV","San Francisco, CA (Metropolitan Area)",14
+"Las Vegas, NV","Santa Barbara, CA",6
+"Las Vegas, NV","Seattle, WA",14
+"Las Vegas, NV","Sioux Falls, SD",2
+"Las Vegas, NV","Spokane, WA",14
+"Las Vegas, NV","St. Louis, MO",14
+"Las Vegas, NV","Tampa, FL (Metropolitan Area)",14
+"Las Vegas, NV","Tucson, AZ",14
+"Las Vegas, NV","Tulsa, OK",14
+"Las Vegas, NV","Washington, DC (Metropolitan Area)",14
+"Las Vegas, NV","Wichita, KS",5
+"Latrobe, PA","Orlando, FL",6
+"Little Rock, AR","Los Angeles, CA (Metropolitan Area)",1
+"Little Rock, AR","New York City, NY (Metropolitan Area)",8
+"Little Rock, AR","Washington, DC (Metropolitan Area)",3
+"Los Angeles, CA (Metropolitan Area)","Louisville, KY",14
+"Los Angeles, CA (Metropolitan Area)","Madison, WI",1
+"Los Angeles, CA (Metropolitan Area)","Medford, OR",14
+"Los Angeles, CA (Metropolitan Area)","Memphis, TN",14
+"Los Angeles, CA (Metropolitan Area)","Miami, FL (Metropolitan Area)",14
+"Los Angeles, CA (Metropolitan Area)","Milwaukee, WI",14
+"Los Angeles, CA (Metropolitan Area)","Minneapolis/St. Paul, MN",14
+"Los Angeles, CA (Metropolitan Area)","Nashville, TN",14
+"Los Angeles, CA (Metropolitan Area)","New Orleans, LA",14
+"Los Angeles, CA (Metropolitan Area)","New York City, NY (Metropolitan Area)",14
+"Los Angeles, CA (Metropolitan Area)","Norfolk, VA (Metropolitan Area)",14
+"Los Angeles, CA (Metropolitan Area)","Oklahoma City, OK",14
+"Los Angeles, CA (Metropolitan Area)","Omaha, NE",14
+"Los Angeles, CA (Metropolitan Area)","Orlando, FL",14
+"Los Angeles, CA (Metropolitan Area)","Pasco/Kennewick/Richland, WA",8
+"Los Angeles, CA (Metropolitan Area)","Philadelphia, PA",14
+"Los Angeles, CA (Metropolitan Area)","Phoenix, AZ",14
+"Los Angeles, CA (Metropolitan Area)","Pittsburgh, PA",14
+"Los Angeles, CA (Metropolitan Area)","Portland, OR",14
+"Los Angeles, CA (Metropolitan Area)","Provo, UT",9
+"Los Angeles, CA (Metropolitan Area)","Raleigh/Durham, NC",14
+"Los Angeles, CA (Metropolitan Area)","Reno, NV",14
+"Los Angeles, CA (Metropolitan Area)","Richmond, VA",14
+"Los Angeles, CA (Metropolitan Area)","Sacramento, CA",14
+"Los Angeles, CA (Metropolitan Area)","Salt Lake City, UT",14
+"Los Angeles, CA (Metropolitan Area)","San Antonio, TX",14
+"Los Angeles, CA (Metropolitan Area)","San Francisco, CA (Metropolitan Area)",14
+"Los Angeles, CA (Metropolitan Area)","Santa Rosa, CA",14
+"Los Angeles, CA (Metropolitan Area)","Savannah, GA",8
+"Los Angeles, CA (Metropolitan Area)","Seattle, WA",14
+"Los Angeles, CA (Metropolitan Area)","Spokane, WA",14
+"Los Angeles, CA (Metropolitan Area)","St. Louis, MO",14
+"Los Angeles, CA (Metropolitan Area)","Syracuse, NY",1
+"Los Angeles, CA (Metropolitan Area)","Tampa, FL (Metropolitan Area)",14
+"Los Angeles, CA (Metropolitan Area)","Tucson, AZ",14
+"Los Angeles, CA (Metropolitan Area)","Tulsa, OK",14
+"Los Angeles, CA (Metropolitan Area)","Washington, DC (Metropolitan Area)",14
+"Los Angeles, CA (Metropolitan Area)","West Palm Beach/Palm Beach, FL",8
+"Louisville, KY","Miami, FL (Metropolitan Area)",14
+"Louisville, KY","New York City, NY (Metropolitan Area)",14
+"Louisville, KY","Orlando, FL",14
+"Louisville, KY","Phoenix, AZ",4
+"Louisville, KY","San Francisco, CA (Metropolitan Area)",1
+"Louisville, KY","Tampa, FL (Metropolitan Area)",14
+"Louisville, KY","Washington, DC (Metropolitan Area)",14
+"Madison, WI","New York City, NY (Metropolitan Area)",14
+"Madison, WI","Orlando, FL",4
+"Madison, WI","Phoenix, AZ",5
+"Madison, WI","Washington, DC (Metropolitan Area)",6
+"Martha's Vineyard, MA","New York City, NY (Metropolitan Area)",3
+"Medford, OR","Seattle, WA",2
+"Memphis, TN","Miami, FL (Metropolitan Area)",14
+"Memphis, TN","New York City, NY (Metropolitan Area)",14
+"Memphis, TN","Orlando, FL",14
+"Memphis, TN","Phoenix, AZ",11
+"Memphis, TN","Tampa, FL (Metropolitan Area)",3
+"Memphis, TN","Washington, DC (Metropolitan Area)",14
+"Miami, FL (Metropolitan Area)","Milwaukee, WI",12
+"Miami, FL (Metropolitan Area)","Minneapolis/St. Paul, MN",14
+"Miami, FL (Metropolitan Area)","Myrtle Beach, SC",2
+"Miami, FL (Metropolitan Area)","Nashville, TN",14
+"Miami, FL (Metropolitan Area)","New Haven, CT",12
+"Miami, FL (Metropolitan Area)","New Orleans, LA",14
+"Miami, FL (Metropolitan Area)","New York City, NY (Metropolitan Area)",14
+"Miami, FL (Metropolitan Area)","Norfolk, VA (Metropolitan Area)",14
+"Miami, FL (Metropolitan Area)","Oklahoma City, OK",1
+"Miami, FL (Metropolitan Area)","Omaha, NE",8
+"Miami, FL (Metropolitan Area)","Orlando, FL",14
+"Miami, FL (Metropolitan Area)","Pensacola, FL",13
+"Miami, FL (Metropolitan Area)","Philadelphia, PA",14
+"Miami, FL (Metropolitan Area)","Phoenix, AZ",14
+"Miami, FL (Metropolitan Area)","Pittsburgh, PA",14
+"Miami, FL (Metropolitan Area)","Portland, OR",14
+"Miami, FL (Metropolitan Area)","Raleigh/Durham, NC",14
+"Miami, FL (Metropolitan Area)","Richmond, VA",14
+"Miami, FL (Metropolitan Area)","Rochester, NY",6
+"Miami, FL (Metropolitan Area)","Sacramento, CA",12
+"Miami, FL (Metropolitan Area)","Salt Lake City, UT",14
+"Miami, FL (Metropolitan Area)","San Antonio, TX",14
+"Miami, FL (Metropolitan Area)","San Diego, CA",14
+"Miami, FL (Metropolitan Area)","San Francisco, CA (Metropolitan Area)",14
+"Miami, FL (Metropolitan Area)","Savannah, GA",1
+"Miami, FL (Metropolitan Area)","Seattle, WA",14
+"Miami, FL (Metropolitan Area)","St. Louis, MO",14
+"Miami, FL (Metropolitan Area)","Syracuse, NY",11
+"Miami, FL (Metropolitan Area)","Tallahassee, FL",13
+"Miami, FL (Metropolitan Area)","Tampa, FL (Metropolitan Area)",14
+"Miami, FL (Metropolitan Area)","Washington, DC (Metropolitan Area)",14
+"Miami, FL (Metropolitan Area)","Worcester, MA",7
+"Milwaukee, WI","Minneapolis/St. Paul, MN",7
+"Milwaukee, WI","Nashville, TN",14
+"Milwaukee, WI","New York City, NY (Metropolitan Area)",14
+"Milwaukee, WI","Orlando, FL",14
+"Milwaukee, WI","Philadelphia, PA",3
+"Milwaukee, WI","Phoenix, AZ",14
+"Milwaukee, WI","San Francisco, CA (Metropolitan Area)",4
+"Milwaukee, WI","Seattle, WA",12
+"Milwaukee, WI","Tampa, FL (Metropolitan Area)",14
+"Milwaukee, WI","Washington, DC (Metropolitan Area)",14
+"Minneapolis/St. Paul, MN","Myrtle Beach, SC",3
+"Minneapolis/St. Paul, MN","Nashville, TN",14
+"Minneapolis/St. Paul, MN","New Orleans, LA",14
+"Minneapolis/St. Paul, MN","New York City, NY (Metropolitan Area)",14
+"Minneapolis/St. Paul, MN","Orlando, FL",14
+"Minneapolis/St. Paul, MN","Palm Springs, CA",8
+"Minneapolis/St. Paul, MN","Philadelphia, PA",14
+"Minneapolis/St. Paul, MN","Phoenix, AZ",14
+"Minneapolis/St. Paul, MN","Pittsburgh, PA",10
+"Minneapolis/St. Paul, MN","Portland, ME",3
+"Minneapolis/St. Paul, MN","Portland, OR",14
+"Minneapolis/St. Paul, MN","Punta Gorda, FL",2
+"Minneapolis/St. Paul, MN","Raleigh/Durham, NC",14
+"Minneapolis/St. Paul, MN","Reno, NV",1
+"Minneapolis/St. Paul, MN","Sacramento, CA",12
+"Minneapolis/St. Paul, MN","Salt Lake City, UT",14
+"Minneapolis/St. Paul, MN","San Antonio, TX",14
+"Minneapolis/St. Paul, MN","San Diego, CA",14
+"Minneapolis/St. Paul, MN","San Francisco, CA (Metropolitan Area)",14
+"Minneapolis/St. Paul, MN","Sarasota/Bradenton, FL",8
+"Minneapolis/St. Paul, MN","Savannah, GA",4
+"Minneapolis/St. Paul, MN","Seattle, WA",14
+"Minneapolis/St. Paul, MN","Spokane, WA",2
+"Minneapolis/St. Paul, MN","St. Louis, MO",14
+"Minneapolis/St. Paul, MN","Tampa, FL (Metropolitan Area)",14
+"Minneapolis/St. Paul, MN","Tucson, AZ",5
+"Minneapolis/St. Paul, MN","Valparaiso, FL",7
+"Minneapolis/St. Paul, MN","Washington, DC (Metropolitan Area)",14
+"Minneapolis/St. Paul, MN","West Palm Beach/Palm Beach, FL",4
+"Myrtle Beach, SC","New York City, NY (Metropolitan Area)",14
+"Myrtle Beach, SC","Philadelphia, PA",7
+"Myrtle Beach, SC","Pittsburgh, PA",6
+"Myrtle Beach, SC","Washington, DC (Metropolitan Area)",14
+"Nantucket, MA","New York City, NY (Metropolitan Area)",6
+"Nashville, TN","New Orleans, LA",14
+"Nashville, TN","New York City, NY (Metropolitan Area)",14
+"Nashville, TN","Orlando, FL",14
+"Nashville, TN","Panama City, FL",8
+"Nashville, TN","Philadelphia, PA",14
+"Nashville, TN","Phoenix, AZ",14
+"Nashville, TN","Pittsburgh, PA",14
+"Nashville, TN","Portland, OR",12
+"Nashville, TN","Raleigh/Durham, NC",14
+"Nashville, TN","Richmond, VA",3
+"Nashville, TN","Sacramento, CA",14
+"Nashville, TN","Salt Lake City, UT",14
+"Nashville, TN","San Antonio, TX",14
+"Nashville, TN","San Diego, CA",14
+"Nashville, TN","San Francisco, CA (Metropolitan Area)",14
+"Nashville, TN","Sarasota/Bradenton, FL",7
+"Nashville, TN","Savannah, GA",1
+"Nashville, TN","Seattle, WA",14
+"Nashville, TN","St. Louis, MO",2
+"Nashville, TN","Tampa, FL (Metropolitan Area)",14
+"Nashville, TN","Washington, DC (Metropolitan Area)",14
+"New Haven, CT","Orlando, FL",14
+"New Haven, CT","Raleigh/Durham, NC",2
+"New Haven, CT","Sarasota/Bradenton, FL",2
+"New Haven, CT","Tampa, FL (Metropolitan Area)",9
+"New Haven, CT","West Palm Beach/Palm Beach, FL",8
+"New Orleans, LA","New York City, NY (Metropolitan Area)",14
+"New Orleans, LA","Orlando, FL",14
+"New Orleans, LA","Philadelphia, PA",14
+"New Orleans, LA","Phoenix, AZ",14
+"New Orleans, LA","Pittsburgh, PA",4
+"New Orleans, LA","Portland, OR",2
+"New Orleans, LA","Raleigh/Durham, NC",14
+"New Orleans, LA","Richmond, VA",2
+"New Orleans, LA","Salt Lake City, UT",8
+"New Orleans, LA","San Antonio, TX",11
+"New Orleans, LA","San Diego, CA",14
+"New Orleans, LA","San Francisco, CA (Metropolitan Area)",14
+"New Orleans, LA","Seattle, WA",14
+"New Orleans, LA","St. Louis, MO",14
+"New Orleans, LA","Tampa, FL (Metropolitan Area)",14
+"New Orleans, LA","Washington, DC (Metropolitan Area)",14
+"New York City, NY (Metropolitan Area)","Norfolk, VA (Metropolitan Area)",14
+"New York City, NY (Metropolitan Area)","Oklahoma City, OK",14
+"New York City, NY (Metropolitan Area)","Omaha, NE",14
+"New York City, NY (Metropolitan Area)","Orlando, FL",14
+"New York City, NY (Metropolitan Area)","Palm Springs, CA",11
+"New York City, NY (Metropolitan Area)","Pensacola, FL",8
+"New York City, NY (Metropolitan Area)","Phoenix, AZ",14
+"New York City, NY (Metropolitan Area)","Pittsburgh, PA",14
+"New York City, NY (Metropolitan Area)","Portland, ME",14
+"New York City, NY (Metropolitan Area)","Portland, OR",14
+"New York City, NY (Metropolitan Area)","Raleigh/Durham, NC",14
+"New York City, NY (Metropolitan Area)","Reno, NV",14
+"New York City, NY (Metropolitan Area)","Richmond, VA",14
+"New York City, NY (Metropolitan Area)","Rochester, NY",14
+"New York City, NY (Metropolitan Area)","Sacramento, CA",14
+"New York City, NY (Metropolitan Area)","Salt Lake City, UT",14
+"New York City, NY (Metropolitan Area)","San Antonio, TX",14
+"New York City, NY (Metropolitan Area)","San Diego, CA",14
+"New York City, NY (Metropolitan Area)","San Francisco, CA (Metropolitan Area)",14
+"New York City, NY (Metropolitan Area)","Sarasota/Bradenton, FL",14
+"New York City, NY (Metropolitan Area)","Savannah, GA",14
+"New York City, NY (Metropolitan Area)","Seattle, WA",14
+"New York City, NY (Metropolitan Area)","St. Louis, MO",14
+"New York City, NY (Metropolitan Area)","Steamboat Springs, CO",1
+"New York City, NY (Metropolitan Area)","Syracuse, NY",13
+"New York City, NY (Metropolitan Area)","Tampa, FL (Metropolitan Area)",14
+"New York City, NY (Metropolitan Area)","Tucson, AZ",10
+"New York City, NY (Metropolitan Area)","Tulsa, OK",7
+"New York City, NY (Metropolitan Area)","Vero Beach, FL",4
+"New York City, NY (Metropolitan Area)","Washington, DC (Metropolitan Area)",14
+"New York City, NY (Metropolitan Area)","West Palm Beach/Palm Beach, FL",14
+"New York City, NY (Metropolitan Area)","Wilmington, NC",14
+"Norfolk, VA (Metropolitan Area)","Orlando, FL",14
+"Norfolk, VA (Metropolitan Area)","San Diego, CA",14
+"Norfolk, VA (Metropolitan Area)","Seattle, WA",3
+"Norfolk, VA (Metropolitan Area)","Tampa, FL (Metropolitan Area)",14
+"Oklahoma City, OK","Orlando, FL",14
+"Oklahoma City, OK","Phoenix, AZ",14
+"Oklahoma City, OK","Seattle, WA",13
+"Oklahoma City, OK","Washington, DC (Metropolitan Area)",14
+"Omaha, NE","Orlando, FL",14
+"Omaha, NE","Phoenix, AZ",14
+"Omaha, NE","San Francisco, CA (Metropolitan Area)",11
+"Omaha, NE","Seattle, WA",10
+"Omaha, NE","Tampa, FL (Metropolitan Area)",9
+"Omaha, NE","Washington, DC (Metropolitan Area)",14
+"Orlando, FL","Pensacola, FL",6
+"Orlando, FL","Philadelphia, PA",14
+"Orlando, FL","Phoenix, AZ",14
+"Orlando, FL","Pittsburgh, PA",14
+"Orlando, FL","Portland, ME",12
+"Orlando, FL","Portland, OR",14
+"Orlando, FL","Raleigh/Durham, NC",14
+"Orlando, FL","Richmond, VA",14
+"Orlando, FL","Rochester, NY",14
+"Orlando, FL","Sacramento, CA",14
+"Orlando, FL","Salt Lake City, UT",14
+"Orlando, FL","San Antonio, TX",14
+"Orlando, FL","San Diego, CA",14
+"Orlando, FL","San Francisco, CA (Metropolitan Area)",14
+"Orlando, FL","Seattle, WA",14
+"Orlando, FL","St. Louis, MO",14
+"Orlando, FL","Syracuse, NY",14
+"Orlando, FL","Trenton, NJ",14
+"Orlando, FL","Tulsa, OK",8
+"Orlando, FL","Washington, DC (Metropolitan Area)",14
+"Orlando, FL","Worcester, MA",7
+"Palm Springs, CA","Portland, OR",11
+"Palm Springs, CA","Sacramento, CA",8
+"Palm Springs, CA","San Francisco, CA (Metropolitan Area)",14
+"Palm Springs, CA","Seattle, WA",14
+"Palm Springs, CA","Washington, DC (Metropolitan Area)",1
+"Pasco/Kennewick/Richland, WA","Phoenix, AZ",2
+"Pensacola, FL","Philadelphia, PA",1
+"Pensacola, FL","Washington, DC (Metropolitan Area)",14
+"Peoria, IL","Phoenix, AZ",1
+"Peoria, IL","Punta Gorda, FL",1
+"Philadelphia, PA","Phoenix, AZ",14
+"Philadelphia, PA","Pittsburgh, PA",9
+"Philadelphia, PA","Portland, OR",7
+"Philadelphia, PA","Raleigh/Durham, NC",14
+"Philadelphia, PA","Salt Lake City, UT",14
+"Philadelphia, PA","San Antonio, TX",14
+"Philadelphia, PA","San Diego, CA",14
+"Philadelphia, PA","San Francisco, CA (Metropolitan Area)",14
+"Philadelphia, PA","Sarasota/Bradenton, FL",9
+"Philadelphia, PA","Savannah, GA",11
+"Philadelphia, PA","Seattle, WA",14
+"Philadelphia, PA","St. Louis, MO",14
+"Philadelphia, PA","Tampa, FL (Metropolitan Area)",14
+"Philadelphia, PA","West Palm Beach/Palm Beach, FL",14
+"Phoenix, AZ","Pittsburgh, PA",14
+"Phoenix, AZ","Portland, OR",14
+"Phoenix, AZ","Provo, UT",13
+"Phoenix, AZ","Raleigh/Durham, NC",14
+"Phoenix, AZ","Reno, NV",14
+"Phoenix, AZ","Richmond, VA",4
+"Phoenix, AZ","Sacramento, CA",14
+"Phoenix, AZ","Salt Lake City, UT",14
+"Phoenix, AZ","San Antonio, TX",14
+"Phoenix, AZ","San Diego, CA",14
+"Phoenix, AZ","San Francisco, CA (Metropolitan Area)",14
+"Phoenix, AZ","Seattle, WA",14
+"Phoenix, AZ","Sioux Falls, SD",13
+"Phoenix, AZ","Spokane, WA",14
+"Phoenix, AZ","St. Louis, MO",14
+"Phoenix, AZ","Tampa, FL (Metropolitan Area)",14
+"Phoenix, AZ","Tulsa, OK",12
+"Phoenix, AZ","Washington, DC (Metropolitan Area)",14
+"Phoenix, AZ","Wichita, KS",3
+"Pittsburgh, PA","Raleigh/Durham, NC",7
+"Pittsburgh, PA","Salt Lake City, UT",1
+"Pittsburgh, PA","San Diego, CA",7
+"Pittsburgh, PA","San Francisco, CA (Metropolitan Area)",14
+"Pittsburgh, PA","Sarasota/Bradenton, FL",12
+"Pittsburgh, PA","Seattle, WA",14
+"Pittsburgh, PA","Tampa, FL (Metropolitan Area)",14
+"Pittsburgh, PA","Washington, DC (Metropolitan Area)",14
+"Portland, ME","Tampa, FL (Metropolitan Area)",1
+"Portland, ME","Washington, DC (Metropolitan Area)",14
+"Portland, OR","Reno, NV",12
+"Portland, OR","Sacramento, CA",14
+"Portland, OR","Salt Lake City, UT",14
+"Portland, OR","San Diego, CA",14
+"Portland, OR","San Francisco, CA (Metropolitan Area)",14
+"Portland, OR","Seattle, WA",14
+"Portland, OR","Spokane, WA",14
+"Portland, OR","St. Louis, MO",3
+"Portland, OR","Tampa, FL (Metropolitan Area)",12
+"Portland, OR","Tucson, AZ",7
+"Portland, OR","Washington, DC (Metropolitan Area)",14
+"Punta Gorda, FL","Rockford, IL",2
+"Punta Gorda, FL","South Bend, IN",1
+"Raleigh/Durham, NC","Salt Lake City, UT",14
+"Raleigh/Durham, NC","San Antonio, TX",1
+"Raleigh/Durham, NC","San Diego, CA",14
+"Raleigh/Durham, NC","San Francisco, CA (Metropolitan Area)",14
+"Raleigh/Durham, NC","Seattle, WA",14
+"Raleigh/Durham, NC","St. Louis, MO",14
+"Raleigh/Durham, NC","Tampa, FL (Metropolitan Area)",14
+"Raleigh/Durham, NC","Washington, DC (Metropolitan Area)",14
+"Reno, NV","Salt Lake City, UT",1
+"Reno, NV","San Diego, CA",14
+"Reno, NV","San Francisco, CA (Metropolitan Area)",14
+"Reno, NV","Seattle, WA",14
+"Reno, NV","Washington, DC (Metropolitan Area)",2
+"Richmond, VA","San Francisco, CA (Metropolitan Area)",8
+"Richmond, VA","Tampa, FL (Metropolitan Area)",14
+"Rochester, NY","Tampa, FL (Metropolitan Area)",8
+"Rochester, NY","Washington, DC (Metropolitan Area)",14
+"Sacramento, CA","Salt Lake City, UT",14
+"Sacramento, CA","San Antonio, TX",2
+"Sacramento, CA","San Diego, CA",14
+"Sacramento, CA","Seattle, WA",14
+"Sacramento, CA","Spokane, WA",12
+"Sacramento, CA","St. Louis, MO",1
+"Sacramento, CA","Washington, DC (Metropolitan Area)",14
+"Salt Lake City, UT","San Antonio, TX",14
+"Salt Lake City, UT","San Diego, CA",14
+"Salt Lake City, UT","San Francisco, CA (Metropolitan Area)",14
+"Salt Lake City, UT","Seattle, WA",14
+"Salt Lake City, UT","Spokane, WA",7
+"Salt Lake City, UT","St. Louis, MO",14
+"Salt Lake City, UT","Tampa, FL (Metropolitan Area)",14
+"Salt Lake City, UT","Tucson, AZ",1
+"Salt Lake City, UT","Washington, DC (Metropolitan Area)",14
+"San Antonio, TX","San Diego, CA",14
+"San Antonio, TX","San Francisco, CA (Metropolitan Area)",14
+"San Antonio, TX","Seattle, WA",14
+"San Antonio, TX","St. Louis, MO",12
+"San Antonio, TX","Tampa, FL (Metropolitan Area)",14
+"San Antonio, TX","Washington, DC (Metropolitan Area)",14
+"San Diego, CA","San Francisco, CA (Metropolitan Area)",14
+"San Diego, CA","Santa Rosa, CA",1
+"San Diego, CA","Seattle, WA",14
+"San Diego, CA","Spokane, WA",14
+"San Diego, CA","St. Louis, MO",14
+"San Diego, CA","Tampa, FL (Metropolitan Area)",14
+"San Diego, CA","Tucson, AZ",2
+"San Diego, CA","Washington, DC (Metropolitan Area)",14
+"San Francisco, CA (Metropolitan Area)","Santa Barbara, CA",14
+"San Francisco, CA (Metropolitan Area)","Seattle, WA",14
+"San Francisco, CA (Metropolitan Area)","Spokane, WA",14
+"San Francisco, CA (Metropolitan Area)","St. Louis, MO",14
+"San Francisco, CA (Metropolitan Area)","Tampa, FL (Metropolitan Area)",14
+"San Francisco, CA (Metropolitan Area)","Tucson, AZ",14
+"San Francisco, CA (Metropolitan Area)","Washington, DC (Metropolitan Area)",14
+"Santa Barbara, CA","Seattle, WA",8
+"Santa Rosa, CA","Seattle, WA",2
+"Sarasota/Bradenton, FL","St. Louis, MO",1
+"Sarasota/Bradenton, FL","Washington, DC (Metropolitan Area)",14
+"Savannah, GA","Washington, DC (Metropolitan Area)",14
+"Seattle, WA","Spokane, WA",14
+"Seattle, WA","St. Louis, MO",14
+"Seattle, WA","Tampa, FL (Metropolitan Area)",14
+"Seattle, WA","Tucson, AZ",14
+"Seattle, WA","Washington, DC (Metropolitan Area)",14
+"St. Louis, MO","Tampa, FL (Metropolitan Area)",14
+"St. Louis, MO","Washington, DC (Metropolitan Area)",14
+"Syracuse, NY","Tampa, FL (Metropolitan Area)",14
+"Syracuse, NY","Washington, DC (Metropolitan Area)",12
+"Tampa, FL (Metropolitan Area)","Trenton, NJ",5
+"Tampa, FL (Metropolitan Area)","Washington, DC (Metropolitan Area)",14
+"Trenton, NJ","West Palm Beach/Palm Beach, FL",3
+"Tucson, AZ","Washington, DC (Metropolitan Area)",14
+"Valparaiso, FL","Washington, DC (Metropolitan Area)",13
+"Washington, DC (Metropolitan Area)","West Palm Beach/Palm Beach, FL",14
