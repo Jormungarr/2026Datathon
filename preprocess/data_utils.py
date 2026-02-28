@@ -13,6 +13,10 @@ def get_unique_cities():
     all_unique_cities = set(df['city1'].unique()).union(set(df['city2'].unique()))
     return list(all_unique_cities)
 
+def get_unique_cities_geocoding():
+    df = pd.read_csv("./data/geocoded_cities.csv")
+    return df
+
 COLUMN_UNIT_MAP = {
     "Year": "year",
     "quarter": "quarter",
