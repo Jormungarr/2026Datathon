@@ -1,14 +1,15 @@
 import pandas as pd
 from visualization_utils import plot_corner_heatmap
+from data_utils import import_orginal_dataset
 
 def test_plot_corner_heatmap():
     # Load the dataset
-    df = pd.read_excel("./data/airline_ticket_dataset.xlsx")
+    df = import_orginal_dataset()
     # Select relevant columns
-    columns = ['Year', 'quarter', 'passengers', 'nsmiles', 'large_ms', 'TotalFaredPax_city1', 'city1']
+    columns = ['passengers', 'nsmiles', 'large_ms', 'TotalFaredPax_city1', ]
     df = df[columns].dropna()
     feature_names = ['Year', 'quarter', 'passengers', 'nsmiles', 'large_ms', 'TotalFaredPax_city1']
-    hue = df['city1']
+    hue = df["Year"]
     X = df[feature_names]
     plot_corner_heatmap(X, feature_names=feature_names, hue=hue, hue_labels=None, palette="Set2", figsize=(10, 10), bins=30, legend_title="city1")
 
