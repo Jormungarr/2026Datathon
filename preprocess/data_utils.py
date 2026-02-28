@@ -7,6 +7,12 @@ def import_unit_removed_dataset():
     df['fare'] = df['fare'].astype(str).str.replace('$', '', regex=False).astype(float)
     df['fare_lg'] = df['fare_lg'].astype(str).str.replace('$', '', regex=False).astype(float)
     return df
+
+def get_unique_cities():
+    df = import_unit_removed_dataset()
+    all_unique_cities = set(df['city1'].unique()).union(set(df['city2'].unique()))
+    return list(all_unique_cities)
+
 COLUMN_UNIT_MAP = {
     "Year": "year",
     "quarter": "quarter",

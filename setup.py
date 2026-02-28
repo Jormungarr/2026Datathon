@@ -10,8 +10,10 @@ setup(
         "matplotlib",
         "seaborn",
         "scipy",
-        "scikit-learn"
-    ],
+        "scikit-learn",
+        "geopy",
+        "plotly",
+        ],
     author="Your Name",
     description="Datathon 2026 project utilities and analysis.",
     python_requires=">=3.7",
