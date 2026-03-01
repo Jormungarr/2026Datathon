@@ -1535,6 +1535,7 @@ def plot_gam_summary_dashboard_plotly(gam, X_test, y_test, y_pred, titles=None, 
     
     # Perfect prediction line
     min_val, max_val = min(y_test.min(), y_pred.min()), max(y_test.max(), y_pred.max())
+    
     fig.add_trace(
         go.Scatter(
             x=[min_val, max_val], y=[min_val, max_val],
@@ -1725,7 +1726,14 @@ def plot_gam_feature_importance_plotly(gam, feature_names=None, save_path=None, 
         return None
 
 
-def plot_gam_combined_dashboard_plotly(gam, X_train, y_train, y_train_pred, X_test, y_test, y_test_pred, titles=None, save_path=None, plot_title=None):
+def plot_gam_combined_dashboard_plotly(
+    gam,
+    X_train, y_train, y_train_pred,      # Training data
+    X_test, y_test, y_test_pred,          # Test data
+    titles=None,                           # FIX: was referencing undefined `all_feature_names`
+    plot_title=None,                       # FIX: was `...` (Ellipsis)
+    save_path=None                         # FIX: was referencing undefined `get_save_path()`
+):
     """
     Interactive Plotly dashboard for GAM model diagnostics comparing BOTH training and test sets.
     Enhanced with better visual separation and clarity.
@@ -1834,8 +1842,8 @@ def plot_gam_combined_dashboard_plotly(gam, X_train, y_train, y_train_pred, X_te
         go.Scatter(
             x=y_train, y=y_train_pred,
             mode='markers',
-            marker=dict(size=4, color='blue', opacity=0.6),
-            name='Training Set',
+            marker=dict(size=4, color='#1f77b4', opacity=0.5),
+            name=f'Training Set (n={len(y_train):,})',
             hovertemplate='<b>Training</b><br>Actual: %{x:.2f}<br>Predicted: %{y:.2f}<extra></extra>'
         ),
         row=diag_row, col=1
@@ -1846,8 +1854,8 @@ def plot_gam_combined_dashboard_plotly(gam, X_train, y_train, y_train_pred, X_te
         go.Scatter(
             x=y_test, y=y_test_pred,
             mode='markers',
-            marker=dict(size=4, color='red', opacity=0.6),
-            name='Test Set',
+            marker=dict(size=5, color='#ff7f0e', opacity=0.7, symbol='diamond'),
+            name=f'Test Set (n={len(y_test):,})',
             hovertemplate='<b>Test</b><br>Actual: %{x:.2f}<br>Predicted: %{y:.2f}<extra></extra>'
         ),
         row=diag_row, col=1
@@ -1878,8 +1886,8 @@ def plot_gam_combined_dashboard_plotly(gam, X_train, y_train, y_train_pred, X_te
         go.Histogram(
             x=train_residuals,
             nbinsx=25,
-            opacity=0.7,
-            marker=dict(color='blue'),
+            opacity=0.6,
+            marker=dict(color='#1f77b4', line=dict(color='darkblue', width=0.5)),
             name='Train Residuals',
             hovertemplate='<b>Training Residuals</b><br>Range: %{x}<br>Count: %{y}<extra></extra>'
         ),
@@ -1891,17 +1899,20 @@ def plot_gam_combined_dashboard_plotly(gam, X_train, y_train, y_train_pred, X_te
         go.Histogram(
             x=test_residuals,
             nbinsx=25,
-            opacity=0.7,
-            marker=dict(color='red'),
+            opacity=0.6,
+            marker=dict(color='#ff7f0e', line=dict(color='darkorange', width=0.5)),
             name='Test Residuals',
             hovertemplate='<b>Test Residuals</b><br>Range: %{x}<br>Count: %{y}<extra></extra>'
         ),
         row=diag_row, col=2
     )
     
+    # Overlay histograms
+    fig.update_layout(barmode='overlay')
+    
     # Mean lines
-    fig.add_vline(x=train_residuals.mean(), line=dict(color='blue', dash='dash', width=2), row=diag_row, col=2)
-    fig.add_vline(x=test_residuals.mean(), line=dict(color='red', dash='dash', width=2), row=diag_row, col=2)
+    fig.add_vline(x=float(train_residuals.mean()), line=dict(color='darkblue', dash='dash', width=2), row=diag_row, col=2)
+    fig.add_vline(x=float(test_residuals.mean()), line=dict(color='darkorange', dash='dash', width=2), row=diag_row, col=2)
     
     # 3. COMBINED Q-Q plots
     from scipy import stats
@@ -1912,7 +1923,7 @@ def plot_gam_combined_dashboard_plotly(gam, X_train, y_train, y_train_pred, X_te
         go.Scatter(
             x=osm_train, y=osr_train,
             mode='markers',
-            marker=dict(size=4, color='blue'),
+            marker=dict(size=4, color='#1f77b4', opacity=0.6),
             name='Train Q-Q',
             hovertemplate='<b>Training Q-Q</b><br>Theoretical: %{x:.2f}<br>Observed: %{y:.2f}<extra></extra>'
         ),
@@ -1925,7 +1936,7 @@ def plot_gam_combined_dashboard_plotly(gam, X_train, y_train, y_train_pred, X_te
         go.Scatter(
             x=osm_test, y=osr_test,
             mode='markers',
-            marker=dict(size=4, color='red'),
+            marker=dict(size=4, color='#ff7f0e', opacity=0.6),
             name='Test Q-Q',
             hovertemplate='<b>Test Q-Q</b><br>Theoretical: %{x:.2f}<br>Observed: %{y:.2f}<extra></extra>'
         ),
@@ -1937,7 +1948,7 @@ def plot_gam_combined_dashboard_plotly(gam, X_train, y_train, y_train_pred, X_te
         go.Scatter(
             x=osm_train, y=slope_train * osm_train + intercept_train,
             mode='lines',
-            line=dict(color='blue', width=2),
+            line=dict(color='darkblue', width=2),
             showlegend=False,
             hoverinfo='skip'
         ),
@@ -1948,7 +1959,7 @@ def plot_gam_combined_dashboard_plotly(gam, X_train, y_train, y_train_pred, X_te
         go.Scatter(
             x=osm_test, y=slope_test * osm_test + intercept_test,
             mode='lines',  
-            line=dict(color='red', width=2),
+            line=dict(color='darkorange', width=2),
             showlegend=False,
             hoverinfo='skip'
         ),
@@ -1956,30 +1967,31 @@ def plot_gam_combined_dashboard_plotly(gam, X_train, y_train, y_train_pred, X_te
     )
     
     # Calculate metrics for title
-    train_rmse = np.sqrt(np.mean(train_residuals**2))
-    test_rmse = np.sqrt(np.mean(test_residuals**2))
+    train_rmse = float(np.sqrt(np.mean(train_residuals**2)))
+    test_rmse = float(np.sqrt(np.mean(test_residuals**2)))
     
     # Update layout
-    main_title = plot_title if plot_title else f"GAM Enhanced Analysis - Train RMSE: {train_rmse:.4f} | Test RMSE: {test_rmse:.4f}"
+    main_title = plot_title if plot_title else f"GAM Combined Analysis - Train RMSE: {train_rmse:.4f} | Test RMSE: {test_rmse:.4f}"
     
-    ffig.update_layout(
+    fig.update_layout(
         height=350 * total_rows,
         title=dict(
             text=main_title,
             x=0.5,
-            y=0.97,  # Move title down slightly from the very top
+            y=0.99,
             xanchor='center',
             yanchor='top',
-            font=dict(size=16, family="Arial Black")  # Slightly smaller font
+            font=dict(size=14, family="Arial Black"),
+            pad=dict(t=20)
         ),
         font=dict(family="Arial", size=10),
         plot_bgcolor='white',
         paper_bgcolor='white',
-        margin=dict(t=120, l=80, r=80, b=60),  # Increase top margin even more
+        margin=dict(t=160, l=80, r=80, b=60),
         legend=dict(
             orientation="h",
-            yanchor="bottom", 
-            y=1.08,  # Move legend higher to avoid title
+            yanchor="top", 
+            y=-0.05,
             xanchor="center",
             x=0.5,
             bgcolor='rgba(255,255,255,0.9)',
@@ -1993,13 +2005,13 @@ def plot_gam_combined_dashboard_plotly(gam, X_train, y_train, y_train_pred, X_te
     fig.update_xaxes(gridcolor='lightgray', gridwidth=0.5)
     fig.update_yaxes(gridcolor='lightgray', gridwidth=0.5)
     
-    # Move performance summary annotation to avoid title overlap
+    # Performance summary annotation - bottom right to avoid all overlaps
     fig.add_annotation(
-        x=0.98, y=0.98,  # Move to top-right corner instead
+        x=0.98, y=0.02,
         xref="paper", yref="paper",
         text=f"<b>Performance Summary</b><br>" +
-             f"Training RMSE: {train_rmse:.4f}<br>" +
-             f"Test RMSE: {test_rmse:.4f}<br>" +
+             f"Training: RMSE={train_rmse:.4f}, n={len(y_train):,}<br>" +
+             f"Test: RMSE={test_rmse:.4f}, n={len(y_test):,}<br>" +
              f"Generalization: {test_rmse/train_rmse:.2f}x" +
              (" ⚠️ Overfitting" if test_rmse/train_rmse > 1.2 else " ✅ Good"),
         showarrow=False,
@@ -2007,9 +2019,9 @@ def plot_gam_combined_dashboard_plotly(gam, X_train, y_train, y_train_pred, X_te
         bgcolor="rgba(255,255,255,0.95)",
         bordercolor="gray",
         borderwidth=1,
-        align="right",  # Right-align text
-        xanchor="right",  # Anchor from right edge
-        yanchor="top"     # Anchor from top edge
+        align="right",
+        xanchor="right",
+        yanchor="bottom"
     )
     
     if save_path:

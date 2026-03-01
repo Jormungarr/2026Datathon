@@ -1,0 +1,18 @@
+{
+  "cv_scores": [
+    {
+      "n_splines": 15,
+      "mean_rmse": 37.140920692887725
+    },
+    {
+      "n_splines": 20,
+      "mean_rmse": 37.08248173529915
+    },
+    {
+      "n_splines": 25,
+      "mean_rmse": 37.05809517494435
+    }
+  ],
+  "selected_n_splines": 25,
+  "selected_mean_rmse": 37.05809517494435
+}

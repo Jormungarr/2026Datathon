@@ -13,11 +13,11 @@ from preprocess.visualization_utils import (
     plot_gam_combined_dashboard_plotly,
     plot_gam_feature_importance_plotly
 )
-
+import json
 
 # Configuration variables for paths and naming
 RESULTS_BASE_DIR = "./results/gam/raw/"
-EXPERIMENT_PREFIX = "add_quarter"  # Change this for different experiments
+EXPERIMENT_PREFIX = "quarter"  # Change this for different experiments
 FIGURE_FORMATS = ".png"  # Could be .pdf, .svg, etc.
 
 # Load and prepare data
@@ -62,6 +62,20 @@ for k in [15, 20, 25]:
 best_k = min(mean_scores, key=lambda x: x[1])[0]
 best_rmse = min(mean_scores, key=lambda x: x[1])[1]
 print(f"Best n_splines={best_k} with average RMSE={float(best_rmse):.4f}")
+
+
+# Prepare cross-validation results for saving
+cv_results = {
+    "cv_scores": [{"n_splines": k, "mean_rmse": float(rmse)} for k, rmse in mean_scores],
+    "selected_n_splines": int(best_k),
+    "selected_mean_rmse": float(best_rmse)
+}
+
+# Save as JSON
+cv_json_path = os.path.join(RESULTS_BASE_DIR, f"{EXPERIMENT_PREFIX}_cv_results.json")
+with open(cv_json_path, "w") as json_file:
+    json.dump(cv_results, json_file, indent=2)
+print(f"✅ Cross-validation results saved to: {cv_json_path}")
 
 # Fit final model on full training set
 # FIX: Skip quarter column for scaling
