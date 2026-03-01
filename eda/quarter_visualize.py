@@ -8,11 +8,11 @@ if __name__ == "__main__":
     df["city2_pax_strength"] = df.groupby(['Year', 'quarter', 'citymarketid_2'])['passengers'].transform('sum')
     
     #calculate relative pax_strength
-    df["relative_pax_strength"] = abs(df["city1_pax_strength"] - df["city2_pax_strength"])
-    df["total_pax_strength"] = df["city1_pax_strength"] + df["city2_pax_strength"]
+    df["rl_pax_str"] = abs(df["city1_pax_strength"] - df["city2_pax_strength"])
+    df["tot_pax_str"] = df["city1_pax_strength"] + df["city2_pax_strength"]
     #merge year and quarter to single time index column
     df['time_index'] = df['Year'].astype(str) + ' Q' + df['quarter'].astype(str)
-    feature_names = ['passengers', 'nsmiles', 'relative_pax_strength', 'total_pax_strength', 'large_ms', 'lf_ms', 'fare', 'fare_lg', 'fare_low']
+    feature_names = ['passengers', 'nsmiles', 'rl_pax_str', 'tot_pax_str', 'large_ms', 'lf_ms', 'fare', 'fare_lg', 'fare_low']
     index_name = ['time_index']
     hue_names = ['carrier_lg']
     X = df[feature_names+hue_names + index_name].dropna()
