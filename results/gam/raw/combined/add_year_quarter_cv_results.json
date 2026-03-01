@@ -1,0 +1,22 @@
+{
+  "cv_scores": [
+    {
+      "n_splines": 15,
+      "mean_rmse": 37.12572629986895
+    },
+    {
+      "n_splines": 20,
+      "mean_rmse": 37.066867529188706
+    },
+    {
+      "n_splines": 25,
+      "mean_rmse": 37.04621617427828
+    }
+  ],
+  "selected_n_splines": 25,
+  "selected_mean_rmse": 37.04621617427828,
+  "categorical_features": [
+    "Year",
+    "quarter"
+  ]
+}
