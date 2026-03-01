@@ -8,7 +8,7 @@ from sklearn.model_selection import StratifiedKFold
 # Ensure year column exists
 # Load and prepare data
 feature_names = ['passengers', 'nsmiles', 'rl_pax_str', 'tot_pax_str', 'large_ms', 'lf_ms']
-X_test, y_test, folds , df_test, df_rest = make_test_and_stratified_folds(feature_cols=feature_names, import_fn=import_unit_removed_dataset)
+X_test, y_test, folds , X_all, y_all, df_test, df_rest = make_test_and_stratified_folds(feature_cols=feature_names, import_fn=import_unit_removed_dataset)
 
 
 # skf = StratifiedKFold(n_splits=10, shuffle=True, random_state=42)

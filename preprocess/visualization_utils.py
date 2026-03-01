@@ -1165,3 +1165,325 @@ def plot_interactive_pc_vs_value(
 
     return fig
 
+def plot_gam_terms(gam, term_indices=None, titles=None, figsize=(8, 4)):
+    """
+    Plot partial dependence for selected terms of a trained pyGAM model.
+
+    Parameters
+    ----------
+    gam : trained pyGAM model
+    term_indices : list of int or None
+        Indices of terms to plot. If None, plot all terms.
+    titles : list of str or None
+        Titles for each subplot. If None, use default.
+    figsize : tuple
+        Figure size.
+    """
+    n_terms = len(gam.terms)
+    if term_indices is None:
+        term_indices = list(range(n_terms))
+    n_plot = len(term_indices)
+    if titles is None:
+        titles = [f"Term {i}" for i in term_indices]
+
+    fig, axs = plt.subplots(n_plot, 1, figsize=(figsize[0], figsize[1] * n_plot))
+    if n_plot == 1:
+        axs = [axs]
+
+    for idx, (i, ax) in enumerate(zip(term_indices, axs)):
+        XX = gam.generate_X_grid(term=i)
+        # pdep: (n_points,), confi: (n_points, 2) -> [lower, upper]
+        pdep, confi = gam.partial_dependence(term=i, X=XX, width=0.95)
+        confi = np.asarray(confi)
+        lower = confi[:, 0]
+        upper = confi[:, 1]
+        x_vals = XX[:, i]
+
+        ax.plot(x_vals, pdep, label="Partial dependence")
+        ax.fill_between(x_vals, lower, upper, color="r", alpha=0.2, label="95% CI")
+        ax.set_title(titles[idx])
+        ax.set_xlabel(f"Feature {i}")
+        ax.set_ylabel("Effect")
+        ax.legend()
+
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_gam_terms(gam, term_indices=None, titles=None, figsize=(12, 4), save_path=None):
+    """
+    Plot partial dependence for selected terms of a trained pyGAM model.
+    Industrial-grade visualization with proper error handling and styling.
+
+    Parameters
+    ----------
+    gam : trained pyGAM model
+        A fitted pygam model (e.g., GammaGAM, LinearGAM)
+    term_indices : list of int or None
+        Indices of terms to plot. If None, plot all non-intercept terms.
+    titles : list of str or None
+        Titles for each subplot. If None, use default.
+    figsize : tuple
+        Figure size (width, height_per_plot).
+    save_path : str or None
+        If provided, saves the figure to this path.
+    """
+    # Filter out intercept terms (they cannot be plotted)
+    plottable_terms = []
+    for i, term in enumerate(gam.terms):
+        try:
+            # Try to generate grid - if it fails, it's likely an intercept
+            gam.generate_X_grid(term=i)
+            plottable_terms.append(i)
+        except ValueError as e:
+            if "intercept" in str(e).lower():
+                print(f"Skipping term {i} (intercept term cannot be plotted)")
+            else:
+                print(f"Skipping term {i} due to error: {e}")
+    
+    if term_indices is None:
+        term_indices = plottable_terms
+    else:
+        # Filter user-provided indices to only include plottable terms
+        term_indices = [i for i in term_indices if i in plottable_terms]
+    
+    if not term_indices:
+        print("No plottable terms found!")
+        return
+    
+    n_plot = len(term_indices)
+    if titles is None:
+        titles = [f"Term {i}" for i in term_indices]
+
+    # Create subplots
+    fig, axs = plt.subplots(n_plot, 1, figsize=(figsize[0], figsize[1] * n_plot))
+    if n_plot == 1:
+        axs = [axs]
+
+    for idx, (i, ax) in enumerate(zip(term_indices, axs)):
+        try:
+            XX = gam.generate_X_grid(term=i)
+            # Get partial dependence and confidence intervals
+            pdep, confi = gam.partial_dependence(term=i, X=XX, width=0.95)
+            
+            # Ensure confi is a 2D array with shape (n_points, 2)
+            confi = np.asarray(confi)
+            if confi.ndim == 1:
+                # If 1D, assume it's just the mean; create dummy CI
+                lower = pdep - 0.1 * np.abs(pdep)
+                upper = pdep + 0.1 * np.abs(pdep)
+            else:
+                lower = confi[:, 0]
+                upper = confi[:, 1]
+            
+            x_vals = XX[:, i]
+
+            # Plot partial dependence
+            ax.plot(x_vals, pdep, linewidth=2.5, color='#1f77b4', label="Partial Dependence", zorder=3)
+            
+            # Fill confidence interval
+            ax.fill_between(x_vals, lower, upper, color='#1f77b4', alpha=0.25, label="95% CI", zorder=2)
+            
+            # Styling
+            ax.set_title(titles[idx], fontsize=13, fontweight='bold', pad=10)
+            ax.set_xlabel(f"Feature {i}", fontsize=11, fontweight='bold')
+            ax.set_ylabel("Partial Effect", fontsize=11, fontweight='bold')
+            ax.grid(True, alpha=0.3, linestyle='--', linewidth=0.7)
+            ax.legend(loc='best', framealpha=0.95, fontsize=10)
+            
+            # Add explained deviance for this term if available
+            try:
+                if hasattr(gam, 'statistics_') and 'edof' in gam.statistics_:
+                    term_deviance = gam.statistics_["edof"][i]
+                    ax.text(0.98, 0.97, f"EDOF: {term_deviance:.2f}", 
+                           transform=ax.transAxes, fontsize=9, 
+                           verticalalignment='top', horizontalalignment='right',
+                           bbox=dict(boxstyle='round', facecolor='wheat', alpha=0.8))
+            except:
+                pass
+
+        except Exception as e:
+            ax.text(0.5, 0.5, f"Error plotting term {i}:\n{str(e)}", 
+                   transform=ax.transAxes, ha='center', va='center',
+                   fontsize=10, color='red')
+            ax.set_title(titles[idx], fontsize=13, fontweight='bold')
+
+    plt.tight_layout()
+    
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight', facecolor='white')
+        print(f"Figure saved to {save_path}")
+    
+    plt.show()
+
+
+def plot_gam_summary_dashboard(gam, X_test, y_test, y_pred, titles=None, figsize=(16, 10), save_path=None):
+    """
+    Industrial-grade GAM summary dashboard with multiple diagnostics:
+    - Partial dependence plots for all terms
+    - Predicted vs Actual scatter
+    - Residuals histogram and Q-Q plot
+    - Feature importance (EDOF)
+    
+    Parameters
+    ----------
+    gam : trained GAM model
+    X_test : np.ndarray, shape (n_samples, n_features)
+        Test features
+    y_test : np.ndarray, shape (n_samples,)
+        Test target values
+    y_pred : np.ndarray, shape (n_samples,)
+        Predictions
+    titles : list of str or None
+        Custom titles for each term
+    figsize : tuple
+        Overall figure size
+    save_path : str or None
+        If provided, saves the figure
+    """
+    # Filter out intercept terms
+    plottable_terms = []
+    for i, term in enumerate(gam.terms):
+        try:
+            gam.generate_X_grid(term=i)
+            plottable_terms.append(i)
+        except ValueError as e:
+            if "intercept" not in str(e).lower():
+                print(f"Skipping term {i} due to error: {e}")
+    
+    n_terms = len(plottable_terms)
+    if titles is None:
+        titles = [f"Term {i}" for i in plottable_terms]
+    
+    # Create a comprehensive grid
+    n_cols = 3
+    n_rows = int(np.ceil(n_terms / n_cols)) + 2  # +2 for diagnostics
+    
+    fig = plt.figure(figsize=figsize)
+    gs = fig.add_gridspec(n_rows, n_cols, hspace=0.35, wspace=0.3)
+    
+    # Plot each plottable term
+    for plot_idx, term_idx in enumerate(plottable_terms):
+        row = plot_idx // n_cols
+        col = plot_idx % n_cols
+        ax = fig.add_subplot(gs[row, col])
+        
+        try:
+            XX = gam.generate_X_grid(term=term_idx)
+            pdep, confi = gam.partial_dependence(term=term_idx, X=XX, width=0.95)
+            confi = np.asarray(confi)
+            if confi.ndim == 1:
+                lower = pdep - 0.1 * np.abs(pdep)
+                upper = pdep + 0.1 * np.abs(pdep)
+            else:
+                lower = confi[:, 0]
+                upper = confi[:, 1]
+            
+            x_vals = XX[:, term_idx]
+            ax.plot(x_vals, pdep, linewidth=2, color='#1f77b4')
+            ax.fill_between(x_vals, lower, upper, color='#1f77b4', alpha=0.25)
+            ax.set_title(titles[plot_idx], fontsize=11, fontweight='bold')
+            ax.set_xlabel(f"Feature {term_idx}", fontsize=9)
+            ax.set_ylabel("Effect", fontsize=9)
+            ax.grid(True, alpha=0.3, linestyle='--')
+        except Exception as e:
+            ax.text(0.5, 0.5, f"Error: {str(e)}", transform=ax.transAxes, ha='center', va='center')
+            ax.set_title(titles[plot_idx], fontsize=11, fontweight='bold')
+    
+    # Predicted vs Actual
+    ax_pred = fig.add_subplot(gs[int(np.ceil(n_terms / n_cols)), 0])
+    ax_pred.scatter(y_test, y_pred, alpha=0.5, s=20, edgecolors='none')
+    min_val = min(y_test.min(), y_pred.min())
+    max_val = max(y_test.max(), y_pred.max())
+    ax_pred.plot([min_val, max_val], [min_val, max_val], 'r--', lw=2, label='Perfect Prediction')
+    ax_pred.set_xlabel('Actual', fontsize=10, fontweight='bold')
+    ax_pred.set_ylabel('Predicted', fontsize=10, fontweight='bold')
+    ax_pred.set_title('Predicted vs Actual', fontsize=11, fontweight='bold')
+    ax_pred.legend()
+    ax_pred.grid(True, alpha=0.3)
+    
+    # Residuals distribution
+    residuals = y_test - y_pred
+    ax_resid = fig.add_subplot(gs[int(np.ceil(n_terms / n_cols)), 1])
+    ax_resid.hist(residuals, bins=30, edgecolor='black', alpha=0.7, color='#2ca02c')
+    ax_resid.axvline(residuals.mean(), color='red', linestyle='--', linewidth=2, label=f'Mean: {residuals.mean():.2f}')
+    ax_resid.set_xlabel('Residuals', fontsize=10, fontweight='bold')
+    ax_resid.set_ylabel('Frequency', fontsize=10, fontweight='bold')
+    ax_resid.set_title('Residuals Distribution', fontsize=11, fontweight='bold')
+    ax_resid.legend()
+    ax_resid.grid(True, alpha=0.3, axis='y')
+    
+    # Q-Q plot
+    from scipy import stats
+    ax_qq = fig.add_subplot(gs[int(np.ceil(n_terms / n_cols)), 2])
+    stats.probplot(residuals, dist="norm", plot=ax_qq)
+    ax_qq.set_title('Q-Q Plot', fontsize=11, fontweight='bold')
+    ax_qq.grid(True, alpha=0.3)
+    
+    fig.suptitle('GAM Model Summary Dashboard', fontsize=16, fontweight='bold', y=0.995)
+    
+    if save_path:
+        plt.savefig(save_path, dpi=300, bbox_inches='tight', facecolor='white')
+        print(f"Dashboard saved to {save_path}")
+    
+    plt.show()
+
+
+def plot_gam_feature_importance(gam, figsize=(10, 6), save_path=None):
+    """
+    Plot feature importance based on effective degrees of freedom (EDOF).
+    Higher EDOF indicates more flexible/important features.
+    
+    Parameters
+    ----------
+    gam : trained GAM model
+    figsize : tuple
+        Figure size
+    save_path : str or None
+        If provided, saves the figure
+    """
+    try:
+        if not hasattr(gam, 'statistics_') or 'edof' not in gam.statistics_:
+            print("EDOF statistics not available for this GAM model.")
+            return
+            
+        edof = gam.statistics_['edof']
+        
+        # Filter out intercept terms (they don't correspond to features)
+        plottable_terms = []
+        plottable_edof = []
+        for i, term in enumerate(gam.terms):
+            try:
+                gam.generate_X_grid(term=i)
+                plottable_terms.append(i)
+                plottable_edof.append(edof[i])
+            except ValueError as e:
+                if "intercept" not in str(e).lower():
+                    print(f"Skipping term {i} due to error: {e}")
+        
+        if not plottable_terms:
+            print("No plottable terms found for feature importance!")
+            return
+        
+        n_terms = len(plottable_terms)
+        fig, ax = plt.subplots(figsize=figsize)
+        colors = plt.cm.viridis(np.linspace(0, 1, n_terms))
+        bars = ax.barh(range(n_terms), plottable_edof, color=colors, edgecolor='black', linewidth=1.2)
+        
+        # Add value labels
+        for i, (bar, val) in enumerate(zip(bars, plottable_edof)):
+            ax.text(val + 0.02, i, f'{val:.2f}', va='center', fontsize=10, fontweight='bold')
+        
+        ax.set_yticks(range(n_terms))
+        ax.set_yticklabels([f'Term {i}' for i in plottable_terms])
+        ax.set_xlabel('Effective Degrees of Freedom (EDOF)', fontsize=12, fontweight='bold')
+        ax.set_title('Feature Importance in GAM Model', fontsize=13, fontweight='bold')
+        ax.grid(True, alpha=0.3, axis='x')
+        
+        plt.tight_layout()
+        if save_path:
+            plt.savefig(save_path, dpi=300, bbox_inches='tight', facecolor='white')
+            print(f"Feature importance plot saved to {save_path}")
+        plt.show()
+    except Exception as e:
+        print(f"Could not plot feature importance: {e}")

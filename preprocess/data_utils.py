@@ -128,7 +128,10 @@ def make_test_and_stratified_folds(
             "val":   [X_val,   y_val],
         })
 
-    return X_test, y_test, folds, df_test, df_rest
+    return X_test, y_test, folds,  X_all, y_all, df_test, df_rest
+
+
+
 
 COLUMN_UNIT_MAP = {
     "Year": "year",

@@ -9,7 +9,7 @@ from preprocess.data_utils import make_test_and_stratified_folds, import_unit_re
 # Define feature columns
 feature_names = ['passengers', 'nsmiles', 'rl_pax_str', 'tot_pax_str', 'large_ms', 'lf_ms']
 time_features = ['quarter', 'Year']
-X_test, y_test, folds, df_test, df_rest = make_test_and_stratified_folds(
+X_test, y_test, folds, X_all, y_all, df_test, df_rest = make_test_and_stratified_folds(
     feature_cols=feature_names + time_features,
     import_fn=import_unit_removed_dataset,
     categorical_encode_cols=time_features
