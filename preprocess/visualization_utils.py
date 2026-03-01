@@ -551,10 +551,31 @@ def plot_interactive_pca_scatter_full(
     save_path=None
 ):
     """
-    Interactive PCA scatter plot with toggles for:
-    - Time period (All Data, Yearly, Quarterly)
-    - Color-coded value (multiple columns)
-    - Color scale distribution (uniform, exponential, normal, power, symlog, linear)
+    Create an interactive PCA scatter plot with dropdown toggles for:
+      - Time period (All Data, Yearly, Quarterly)
+      - Color-coded value (multiple columns)
+      - Color scale distribution (uniform, exponential, normal, power, symlog, linear)
+    Features:
+      - Always shows colorbar for all traces
+      - Allows user to set number of colorbar ticks (n_ticks)
+      - Supports additional scale distributions: power, symlog, linear
+      - Adds toggles for "All Data" and yearly aggregation in addition to quarterly
+      - Fixes toggle cutoff/overlap and improves layout
+    Args:
+        df (pd.DataFrame): DataFrame containing features, color columns, and time index
+        feature_names (list): List of feature names for PCA
+        color_columns (list): List of column names to use for color coding
+        time_column (str): Column name for time index (e.g., '2025 Q1')
+        year_column (str): Column name for year (e.g., 'Year')
+        pc_x (int): PC index for x-axis (0-based)
+        pc_y (int): PC index for y-axis (0-based)
+        standardize (bool): Whether to standardize data before PCA
+        n_ticks (int): Number of ticks on the color gradient scale
+        figsize (tuple): Figure size (width, height)
+        title (str): Plot title
+        save_path (str): If provided, saves the HTML figure
+    Returns:
+        plotly.graph_objects.Figure: The interactive PCA scatter plot figure
     """
     from sklearn.preprocessing import StandardScaler
     from sklearn.decomposition import PCA
@@ -890,4 +911,257 @@ def _get_colorbar_ticktext(values, mode='uniform', n_ticks=6):
         tick_vals = np.linspace(values.min(), values.max(), n_ticks)
     
     return [f"{v:.1f}" for v in tick_vals]
+
+
+def plot_interactive_pc_vs_value(
+    df,
+    feature_names,
+    value_columns,
+    time_column='time_index',
+    year_column='Year',
+    pc_x=0,
+    standardize=True,
+    n_ticks=6,
+    figsize=(1000, 750),
+    title="PC vs Value Interactive Plot",
+    save_path=None
+):
+    """
+    Interactive plot: PC (fixed, user input) vs value column (toggle), with time, value, and scale toggles.
+    Args:
+        df (pd.DataFrame): DataFrame containing features, value columns, and time index
+        feature_names (list): List of feature names for PCA
+        value_columns (list): List of column names to use for y-axis and color coding
+        time_column (str): Column name for time index (e.g., '2025 Q1')
+        year_column (str): Column name for year (e.g., 'Year')
+        pc_x (int): PC index for x-axis (0-based)
+        standardize (bool): Whether to standardize data before PCA
+        n_ticks (int): Number of ticks on the color gradient scale
+        figsize (tuple): Figure size (width, height)
+        title (str): Plot title
+        save_path (str): If provided, saves the HTML figure
+    Returns:
+        plotly.graph_objects.Figure: The interactive plot
+    """
+    from sklearn.preprocessing import StandardScaler
+    from sklearn.decomposition import PCA
+    import plotly.graph_objects as go
+
+    # Ensure year column exists
+    if year_column not in df.columns:
+        df = df.copy()
+        df[year_column] = df[time_column].astype(str).str.extract(r'(\d{4})')[0]
+
+    df = df.copy().dropna(subset=feature_names + value_columns + [time_column, year_column])
+
+    # Fit PCA
+    X = df[feature_names].values
+    if standardize:
+        X = StandardScaler().fit_transform(X)
+    pca = PCA()
+    pc_scores = pca.fit_transform(X)
+    n_pcs = pc_scores.shape[1]
+    for i in range(n_pcs):
+        df[f'PC{i+1}'] = pc_scores[:, i]
+    pc_x_col = f'PC{pc_x+1}'
+
+    # Time options: All Data, each year, each quarter
+    time_periods_quarterly = sorted(df[time_column].unique())
+    time_periods_yearly = sorted(df[year_column].unique())
+    time_options = ["All Data"] + [f"Year {y}" for y in time_periods_yearly] + list(time_periods_quarterly)
+
+    scale_modes = ['uniform', 'exponential', 'normal', 'power', 'symlog', 'linear']
+    scale_labels = {
+        'uniform': 'Uniform (Quantile)',
+        'exponential': 'Exponential (Log)',
+        'normal': 'Normal (Z-score)',
+        'power': 'Power (Sqrt)',
+        'symlog': 'Symmetric Log',
+        'linear': 'Linear (Min-Max)'
+    }
+
+    # Only build traces for the currently selected options for speed
+    default_t, default_v, default_s = 0, 0, 0
+
+    def get_df_time(time_opt):
+        if time_opt == "All Data":
+            return df.copy()
+        elif time_opt.startswith("Year "):
+            year_val = time_opt.replace("Year ", "")
+            return df[df[year_column].astype(str) == str(year_val)]
+        else:
+            return df[df[time_column] == time_opt]
+
+    # Initial data
+    df_time = get_df_time(time_options[default_t])
+    value_col = value_columns[default_v]
+    scale_mode = scale_modes[default_s]
+    color_vals = df_time[value_col].values
+    scaled_colors = _scale_colors(color_vals, mode=scale_mode)
+    fig = go.Figure()
+
+    fig.add_trace(go.Scatter(
+        x=df_time[pc_x_col],
+        y=df_time[value_col],
+        mode='markers',
+        marker=dict(
+            size=6,
+            color=scaled_colors,
+            colorscale='Viridis',
+            showscale=True,
+            cmin=0,
+            cmax=1,
+            colorbar=dict(
+                title=dict(text=value_col, side='right'),
+                tickvals=_get_colorbar_ticks(color_vals, mode=scale_mode, n_ticks=n_ticks),
+                ticktext=_get_colorbar_ticktext(color_vals, mode=scale_mode, n_ticks=n_ticks),
+                len=0.6,
+                y=0.5,
+                yanchor='middle',
+            ),
+            opacity=0.7,
+        ),
+        text=[
+            f"{pc_x_col}: {x:.2f}<br>{value_col}: {y:.2f}"
+            for x, y in zip(df_time[pc_x_col], df_time[value_col])
+        ],
+        hoverinfo='text',
+        name=f"{time_options[default_t]} | {value_col} | {scale_mode}",
+        visible=True
+    ))
+
+    # Dropdowns
+    def make_update_args(t_idx=None, v_idx=None, s_idx=None):
+        t_idx = default_t if t_idx is None else t_idx
+        v_idx = default_v if v_idx is None else v_idx
+        s_idx = default_s if s_idx is None else s_idx
+        df_time = get_df_time(time_options[t_idx])
+        value_col = value_columns[v_idx]
+        scale_mode = scale_modes[s_idx]
+        color_vals = df_time[value_col].values
+        scaled_colors = _scale_colors(color_vals, mode=scale_mode)
+        return dict(
+            x=[df_time[pc_x_col]],
+            y=[df_time[value_col]],
+            marker=dict(
+                size=6,
+                color=scaled_colors,
+                colorscale='Viridis',
+                showscale=True,
+                cmin=0,
+                cmax=1,
+                colorbar=dict(
+                    title=dict(text=value_col, side='right'),
+                    tickvals=_get_colorbar_ticks(color_vals, mode=scale_mode, n_ticks=n_ticks),
+                    ticktext=_get_colorbar_ticktext(color_vals, mode=scale_mode, n_ticks=n_ticks),
+                    len=0.6,
+                    y=0.5,
+                    yanchor='middle',
+                ),
+                opacity=0.7,
+            ),
+            text=[
+                f"{pc_x_col}: {x:.2f}<br>{value_col}: {y:.2f}"
+                for x, y in zip(df_time[pc_x_col], df_time[value_col])
+            ],
+            name=f"{time_options[t_idx]} | {value_col} | {scale_mode}",
+        ), f"{title} - {time_options[t_idx]}"
+
+    # Time dropdown
+    time_buttons = []
+    for t_idx, time_opt in enumerate(time_options):
+        update_args, new_title = make_update_args(t_idx=t_idx)
+        time_buttons.append(dict(
+            label=str(time_opt),
+            method='update',
+            args=[
+                update_args,
+                {'title': new_title}
+            ]
+        ))
+
+    # Value dropdown
+    value_buttons = []
+    for v_idx, value_col in enumerate(value_columns):
+        update_args, _ = make_update_args(v_idx=v_idx)
+        value_buttons.append(dict(
+            label=value_col,
+            method='update',
+            args=[update_args, {}]
+        ))
+
+    # Scale dropdown
+    scale_buttons = []
+    for s_idx, scale_mode in enumerate(scale_modes):
+        update_args, _ = make_update_args(s_idx=s_idx)
+        scale_buttons.append(dict(
+            label=scale_labels[scale_mode],
+            method='update',
+            args=[update_args, {}]
+        ))
+
+    # Layout with improved toggle placement
+    fig.update_layout(
+        title=dict(
+            text=f"{title} - {time_options[default_t]}",
+            y=0.96,
+            x=0.5,
+            xanchor='center',
+            yanchor='top',
+            font=dict(size=16)
+        ),
+        xaxis_title=f"PC{pc_x+1} ({pca.explained_variance_ratio_[pc_x]*100:.1f}%)",
+        yaxis_title=f"{value_columns[default_v]}",
+        width=figsize[0],
+        height=figsize[1],
+        margin=dict(t=120, l=80, r=120, b=80),
+        updatemenus=[
+            dict(
+                buttons=time_buttons,
+                direction='down',
+                showactive=True,
+                x=0.0,
+                xanchor='left',
+                y=1.13,
+                yanchor='top',
+                bgcolor='rgba(255,255,255,0.95)',
+                bordercolor='#ccc',
+                font=dict(size=11),
+            ),
+            dict(
+                buttons=value_buttons,
+                direction='down',
+                showactive=True,
+                x=0.18,
+                xanchor='left',
+                y=1.13,
+                yanchor='top',
+                bgcolor='rgba(255,255,255,0.95)',
+                bordercolor='#ccc',
+                font=dict(size=11),
+            ),
+            dict(
+                buttons=scale_buttons,
+                direction='down',
+                showactive=True,
+                x=0.36,
+                xanchor='left',
+                y=1.13,
+                yanchor='top',
+                bgcolor='rgba(255,255,255,0.95)',
+                bordercolor='#ccc',
+                font=dict(size=11),
+            ),
+        ],
+        annotations=[
+            dict(text="<b>Time:</b>", x=0.0, xref="paper", y=1.17, yref="paper", showarrow=False, font=dict(size=11)),
+            dict(text="<b>Y Value:</b>", x=0.18, xref="paper", y=1.17, yref="paper", showarrow=False, font=dict(size=11)),
+            dict(text="<b>Scale:</b>", x=0.36, xref="paper", y=1.17, yref="paper", showarrow=False, font=dict(size=11)),
+        ]
+    )
+
+    if save_path:
+        fig.write_html(save_path)
+
+    return fig
 
