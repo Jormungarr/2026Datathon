@@ -83,11 +83,13 @@ All models are evaluated on held-out test data (10% random split) using **Root M
 | GAM (Raw + Year) | Raw + Year | 36.74 |
 | GAM (Raw) | Raw | 36.75 |
 | GAM (Raw + Quarter) | Raw + Quarter | 37.88 |
-| GNN (MetaLayer) | Graph-Structured | 45.01 |
+| GNN (MetaLayer)† | Graph-Structured | 45.01 |
 | GAM (PCA + Quarter) | PCA | 49.10 |
 | GAM (PCA + Year) | PCA | 49.11 |
 | GAM (PCA + Quarter + Year) | PCA | 49.11 |
 | GAM (PCA) | PCA | 49.11 |
+
+> † *GNN results are exploratory and evaluated on a different test split (n = 3,000), so RMSE is not directly comparable to the tabular models above.*
 
 > **Key Findings:**
 > - GAM with PCA-guided interaction terms achieves the best GAM performance (RMSE = 36.33), suggesting that PCA-informed feature engineering captures meaningful nonlinear market structure.
