@@ -127,6 +127,40 @@ X_val = val_df[num_features + cat_features]
 y_val = val_df["y_fare_t1"].astype(float)
 
 # ============ 6) Pipeline + LassoCV（CV 只在训练集内部） ============
+# ============ 6) Pipeline + LassoCV（CV 只在训练集内部） ============
+from collections import defaultdict
+
+N_SPLITS = 5
+RNG = np.random.RandomState(42)
+
+# ---- year-quarter strata based on t time ----
+# year_t already exists in df; quarter is t quarter
+strata = (train_df["year_t"].astype(str) + "_Q" + train_df["quarter"].astype(int).astype(str)).to_numpy()
+
+# ---- build fold assignment that is stratified by year-quarter ----
+fold_id = np.full(len(train_df), -1, dtype=int)
+
+# indices per stratum
+bucket = defaultdict(list)
+for i, s in enumerate(strata):
+    bucket[s].append(i)
+
+for s, idxs in bucket.items():
+    idxs = np.array(idxs, dtype=int)
+    RNG.shuffle(idxs)  # shuffle within stratum
+    # round-robin assign to folds (works even if a stratum has < N_SPLITS samples)
+    fold_id[idxs] = np.arange(len(idxs)) % N_SPLITS
+
+assert (fold_id >= 0).all()
+
+# ---- convert fold_id -> cv splits for sklearn ----
+all_idx = np.arange(len(train_df))
+cv_splits = []
+for k in range(N_SPLITS):
+    test_idx = all_idx[fold_id == k]
+    train_idx = all_idx[fold_id != k]
+    cv_splits.append((train_idx, test_idx))
+
 pre = ColumnTransformer(
     transformers=[
         ("num", Pipeline([
@@ -142,7 +176,7 @@ pre = ColumnTransformer(
 
 model = LassoCV(
     alphas=np.logspace(-3, 1, 50),
-    cv=5,
+    cv=cv_splits,              # <<< changed here
     max_iter=20000,
     random_state=42,
 )
@@ -150,14 +184,25 @@ model = LassoCV(
 pipe = Pipeline([("pre", pre), ("model", model)])
 pipe.fit(X_train, y_train)
 
+# pipe.fit(X_train, y_train) 之后
+
+m = pipe.named_steps["model"]
+
+# 找到 alpha_ 在 alphas_ 里的索引（浮点数用 argmin(abs) 更稳）
+best_i = int(np.argmin(np.abs(m.alphas_ - m.alpha_)))
+
+fold_mse = m.mse_path_[best_i]          # (n_folds,)
+cv_mse_mean = float(np.mean(fold_mse))
+cv_mse_std  = float(np.std(fold_mse, ddof=1)) if len(fold_mse) > 1 else 0.0
+cv_rmse_mean = float(np.sqrt(cv_mse_mean))
+
+print(
+    f"[Train-CV] MSE={cv_mse_mean:.6f} ± {cv_mse_std:.6f}  "
+    f"RMSE={cv_rmse_mean:.6f}  alpha={m.alpha_:.6g}"
+)
+print("[Train-CV] fold_mse:", ", ".join(f"{x:.6f}" for x in fold_mse))
+
 pred = pipe.predict(X_val)
-
-# sklearn 旧版兼容：sqrt(MSE)
-mse = mean_squared_error(y_val, pred)
-rmse = float(np.sqrt(mse))
-mae = float(mean_absolute_error(y_val, pred))
-
-print(f"[2025 holdout] RMSE={rmse:.4f}  MAE={mae:.4f}  alpha={pipe.named_steps['model'].alpha_:.6g}")
 
 # ============ 7) 导出用于拟合图的数据 ============
 fit_df = val_df[[
