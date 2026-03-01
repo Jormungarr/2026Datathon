@@ -60,10 +60,69 @@ The first three components explain approximately **74% of total variance**.
 
 ---
 
-# Evaluation
+# Results
 
-- **RMSE** (Root Mean Squared Error)  
-- **MAE** (Mean Absolute Error)  
-- Cross-validation performance  
+### Dataset
+
+| Split | Samples | Ratio |
+|:------|--------:|------:|
+| Train | ~12,582 | 90%   |
+| Test  | ~1,398  | 10%   |
+| **Total** | **~13,980** | **100%** |
+
+All models are evaluated on held-out test data (10% random split) using **Root Mean Squared Error (RMSE)**.
+
+### Model Comparison
+
+| Model | Features | Test RMSE |
+|:------|:---------|----------:|
+| **Lasso Regression (Baseline) 🥇** | **Raw** | **35.23** |
+| *GAM (Raw + PCA-Guided Interactions) 🥈* | *Raw + PCA-Guided* | *36.33* |
+| GAM (Raw + PCA-Guided Interactions + Quarter) | Raw + PCA-Guided + Quarter | 36.35 |
+| GAM (Raw + Year + Quarter) | Raw + Year + Quarter | 36.73 |
+| GAM (Raw + Year) | Raw + Year | 36.74 |
+| GAM (Raw) | Raw | 36.75 |
+| GAM (Raw + Quarter) | Raw + Quarter | 37.88 |
+| GNN (MetaLayer) | Graph-Structured | 45.01 |
+| GAM (PCA + Quarter) | PCA | 49.10 |
+| GAM (PCA + Year) | PCA | 49.11 |
+| GAM (PCA + Quarter + Year) | PCA | 49.11 |
+| GAM (PCA) | PCA | 49.11 |
+
+> **Key Findings:**
+> - GAM with PCA-guided interaction terms achieves the best GAM performance (RMSE = 36.33), suggesting that PCA-informed feature engineering captures meaningful nonlinear market structure.
+> - Raw features consistently outperform PCA-only inputs, indicating that individual structural variables carry predictive signal lost during dimensionality reduction.
+> - The GNN captures network topology but does not yet outperform tabular models, highlighting the challenge of encoding sparse airline graphs.
+
+---
+
+# Getting Started
+
+### Prerequisites
+
+- Python ≥ 3.9
+- [Conda](https://docs.conda.io/) (recommended)
+
+### Installation
+
+```bash
+git clone https://github.com/Jormungarr/2026Datathon.git
+cd 2026Datathon
+pip install -e .
+```
+
+### Project Structure
+
+```
+├── data/                # Raw data (flight edges, geocoded cities)
+├── preprocess/          # Data loading, filtering, and feature engineering
+├── eda/                 # Exploratory data analysis scripts and notebooks
+├── pca/                 # PCA analysis notebooks
+├── model/               # Model implementations
+│   ├── baseline_lasso.py
+│   ├── gam/             # GAM variants (raw, PCA, interaction terms)
+│   └── Metalayer/       # Graph Neural Network (MetaLayer GNN)
+└── results/             # Predictions, dashboards, and visualizations
+```
 
 ---
