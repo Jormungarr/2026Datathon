@@ -1723,3 +1723,285 @@ def plot_gam_feature_importance_plotly(gam, feature_names=None, save_path=None, 
     except Exception as e:
         print(f"❌ Could not plot feature importance: {e}")
         return None
+
+
+def plot_gam_combined_dashboard_plotly(gam, X_train, y_train, y_train_pred, X_test, y_test, y_test_pred, titles=None, save_path=None, plot_title=None):
+    """
+    Interactive Plotly dashboard for GAM model diagnostics comparing BOTH training and test sets.
+    
+    Parameters:
+    - gam: Fitted GAM model
+    - X_train, y_train, y_train_pred: Training data, actuals, predictions
+    - X_test, y_test, y_test_pred: Test data, actuals, predictions
+    - titles: Feature names for partial dependence plots
+    - save_path: Where to save HTML file
+    - plot_title: Custom title for the entire dashboard
+    """
+    # Filter plottable terms
+    plottable_terms = []
+    for i, term in enumerate(gam.terms):
+        try:
+            gam.generate_X_grid(term=i)
+            plottable_terms.append(i)
+        except ValueError:
+            pass
+    
+    n_terms = len(plottable_terms)
+    
+    # Create titles for partial dependence plots
+    if titles is None:
+        plot_titles = [f"Term {i}" for i in plottable_terms]
+    else:
+        plot_titles = []
+        for idx, term_idx in enumerate(plottable_terms):
+            if idx < len(titles):
+                plot_titles.append(titles[idx])
+            else:
+                plot_titles.append(f"Term {term_idx}")
+    
+    # Calculate grid dimensions - partial dependence + 3 diagnostic plots
+    n_cols = 3
+    partial_rows = int(np.ceil(n_terms / n_cols))
+    total_rows = partial_rows + 1  # +1 for diagnostics row
+    
+    # Create subplot titles
+    diagnostic_titles = ['Train vs Test Predictions', 'Residuals Comparison', 'Q-Q Plot Comparison']
+    subplot_titles = plot_titles + diagnostic_titles
+    
+    # Create subplots
+    fig = make_subplots(
+        rows=total_rows, cols=n_cols,
+        subplot_titles=subplot_titles,
+        specs=[[{"secondary_y": False} for _ in range(n_cols)] for _ in range(total_rows)],
+        vertical_spacing=0.12,
+        horizontal_spacing=0.08
+    )
+    
+    # Plot partial effects (same as before - model-based)
+    for plot_idx, term_idx in enumerate(plottable_terms):
+        row = (plot_idx // n_cols) + 1
+        col = (plot_idx % n_cols) + 1
+        
+        try:
+            XX = gam.generate_X_grid(term=term_idx)
+            pdep, confi = gam.partial_dependence(term=term_idx, X=XX, width=0.95)
+            confi = np.asarray(confi)
+            
+            if confi.ndim == 1:
+                lower = pdep - 0.1 * np.abs(pdep)
+                upper = pdep + 0.1 * np.abs(pdep)
+            else:
+                lower = confi[:, 0]
+                upper = confi[:, 1]
+            
+            x_vals = XX[:, term_idx]
+            
+            # Confidence interval
+            fig.add_trace(
+                go.Scatter(
+                    x=np.concatenate([x_vals, x_vals[::-1]]),
+                    y=np.concatenate([upper, lower[::-1]]),
+                    fill='toself',
+                    fillcolor='rgba(31, 119, 180, 0.3)',
+                    line=dict(color='rgba(255,255,255,0)'),
+                    showlegend=False,
+                    hoverinfo='skip'
+                ),
+                row=row, col=col
+            )
+            
+            # Main effect line
+            fig.add_trace(
+                go.Scatter(
+                    x=x_vals, y=pdep,
+                    mode='lines',
+                    line=dict(color='#1f77b4', width=2.5),
+                    showlegend=False,
+                    hovertemplate=f'<b>{plot_titles[plot_idx]}</b><br>Value: %{{x:.3f}}<br>Effect: %{{y:.3f}}<extra></extra>'
+                ),
+                row=row, col=col
+            )
+            
+        except Exception as e:
+            fig.add_annotation(
+                x=0.5, y=0.5,
+                xref=f"x{(row-1)*n_cols + col} domain",
+                yref=f"y{(row-1)*n_cols + col} domain",
+                text=f"Error: {str(e)[:50]}...",
+                showarrow=False,
+                font=dict(size=10, color="red")
+            )
+    
+    # COMBINED DIAGNOSTIC PLOTS
+    diag_row = partial_rows + 1
+    
+    # 1. COMBINED Predicted vs Actual (Train vs Test)
+    # Training points
+    fig.add_trace(
+        go.Scatter(
+            x=y_train, y=y_train_pred,
+            mode='markers',
+            marker=dict(size=4, color='blue', opacity=0.6),
+            name='Training Set',
+            hovertemplate='<b>Training</b><br>Actual: %{x:.2f}<br>Predicted: %{y:.2f}<extra></extra>'
+        ),
+        row=diag_row, col=1
+    )
+    
+    # Test points
+    fig.add_trace(
+        go.Scatter(
+            x=y_test, y=y_test_pred,
+            mode='markers',
+            marker=dict(size=4, color='red', opacity=0.6),
+            name='Test Set',
+            hovertemplate='<b>Test</b><br>Actual: %{x:.2f}<br>Predicted: %{y:.2f}<extra></extra>'
+        ),
+        row=diag_row, col=1
+    )
+    
+    # Perfect prediction line
+    all_actual = np.concatenate([y_train, y_test])
+    all_pred = np.concatenate([y_train_pred, y_test_pred])
+    min_val, max_val = min(all_actual.min(), all_pred.min()), max(all_actual.max(), all_pred.max())
+    
+    fig.add_trace(
+        go.Scatter(
+            x=[min_val, max_val], y=[min_val, max_val],
+            mode='lines',
+            line=dict(color='black', dash='dash', width=2),
+            showlegend=False,
+            hoverinfo='skip'
+        ),
+        row=diag_row, col=1
+    )
+    
+    # 2. COMBINED Residuals histogram
+    train_residuals = y_train - y_train_pred
+    test_residuals = y_test - y_test_pred
+    
+    # Training residuals
+    fig.add_trace(
+        go.Histogram(
+            x=train_residuals,
+            nbinsx=25,
+            opacity=0.7,
+            marker=dict(color='blue'),
+            name='Train Residuals',
+            hovertemplate='<b>Training Residuals</b><br>Range: %{x}<br>Count: %{y}<extra></extra>'
+        ),
+        row=diag_row, col=2
+    )
+    
+    # Test residuals
+    fig.add_trace(
+        go.Histogram(
+            x=test_residuals,
+            nbinsx=25,
+            opacity=0.7,
+            marker=dict(color='red'),
+            name='Test Residuals',
+            hovertemplate='<b>Test Residuals</b><br>Range: %{x}<br>Count: %{y}<extra></extra>'
+        ),
+        row=diag_row, col=2
+    )
+    
+    # Mean lines
+    fig.add_vline(x=train_residuals.mean(), line=dict(color='blue', dash='dash', width=2), row=diag_row, col=2)
+    fig.add_vline(x=test_residuals.mean(), line=dict(color='red', dash='dash', width=2), row=diag_row, col=2)
+    
+    # 3. COMBINED Q-Q plots
+    from scipy import stats
+    
+    # Training Q-Q
+    (osm_train, osr_train), (slope_train, intercept_train, r_train) = stats.probplot(train_residuals, dist="norm", plot=None)
+    fig.add_trace(
+        go.Scatter(
+            x=osm_train, y=osr_train,
+            mode='markers',
+            marker=dict(size=4, color='blue'),
+            name='Train Q-Q',
+            hovertemplate='<b>Training Q-Q</b><br>Theoretical: %{x:.2f}<br>Observed: %{y:.2f}<extra></extra>'
+        ),
+        row=diag_row, col=3
+    )
+    
+    # Test Q-Q
+    (osm_test, osr_test), (slope_test, intercept_test, r_test) = stats.probplot(test_residuals, dist="norm", plot=None)
+    fig.add_trace(
+        go.Scatter(
+            x=osm_test, y=osr_test,
+            mode='markers',
+            marker=dict(size=4, color='red'),
+            name='Test Q-Q',
+            hovertemplate='<b>Test Q-Q</b><br>Theoretical: %{x:.2f}<br>Observed: %{y:.2f}<extra></extra>'
+        ),
+        row=diag_row, col=3
+    )
+    
+    # Q-Q reference lines
+    fig.add_trace(
+        go.Scatter(
+            x=osm_train, y=slope_train * osm_train + intercept_train,
+            mode='lines',
+            line=dict(color='blue', width=2),
+            showlegend=False,
+            hoverinfo='skip'
+        ),
+        row=diag_row, col=3
+    )
+    
+    fig.add_trace(
+        go.Scatter(
+            x=osm_test, y=slope_test * osm_test + intercept_test,
+            mode='lines',  
+            line=dict(color='red', width=2),
+            showlegend=False,
+            hoverinfo='skip'
+        ),
+        row=diag_row, col=3
+    )
+    
+    # Calculate metrics for title
+    train_rmse = np.sqrt(np.mean(train_residuals**2))
+    test_rmse = np.sqrt(np.mean(test_residuals**2))
+    
+    # Update layout
+    main_title = plot_title if plot_title else f"GAM Model Analysis - Train RMSE: {train_rmse:.4f} | Test RMSE: {test_rmse:.4f}"
+    
+    fig.update_layout(
+        height=400 * total_rows,
+        title=dict(
+            text=main_title,
+            x=0.5,
+            font=dict(size=18, family="Arial Black"),
+            xanchor='center'
+        ),
+        font=dict(family="Arial", size=10),
+        plot_bgcolor='white',
+        paper_bgcolor='white',
+        legend=dict(
+            orientation="h",
+            yanchor="bottom", 
+            y=1.05,
+            xanchor="center",
+            x=0.5
+        )
+    )
+    
+    # Update all axes
+    fig.update_xaxes(gridcolor='lightgray', gridwidth=0.5)
+    fig.update_yaxes(gridcolor='lightgray', gridwidth=0.5)
+    
+    if save_path:
+        if not save_path.endswith('.html'):
+            html_path = save_path + '.html'
+        else:
+            html_path = save_path
+            
+        os.makedirs(os.path.dirname(html_path), exist_ok=True)
+        fig.write_html(html_path)
+        print(f"✅ Combined dashboard saved to: {html_path}")
+    
+    fig.show()
+    return fig

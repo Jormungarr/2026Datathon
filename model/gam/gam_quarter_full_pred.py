@@ -93,117 +93,52 @@ print(f"\nTraining Set RMSE: {train_rmse:.4f}")
 print(f"Test Set RMSE: {test_rmse:.4f}")
 print(f"Overfitting Check: Test RMSE / Train RMSE = {test_rmse/train_rmse:.2f}")
 
-# Industrial-grade visualizations for BOTH training and test sets
+# Single directory for all results
+results_dir = os.path.join(RESULTS_BASE_DIR, "combined")
+os.makedirs(results_dir, exist_ok=True)
+
+def get_save_path(diagram_type):
+    """Generate standardized save path for diagrams."""
+    return os.path.join(results_dir, f"{EXPERIMENT_PREFIX}_{diagram_type}")
+
 print("\n" + "="*80)
-print("GENERATING VISUALIZATIONS FOR TRAINING AND TEST SETS")
+print("GENERATING COMBINED VISUALIZATIONS")
 print("="*80 + "\n")
 
-# Create results directories for both train and test
-train_dir = os.path.join(RESULTS_BASE_DIR, "train")
-test_dir = os.path.join(RESULTS_BASE_DIR, "test")
-os.makedirs(train_dir, exist_ok=True)
-os.makedirs(test_dir, exist_ok=True)
-
-# Helper functions to generate save paths for train/test
-def get_train_save_path(diagram_type):
-    """Generate standardized save path for training set diagrams."""
-    return os.path.join(train_dir, f"{EXPERIMENT_PREFIX}_{diagram_type}")
-
-def get_test_save_path(diagram_type):
-    """Generate standardized save path for test set diagrams."""
-    return os.path.join(test_dir, f"{EXPERIMENT_PREFIX}_{diagram_type}")
-
-print("🏋️  Generating TRAINING SET visualizations...")
-print("-" * 60)
-
-# 1. TRAINING SET: Interactive partial dependence plots
+# 1. Partial dependence plots (model-based, same for both)
 plot_gam_terms_plotly(
     gam, 
     titles=all_feature_names,
-    plot_title="🏋️ Training Set - GAM Partial Dependence Analysis",
-    save_path=get_train_save_path("partial_dependence")
+    plot_title=f"GAM Partial Dependence Analysis (n_splines={best_k})",
+    save_path=get_save_path("partial_dependence")
 )
 
-# 2. TRAINING SET: Interactive diagnostic dashboard
-plot_gam_summary_dashboard_plotly(
-    gam, 
-    X_all_scaled,
-    y_all,
-    y_train_pred,
+# 2. Combined diagnostic dashboard (train + test)
+plot_gam_combined_dashboard_plotly(
+    gam,
+    X_all_scaled, y_all, y_train_pred,      # Training data
+    X_test_scaled, y_test, y_test_pred,     # Test data
     titles=all_feature_names,
-    plot_title="🏋️ Training Set - GAM Model Diagnostics Dashboard",
-    save_path=get_train_save_path("summary_dashboard")
+    plot_title=f"GAM Combined Analysis - Train RMSE: {train_rmse:.4f} | Test RMSE: {test_rmse:.4f}",
+    save_path=get_save_path("combined_dashboard")
 )
 
-# 3. TRAINING SET: Feature importance
+# 3. Feature importance (model-based)
 plot_gam_feature_importance_plotly(
     gam,
     feature_names=all_feature_names,
-    plot_title="🏋️ Training Set - GAM Feature Importance Analysis",
-    save_path=get_train_save_path("feature_importance")
-)
-
-print("\n🧪 Generating TEST SET visualizations...")
-print("-" * 60)
-
-# 1. TEST SET: Interactive partial dependence plots
-plot_gam_terms_plotly(
-    gam, 
-    titles=all_feature_names,
-    plot_title="🧪 Test Set - GAM Partial Dependence Analysis",
-    save_path=get_test_save_path("partial_dependence")
-)
-
-# 2. TEST SET: Interactive diagnostic dashboard
-plot_gam_summary_dashboard_plotly(
-    gam, 
-    X_test_scaled,
-    y_test,
-    y_test_pred,
-    titles=all_feature_names,
-    plot_title="🧪 Test Set - GAM Model Diagnostics Dashboard",
-    save_path=get_test_save_path("summary_dashboard")
-)
-
-# 3. TEST SET: Feature importance
-plot_gam_feature_importance_plotly(
-    gam,
-    feature_names=all_feature_names,
-    plot_title="🧪 Test Set - GAM Feature Importance Analysis",
-    save_path=get_test_save_path("feature_importance")
+    plot_title=f"GAM Feature Importance Analysis (EDOF)",
+    save_path=get_save_path("feature_importance")
 )
 
 print("\n" + "="*80)
 print("VISUALIZATION SUMMARY")
 print("="*80)
-print(f"✅ Training Set Analysis Complete!")
-print(f"   📁 Saved to: {train_dir}")
+print(f"✅ Combined Analysis Complete!")
+print(f"   📁 Saved to: {results_dir}")
 print(f"   📊 Training RMSE: {train_rmse:.4f}")
-print(f"   📈 Samples: {len(y_all):,}")
-
-print(f"\n✅ Test Set Analysis Complete!")
-print(f"   📁 Saved to: {test_dir}")
 print(f"   📊 Test RMSE: {test_rmse:.4f}")
-print(f"   📈 Samples: {len(y_test):,}")
-
-print(f"\n🏷️  Experiment: {EXPERIMENT_PREFIX}")
-print(f"🎯 Model: GAM (n_splines={best_k})")
-print(f"📏 Generalization Ratio: {test_rmse/train_rmse:.2f}" + 
+print(f"   📈 Training Samples: {len(y_all):,}")
+print(f"   📈 Test Samples: {len(y_test):,}")
+print(f"   📏 Generalization Ratio: {test_rmse/train_rmse:.2f}" + 
       (" ⚠️  (>1.2 indicates overfitting)" if test_rmse/train_rmse > 1.2 else " ✅ (good generalization)"))
-
-# Optional: Create a comparison summary
-comparison_data = {
-    "Dataset": ["Training", "Test"],
-    "RMSE": [train_rmse, test_rmse],
-    "Samples": [len(y_all), len(y_test)],
-    "Directory": [train_dir, test_dir]
-}
-
-print(f"\n📋 COMPARISON SUMMARY:")
-print(f"{'Dataset':<10} {'RMSE':<8} {'Samples':<8} {'Directory'}")
-print("-" * 50)
-for i in range(len(comparison_data["Dataset"])):
-    print(f"{comparison_data['Dataset'][i]:<10} "
-          f"{comparison_data['RMSE'][i]:<8.4f} "
-          f"{comparison_data['Samples'][i]:<8,} "
-          f"{os.path.basename(comparison_data['Directory'][i])}")
