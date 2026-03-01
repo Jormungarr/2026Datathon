@@ -10,7 +10,7 @@ import numpy as np
 from sklearn.model_selection import StratifiedKFold
 from preprocess.visualization_utils import (
     plot_gam_terms_plotly, 
-    plot_gam_summary_dashboard_plotly,
+    plot_gam_combined_dashboard_plotly,
     plot_gam_feature_importance_plotly
 )
 

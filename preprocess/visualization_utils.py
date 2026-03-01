@@ -1728,14 +1728,7 @@ def plot_gam_feature_importance_plotly(gam, feature_names=None, save_path=None, 
 def plot_gam_combined_dashboard_plotly(gam, X_train, y_train, y_train_pred, X_test, y_test, y_test_pred, titles=None, save_path=None, plot_title=None):
     """
     Interactive Plotly dashboard for GAM model diagnostics comparing BOTH training and test sets.
-    
-    Parameters:
-    - gam: Fitted GAM model
-    - X_train, y_train, y_train_pred: Training data, actuals, predictions
-    - X_test, y_test, y_test_pred: Test data, actuals, predictions
-    - titles: Feature names for partial dependence plots
-    - save_path: Where to save HTML file
-    - plot_title: Custom title for the entire dashboard
+    Enhanced with better visual separation and clarity.
     """
     # Filter plottable terms
     plottable_terms = []
@@ -1967,31 +1960,57 @@ def plot_gam_combined_dashboard_plotly(gam, X_train, y_train, y_train_pred, X_te
     test_rmse = np.sqrt(np.mean(test_residuals**2))
     
     # Update layout
-    main_title = plot_title if plot_title else f"GAM Model Analysis - Train RMSE: {train_rmse:.4f} | Test RMSE: {test_rmse:.4f}"
+    main_title = plot_title if plot_title else f"GAM Enhanced Analysis - Train RMSE: {train_rmse:.4f} | Test RMSE: {test_rmse:.4f}"
     
-    fig.update_layout(
-        height=400 * total_rows,
+    ffig.update_layout(
+        height=350 * total_rows,
         title=dict(
             text=main_title,
             x=0.5,
-            font=dict(size=18, family="Arial Black"),
-            xanchor='center'
+            y=0.97,  # Move title down slightly from the very top
+            xanchor='center',
+            yanchor='top',
+            font=dict(size=16, family="Arial Black")  # Slightly smaller font
         ),
         font=dict(family="Arial", size=10),
         plot_bgcolor='white',
         paper_bgcolor='white',
+        margin=dict(t=120, l=80, r=80, b=60),  # Increase top margin even more
         legend=dict(
             orientation="h",
             yanchor="bottom", 
-            y=1.05,
+            y=1.08,  # Move legend higher to avoid title
             xanchor="center",
-            x=0.5
-        )
+            x=0.5,
+            bgcolor='rgba(255,255,255,0.9)',
+            bordercolor='gray',
+            borderwidth=1
+        ),
+        showlegend=True
     )
     
-    # Update all axes
+    # Update all axes with better grid
     fig.update_xaxes(gridcolor='lightgray', gridwidth=0.5)
     fig.update_yaxes(gridcolor='lightgray', gridwidth=0.5)
+    
+    # Move performance summary annotation to avoid title overlap
+    fig.add_annotation(
+        x=0.98, y=0.98,  # Move to top-right corner instead
+        xref="paper", yref="paper",
+        text=f"<b>Performance Summary</b><br>" +
+             f"Training RMSE: {train_rmse:.4f}<br>" +
+             f"Test RMSE: {test_rmse:.4f}<br>" +
+             f"Generalization: {test_rmse/train_rmse:.2f}x" +
+             (" ⚠️ Overfitting" if test_rmse/train_rmse > 1.2 else " ✅ Good"),
+        showarrow=False,
+        font=dict(size=10, color="black"),
+        bgcolor="rgba(255,255,255,0.95)",
+        bordercolor="gray",
+        borderwidth=1,
+        align="right",  # Right-align text
+        xanchor="right",  # Anchor from right edge
+        yanchor="top"     # Anchor from top edge
+    )
     
     if save_path:
         if not save_path.endswith('.html'):
