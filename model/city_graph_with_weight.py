@@ -6,7 +6,7 @@ import plotly.graph_objects as go
 
 from preprocess.data_utils import import_orginal_dataset
 
-OUT_DIR = "./outputs"
+OUT_DIR = "./results/city_graph_with_weight"
 os.makedirs(OUT_DIR, exist_ok=True)
 
 # =========================

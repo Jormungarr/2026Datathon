@@ -103,7 +103,7 @@ def make_test_and_stratified_folds(
     from sklearn.model_selection import StratifiedShuffleSplit
     strat_y = df["time_index"].astype(str).to_numpy()
     sss = StratifiedShuffleSplit(n_splits=1, test_size=test_ratio, random_state=random_state)
-    test_idx, rest_idx = next(sss.split(df, strat_y))
+    rest_idx, test_idx = next(sss.split(df, strat_y))
 
     df_test = df.iloc[test_idx]
     df_rest = df.iloc[rest_idx]
