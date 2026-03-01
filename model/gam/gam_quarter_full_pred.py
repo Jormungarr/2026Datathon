@@ -11,7 +11,7 @@ from sklearn.model_selection import StratifiedKFold
 from preprocess.visualization_utils import (
     plot_gam_terms_plotly, 
     plot_gam_summary_dashboard_plotly,
-    plot_gam_feature_importance_plotly  # Keep matplotlib for this one
+    plot_gam_feature_importance_plotly
 )
 
 
@@ -24,12 +24,6 @@ FIGURE_FORMATS = ".png"  # Could be .pdf, .svg, etc.
 time_features = ['quarter']
 feature_names = ['passengers', 'nsmiles', 'rl_pax_str', 'tot_pax_str', 'large_ms', 'lf_ms']
 all_feature_names = feature_names + time_features
-
-# Create complete feature names including time features
-all_feature_names = feature_names + time_features
-# Result: ['passengers', 'nsmiles', 'rl_pax_str', 'tot_pax_str', 'large_ms', 'lf_ms', 'quarter']
-
-# Then use this in your visualization calls:
 
 # Load and prepare data
 X_test, y_test, folds , X_all, y_all, df_test, df_rest  = make_test_and_stratified_folds(
@@ -87,45 +81,129 @@ print("GAM MODEL SUMMARY")
 print("="*80 + "\n")
 gam.summary()
 
-# Generate predictions
-y_test_pred = gam.predict(X_test_scaled)
-test_rmse = np.sqrt(((y_test - y_test_pred) ** 2).mean())
-print(f"\nTest Set RMSE: {test_rmse:.4f}")
+# Generate predictions for BOTH training and test sets
+y_train_pred = gam.predict(X_all_scaled)  # Training predictions
+y_test_pred = gam.predict(X_test_scaled)   # Test predictions
 
-# Industrial-grade visualizations
+# Calculate performance metrics
+train_rmse = np.sqrt(((y_all - y_train_pred) ** 2).mean())
+test_rmse = np.sqrt(((y_test - y_test_pred) ** 2).mean())
+
+print(f"\nTraining Set RMSE: {train_rmse:.4f}")
+print(f"Test Set RMSE: {test_rmse:.4f}")
+print(f"Overfitting Check: Test RMSE / Train RMSE = {test_rmse/train_rmse:.2f}")
+
+# Industrial-grade visualizations for BOTH training and test sets
 print("\n" + "="*80)
-print("GENERATING VISUALIZATIONS")
+print("GENERATING VISUALIZATIONS FOR TRAINING AND TEST SETS")
 print("="*80 + "\n")
 
-# Create results directory if it doesn't exist
-os.makedirs(RESULTS_BASE_DIR, exist_ok=True)
+# Create results directories for both train and test
+train_dir = os.path.join(RESULTS_BASE_DIR, "train")
+test_dir = os.path.join(RESULTS_BASE_DIR, "test")
+os.makedirs(train_dir, exist_ok=True)
+os.makedirs(test_dir, exist_ok=True)
 
-# Helper function to generate save paths
-def get_save_path(diagram_type):
-    """Generate standardized save path for diagrams."""
-    return os.path.join(RESULTS_BASE_DIR, f"{EXPERIMENT_PREFIX}_{diagram_type}{FIGURE_FORMATS}")
+# Helper functions to generate save paths for train/test
+def get_train_save_path(diagram_type):
+    """Generate standardized save path for training set diagrams."""
+    return os.path.join(train_dir, f"{EXPERIMENT_PREFIX}_{diagram_type}")
 
-# 1. Interactive partial dependence plots
+def get_test_save_path(diagram_type):
+    """Generate standardized save path for test set diagrams."""
+    return os.path.join(test_dir, f"{EXPERIMENT_PREFIX}_{diagram_type}")
+
+print("🏋️  Generating TRAINING SET visualizations...")
+print("-" * 60)
+
+# 1. TRAINING SET: Interactive partial dependence plots
 plot_gam_terms_plotly(
     gam, 
     titles=all_feature_names,
-    save_path=get_save_path("partial_dependence")  # Saves as .html
+    plot_title="🏋️ Training Set - GAM Partial Dependence Analysis",
+    save_path=get_train_save_path("partial_dependence")
 )
 
-# 2. Interactive diagnostic dashboard
+# 2. TRAINING SET: Interactive diagnostic dashboard
 plot_gam_summary_dashboard_plotly(
     gam, 
-    X_test_scaled, 
-    y_test, 
-    y_test_pred,
+    X_all_scaled,
+    y_all,
+    y_train_pred,
     titles=all_feature_names,
-    save_path=get_save_path("summary_dashboard")  # Saves as .html
+    plot_title="🏋️ Training Set - GAM Model Diagnostics Dashboard",
+    save_path=get_train_save_path("summary_dashboard")
 )
+
+# 3. TRAINING SET: Feature importance
 plot_gam_feature_importance_plotly(
     gam,
     feature_names=all_feature_names,
-    save_path=get_save_path("feature_importance_interactive")
+    plot_title="🏋️ Training Set - GAM Feature Importance Analysis",
+    save_path=get_train_save_path("feature_importance")
 )
-print(f"\n✓ All visualizations generated successfully!")
-print(f"📁 Results saved to: {RESULTS_BASE_DIR}")
-print(f"🏷️  Experiment prefix: {EXPERIMENT_PREFIX}")
+
+print("\n🧪 Generating TEST SET visualizations...")
+print("-" * 60)
+
+# 1. TEST SET: Interactive partial dependence plots
+plot_gam_terms_plotly(
+    gam, 
+    titles=all_feature_names,
+    plot_title="🧪 Test Set - GAM Partial Dependence Analysis",
+    save_path=get_test_save_path("partial_dependence")
+)
+
+# 2. TEST SET: Interactive diagnostic dashboard
+plot_gam_summary_dashboard_plotly(
+    gam, 
+    X_test_scaled,
+    y_test,
+    y_test_pred,
+    titles=all_feature_names,
+    plot_title="🧪 Test Set - GAM Model Diagnostics Dashboard",
+    save_path=get_test_save_path("summary_dashboard")
+)
+
+# 3. TEST SET: Feature importance
+plot_gam_feature_importance_plotly(
+    gam,
+    feature_names=all_feature_names,
+    plot_title="🧪 Test Set - GAM Feature Importance Analysis",
+    save_path=get_test_save_path("feature_importance")
+)
+
+print("\n" + "="*80)
+print("VISUALIZATION SUMMARY")
+print("="*80)
+print(f"✅ Training Set Analysis Complete!")
+print(f"   📁 Saved to: {train_dir}")
+print(f"   📊 Training RMSE: {train_rmse:.4f}")
+print(f"   📈 Samples: {len(y_all):,}")
+
+print(f"\n✅ Test Set Analysis Complete!")
+print(f"   📁 Saved to: {test_dir}")
+print(f"   📊 Test RMSE: {test_rmse:.4f}")
+print(f"   📈 Samples: {len(y_test):,}")
+
+print(f"\n🏷️  Experiment: {EXPERIMENT_PREFIX}")
+print(f"🎯 Model: GAM (n_splines={best_k})")
+print(f"📏 Generalization Ratio: {test_rmse/train_rmse:.2f}" + 
+      (" ⚠️  (>1.2 indicates overfitting)" if test_rmse/train_rmse > 1.2 else " ✅ (good generalization)"))
+
+# Optional: Create a comparison summary
+comparison_data = {
+    "Dataset": ["Training", "Test"],
+    "RMSE": [train_rmse, test_rmse],
+    "Samples": [len(y_all), len(y_test)],
+    "Directory": [train_dir, test_dir]
+}
+
+print(f"\n📋 COMPARISON SUMMARY:")
+print(f"{'Dataset':<10} {'RMSE':<8} {'Samples':<8} {'Directory'}")
+print("-" * 50)
+for i in range(len(comparison_data["Dataset"])):
+    print(f"{comparison_data['Dataset'][i]:<10} "
+          f"{comparison_data['RMSE'][i]:<8.4f} "
+          f"{comparison_data['Samples'][i]:<8,} "
+          f"{os.path.basename(comparison_data['Directory'][i])}")

@@ -531,8 +531,17 @@ def plot_interactive_pca_scatter(
     )
     
     if save_path:
-        fig.write_html(save_path)
+        # FIX: Ensure proper HTML extension and directory creation
+        if not save_path.endswith('.html'):
+            html_path = save_path + '.html'
+        else:
+            html_path = save_path
+            
+        os.makedirs(os.path.dirname(html_path), exist_ok=True)
+        fig.write_html(html_path)
+        print(f"✅ Interactive plot saved to: {html_path}")
     
+    fig.show()
     return fig
 
 
@@ -798,8 +807,17 @@ def plot_interactive_pca_scatter_full(
     )
 
     if save_path:
-        fig.write_html(save_path)
-
+        # FIX: Ensure proper HTML extension and directory creation
+        if not save_path.endswith('.html'):
+            html_path = save_path + '.html'
+        else:
+            html_path = save_path
+            
+        os.makedirs(os.path.dirname(html_path), exist_ok=True)
+        fig.write_html(html_path)
+        print(f"✅ Interactive dashboard saved to: {html_path}")
+    
+    fig.show()
     return fig
 
 
@@ -1171,15 +1189,27 @@ def plot_interactive_pc_vs_value(
     )
 
     if save_path:
-        fig.write_html(save_path)
-
+        # FIX: Ensure proper HTML extension and directory creation
+        if not save_path.endswith('.html'):
+            html_path = save_path + '.html'
+        else:
+            html_path = save_path
+            
+        os.makedirs(os.path.dirname(html_path), exist_ok=True)
+        fig.write_html(html_path)
+        print(f"✅ Interactive plot saved to: {html_path}")
+    
+    fig.show()
     return fig
 
 
-def plot_gam_terms_plotly(gam, term_indices=None, titles=None, save_path=None):
+def plot_gam_terms_plotly(gam, term_indices=None, titles=None, save_path=None, plot_title=None):
     """
     Interactive Plotly version of GAM partial dependence plots.
     Much better than matplotlib for exploration and presentation.
+    
+    Parameters:
+    - plot_title: Custom title for the entire plot (e.g., "Training Set Analysis")
     """
     # Filter out intercept terms
     plottable_terms = []
@@ -1220,7 +1250,7 @@ def plot_gam_terms_plotly(gam, term_indices=None, titles=None, save_path=None):
     fig = make_subplots(
         rows=n_plot, cols=1,
         subplot_titles=plot_titles,
-        vertical_spacing=0.08,  # Much cleaner than matplotlib
+        vertical_spacing=0.08,
         shared_xaxes=False
     )
     
@@ -1248,7 +1278,7 @@ def plot_gam_terms_plotly(gam, term_indices=None, titles=None, save_path=None):
                     x=np.concatenate([x_vals, x_vals[::-1]]),
                     y=np.concatenate([upper, lower[::-1]]),
                     fill='toself',
-                    fillcolor='rgba(31, 119, 180, 0.3)',
+                    fillcolor=f'rgba(31, 119, 180, 0.3)',
                     line=dict(color='rgba(255,255,255,0)'),
                     name='95% CI',
                     hoverinfo='skip',
@@ -1274,17 +1304,15 @@ def plot_gam_terms_plotly(gam, term_indices=None, titles=None, save_path=None):
                 row=idx+1, col=1
             )
             
-            # FIX: Add EDOF annotation with correct handling and xref format
+            # Add EDOF annotation
             try:
                 if hasattr(gam, 'statistics_') and 'edof' in gam.statistics_:
                     edof_values = gam.statistics_["edof"]
-                    # Handle both scalar and array cases
                     if np.isscalar(edof_values):
                         edof = edof_values
                     else:
                         edof = edof_values[term_i] if term_i < len(edof_values) else edof_values
                     
-                    # FIX: Correct xref format for subplots
                     if n_plot == 1:
                         xref = "x domain"
                         yref = "y domain"
@@ -1307,7 +1335,6 @@ def plot_gam_terms_plotly(gam, term_indices=None, titles=None, save_path=None):
                 print(f"Could not add EDOF annotation for term {term_i}: {edof_error}")
             
         except Exception as e:
-            # FIX: Correct xref format for error annotations
             if n_plot == 1:
                 xref = "x domain"
                 yref = "y domain"
@@ -1324,13 +1351,16 @@ def plot_gam_terms_plotly(gam, term_indices=None, titles=None, save_path=None):
                 font=dict(size=12, color="red")
             )
     
-    # Update layout with professional styling
+    # Update layout with custom title
+    main_title = plot_title if plot_title else "GAM Partial Dependence Plots"
+    
     fig.update_layout(
-        height=300 * n_plot,  # Dynamic height
+        height=300 * n_plot,
         title=dict(
-            text="GAM Partial Dependence Plots",
+            text=main_title,
             x=0.5,
-            font=dict(size=18, family="Arial Black")
+            font=dict(size=18, family="Arial Black"),
+            xanchor='center'
         ),
         showlegend=True,
         legend=dict(
@@ -1374,18 +1404,25 @@ def plot_gam_terms_plotly(gam, term_indices=None, titles=None, save_path=None):
             )
     
     if save_path:
-        os.makedirs(os.path.dirname(save_path), exist_ok=True)
-        fig.write_html(save_path.replace('.png', '.html'))
-        print(f"Interactive plot saved to {save_path.replace('.png', '.html')}")
+        if not save_path.endswith('.html'):
+            html_path = save_path + '.html'
+        else:
+            html_path = save_path
+            
+        os.makedirs(os.path.dirname(html_path), exist_ok=True)
+        fig.write_html(html_path)
+        print(f"✅ Interactive plot saved to: {html_path}")
     
     fig.show()
     return fig
 
 
-def plot_gam_summary_dashboard_plotly(gam, X_test, y_test, y_pred, titles=None, save_path=None):
+def plot_gam_summary_dashboard_plotly(gam, X_test, y_test, y_pred, titles=None, save_path=None, plot_title=None):
     """
     Interactive Plotly dashboard for GAM model diagnostics.
-    Much superior to matplotlib - responsive, interactive, professional.
+    
+    Parameters:
+    - plot_title: Custom title for the entire dashboard (e.g., "Training Set Model Diagnostics")
     """
     # Filter plottable terms
     plottable_terms = []
@@ -1555,13 +1592,16 @@ def plot_gam_summary_dashboard_plotly(gam, X_test, y_test, y_pred, titles=None, 
         row=diag_row, col=3
     )
     
-    # Update layout
+    # Update layout with custom title
+    main_title = plot_title if plot_title else "GAM Model Summary Dashboard"
+    
     fig.update_layout(
         height=400 * total_rows,
         title=dict(
-            text="GAM Model Summary Dashboard",
+            text=main_title,
             x=0.5,
-            font=dict(size=20, family="Arial Black")
+            font=dict(size=20, family="Arial Black"),
+            xanchor='center'
         ),
         font=dict(family="Arial", size=10),
         plot_bgcolor='white',
@@ -1573,17 +1613,25 @@ def plot_gam_summary_dashboard_plotly(gam, X_test, y_test, y_pred, titles=None, 
     fig.update_yaxes(gridcolor='lightgray', gridwidth=0.5)
     
     if save_path:
-        os.makedirs(os.path.dirname(save_path), exist_ok=True)
-        fig.write_html(save_path.replace('.png', '.html'))
-        print(f"Interactive dashboard saved to {save_path.replace('.png', '.html')}")
+        if not save_path.endswith('.html'):
+            html_path = save_path + '.html'
+        else:
+            html_path = save_path
+            
+        os.makedirs(os.path.dirname(html_path), exist_ok=True)
+        fig.write_html(html_path)
+        print(f"✅ Interactive dashboard saved to: {html_path}")
     
     fig.show()
     return fig
 
-def plot_gam_feature_importance_plotly(gam, feature_names=None, save_path=None):
+
+def plot_gam_feature_importance_plotly(gam, feature_names=None, save_path=None, plot_title=None):
     """
     Interactive Plotly version of GAM feature importance based on EDOF.
-    Much more interactive and professional than matplotlib version.
+    
+    Parameters:
+    - plot_title: Custom title for the feature importance plot
     """
     try:
         if not hasattr(gam, 'statistics_') or 'edof' not in gam.statistics_:
@@ -1616,11 +1664,6 @@ def plot_gam_feature_importance_plotly(gam, feature_names=None, save_path=None):
         else:
             labels = [f'Term {i}' for i in plottable_terms]
         
-        # Create colors based on importance (higher EDOF = more important = darker color)
-        colors = px.colors.sequential.Viridis
-        color_scale = np.linspace(0, 1, n_terms)
-        bar_colors = [colors[int(c * (len(colors) - 1))] for c in color_scale]
-        
         # Create horizontal bar chart
         fig = go.Figure(data=[
             go.Bar(
@@ -1642,34 +1685,41 @@ def plot_gam_feature_importance_plotly(gam, feature_names=None, save_path=None):
             )
         ])
         
-        # Update layout
+        # Update layout with custom title
+        main_title = plot_title if plot_title else "GAM Feature Importance (Effective Degrees of Freedom)"
+        
         fig.update_layout(
             title=dict(
-                text="GAM Feature Importance (Effective Degrees of Freedom)",
+                text=main_title,
                 x=0.5,
-                font=dict(size=16, family="Arial Black")
+                font=dict(size=16, family="Arial Black"),
+                xanchor='center'
             ),
             xaxis_title="Effective Degrees of Freedom (EDOF)",
             yaxis_title="Features",
             font=dict(family="Arial", size=12),
             plot_bgcolor='white',
             paper_bgcolor='white',
-            height=max(400, n_terms * 50),  # Dynamic height based on number of features
-            margin=dict(l=150, r=50, t=80, b=50)  # Extra left margin for feature names
+            height=max(400, n_terms * 50),
+            margin=dict(l=150, r=50, t=80, b=50)
         )
         
-        # Update axes
         fig.update_xaxes(gridcolor='lightgray', gridwidth=0.5)
         fig.update_yaxes(gridcolor='lightgray', gridwidth=0.5)
         
         if save_path:
-            os.makedirs(os.path.dirname(save_path), exist_ok=True)
-            fig.write_html(save_path.replace('.png', '.html'))
-            print(f"Interactive feature importance plot saved to {save_path.replace('.png', '.html')}")
+            if not save_path.endswith('.html'):
+                html_path = save_path + '.html'
+            else:
+                html_path = save_path
+                
+            os.makedirs(os.path.dirname(html_path), exist_ok=True)
+            fig.write_html(html_path)
+            print(f"✅ Interactive feature importance saved to: {html_path}")
         
         fig.show()
         return fig
         
     except Exception as e:
-        print(f"Could not plot feature importance: {e}")
+        print(f"❌ Could not plot feature importance: {e}")
         return None
