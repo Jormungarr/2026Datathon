@@ -12,6 +12,7 @@ import numpy as np
 from preprocess.visualization_utils import plot_gam_terms, plot_gam_summary_dashboard, plot_gam_feature_importance
 
 # Ensure year column exists
+N_COMPONENTS =  3
 # Load and prepare data
 feature_names = ['passengers', 'nsmiles', 'rl_pax_str', 'tot_pax_str', 'large_ms', 'lf_ms']
 pca_feature_names = [f'PC{i+1}' for i in range(N_COMPONENTS)]

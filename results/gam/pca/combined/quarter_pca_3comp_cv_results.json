@@ -1,0 +1,30 @@
+{
+  "cv_scores": [
+    {
+      "n_splines": 15,
+      "mean_rmse": 47.952924562787025
+    },
+    {
+      "n_splines": 20,
+      "mean_rmse": 47.941066522705405
+    },
+    {
+      "n_splines": 25,
+      "mean_rmse": 47.91504781748351
+    }
+  ],
+  "selected_n_splines": 25,
+  "selected_mean_rmse": 47.91504781748351,
+  "n_pca_components": 3,
+  "original_features": [
+    "passengers",
+    "nsmiles",
+    "rl_pax_str",
+    "tot_pax_str",
+    "large_ms",
+    "lf_ms"
+  ],
+  "categorical_features": [
+    "quarter"
+  ]
+}
