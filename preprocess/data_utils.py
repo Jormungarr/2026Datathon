@@ -23,7 +23,8 @@ from sklearn.model_selection import StratifiedKFold
 
 def make_test_and_stratified_folds(
     feature_cols,
-    import_fn,
+    categorical_encode_cols=None,
+    import_fn=None,
     target_col="fare",
     test_ratio=0.1,
     n_splits=10,
@@ -53,6 +54,7 @@ def make_test_and_stratified_folds(
     # ---------- load & clean ----------
     df = import_fn()
     df = df.dropna().copy()
+ 
 
     # ---------- feature engineering ----------
     df["city1_pax_strength"] = (
@@ -64,7 +66,17 @@ def make_test_and_stratified_folds(
     df["rl_pax_str"] = (df["city1_pax_strength"] - df["city2_pax_strength"]).abs()
     df["tot_pax_str"] = df["city1_pax_strength"] + df["city2_pax_strength"]
     df["time_index"] = df["Year"].astype(str) + " Q" + df["quarter"].astype(int).astype(str)
-
+    # Encode specified categorical columns if provided
+    if categorical_encode_cols is not None and len(categorical_encode_cols) > 0:
+        df = pd.get_dummies(df, columns=categorical_encode_cols, drop_first=True)
+        # Update feature_cols to include new dummy columns
+        new_features = []
+        for col in feature_cols:
+            if col in categorical_encode_cols:
+                new_features.extend([c for c in df.columns if c.startswith(col + '_')])
+            else:
+                new_features.append(col)
+        feature_cols = new_features
     # ---------- checks ----------
     needed = set(feature_cols + [target_col, "time_index"])
     missing = [c for c in needed if c not in df.columns]
