@@ -59,3 +59,7 @@ coverage.xml
 .tox/
 .nox/
 test-results/
+
+# output
+outputs/
+*.html
