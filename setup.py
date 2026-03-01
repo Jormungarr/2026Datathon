@@ -13,6 +13,7 @@ setup(
         "scikit-learn",
         "geopy",
         "plotly",
+        "pygam"
         ],
     author="Your Name",
     description="Datathon 2026 project utilities and analysis.",

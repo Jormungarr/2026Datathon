@@ -25,7 +25,7 @@ def make_test_and_stratified_folds(
     feature_cols,
     import_fn,
     target_col="fare",
-    test_n=100,
+    test_ratio=0.1,
     n_splits=10,
     shuffle=True,
     random_state=42,
@@ -38,7 +38,7 @@ def make_test_and_stratified_folds(
       2) build strength features:
            city1_pax_strength, city2_pax_strength, rl_pax_str, tot_pax_str
          and time_index = "Year Qquarter"
-      3) random sample test_n rows as test set
+      3) stratified sample test_ratio fraction as test set
       4) StratifiedKFold on remaining rows using time_index as strat label
       5) return (X_test, y_test, folds)
 
@@ -72,8 +72,11 @@ def make_test_and_stratified_folds(
         raise KeyError(f"Missing columns in df: {missing}")
 
     n = len(df)
-    if not (1 <= test_n < n):
-        raise ValueError(f"test_n must be in [1, {n-1}], got {test_n}")
+    if not (0 < test_ratio < 1):
+        raise ValueError(f"test_ratio must be in (0, 1), got {test_ratio}")
+    test_n = int(n * test_ratio)
+    if test_n < 1 or test_n >= n:
+        raise ValueError(f"test_ratio results in invalid test set size: {test_n}")
 
     # StratifiedKFold feasibility: each class count >= n_splits
     vc = df["time_index"].astype(str).value_counts()
@@ -84,29 +87,28 @@ def make_test_and_stratified_folds(
             f"Examples:\n{too_small.head(10).to_string()}"
         )
 
-    # ---------- sample test set ----------
-    rng = np.random.default_rng(random_state)
-    all_idx = np.arange(n)
-    test_idx = rng.choice(all_idx, size=test_n, replace=False)
+    # ---------- stratified sample test set ----------
+    from sklearn.model_selection import StratifiedShuffleSplit
+    strat_y = df["time_index"].astype(str).to_numpy()
+    sss = StratifiedShuffleSplit(n_splits=1, test_size=test_ratio, random_state=random_state)
+    test_idx, rest_idx = next(sss.split(df, strat_y))
 
-    mask_test = np.zeros(n, dtype=bool)
-    mask_test[test_idx] = True
-
-    df_test = df.loc[mask_test]
-    df_rest = df.loc[~mask_test]
+    df_test = df.iloc[test_idx]
+    df_rest = df.iloc[rest_idx]
 
     X_test = df_test[feature_cols].to_numpy()
     y_test = df_test[target_col].to_numpy()
 
     X_all = df_rest[feature_cols].to_numpy()
     y_all = df_rest[target_col].to_numpy()
-    strat_y = df_rest["time_index"].astype(str).to_numpy()
+    strat_y_rest = df_rest["time_index"].astype(str).to_numpy()
 
     # ---------- stratified k-fold ----------
+    from sklearn.model_selection import StratifiedKFold
     skf = StratifiedKFold(n_splits=n_splits, shuffle=shuffle, random_state=random_state)
 
     folds = []
-    for tr_idx, va_idx in skf.split(X_all, strat_y):
+    for tr_idx, va_idx in skf.split(X_all, strat_y_rest):
         X_train, X_val = X_all[tr_idx], X_all[va_idx]
         y_train, y_val = y_all[tr_idx], y_all[va_idx]
         folds.append({
@@ -114,7 +116,7 @@ def make_test_and_stratified_folds(
             "val":   [X_val,   y_val],
         })
 
-    return X_test, y_test, folds
+    return X_test, y_test, folds, df_test, df_rest
 
 COLUMN_UNIT_MAP = {
     "Year": "year",
