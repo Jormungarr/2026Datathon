@@ -5,7 +5,7 @@ from sklearn.decomposition import PCA
 import plotly.graph_objects as go
 import numpy as np
 from preprocess.data_utils import make_test_and_stratified_folds, import_unit_removed_dataset
-
+#Quarter Seasonal
 # Define feature columns
 feature_names = ['passengers', 'nsmiles', 'rl_pax_str', 'tot_pax_str', 'large_ms', 'lf_ms']
 time_features = ['quarter', 'Year']
@@ -31,8 +31,8 @@ for k in [15, 20, 25]:
         # Split numeric and categorical features
         X_train_num = X_train[:, :n_numeric]
         X_val_num = X_val[:, :n_numeric]
-        X_train_cat = X_train[:, n_numeric:]
-        X_val_cat = X_val[:, n_numeric:]
+        X_train_cat = X_train[:, n_numeric:n_numeric+1] #Seasonal Quarter
+        X_val_cat = X_val[:, n_numeric:n_numeric+1]
 
         # Fit scaler and PCA on numeric features only
         scaler = StandardScaler().fit(X_train_num)
@@ -59,3 +59,4 @@ best_k = min(mean_scores, key=lambda x: x[1])[0]
 best_rmse = min(mean_scores, key=lambda x: x[1])[1]
 print(f"Best n_splines={best_k} with average RMSE={float(best_rmse):.4f}")
 
+#Quarter Level variations:

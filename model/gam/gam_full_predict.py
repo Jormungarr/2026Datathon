@@ -38,7 +38,7 @@ for k in [15, 20, 25]:
     
     mean_rmse = np.mean(scores)
     mean_scores.append((k, mean_rmse))
-    print(f"k={k}: RMSE={mean_rmse:.4f}")
+    print(f"k={k}: RMSE={mean_rmse:.4f}")   
 
 best_k = min(mean_scores, key=lambda x: x[1])[0]
 best_rmse = min(mean_scores, key=lambda x: x[1])[1]
