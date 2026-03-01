@@ -2,7 +2,7 @@ import os
 import json
 import numpy as np
 from preprocess.data_utils import import_unit_removed_dataset
-from pygam import GammaGAM, s, te
+from pygam import GammaGAM, s, f, te
 from sklearn.preprocessing import StandardScaler
 from preprocess.data_utils import make_test_and_stratified_folds
 from preprocess.visualization_utils import (
@@ -13,27 +13,33 @@ from preprocess.visualization_utils import (
 
 # Configuration variables for paths and naming
 RESULTS_BASE_DIR = "./results/gam/guided_interaction/"
-EXPERIMENT_PREFIX = "no_quarter"
+EXPERIMENT_PREFIX = "add_quarter"
 
 # Feature columns:
-#   0: passengers, 1: nsmiles, 2: rl_pax_str, 3: tot_pax_str, 4: large_ms, 5: lf_ms
+#   0: passengers, 1: nsmiles, 2: rl_pax_str, 3: tot_pax_str, 4: large_ms, 5: lf_ms, 6: quarter
 feature_names = ['passengers', 'nsmiles', 'rl_pax_str', 'tot_pax_str', 'large_ms', 'lf_ms']
-all_feature_names = feature_names  # No time features
+time_features = ['quarter']
+all_feature_names = feature_names + time_features
 
-# Load and prepare data (NO categorical encoding)
+# Load and prepare data
 X_test, y_test, folds, X_all, y_all, df_test, df_rest = make_test_and_stratified_folds(
-    feature_cols=feature_names,
-    import_fn=import_unit_removed_dataset
+    feature_cols=feature_names + time_features,
+    import_fn=import_unit_removed_dataset,
+    categorical_encode_cols=time_features
 )
 
-# GAM formula builder: 6 spline terms + 2 tensor product interactions
+n_continuous = len(feature_names)  # 6 continuous columns (indices 0-5)
+quarter_col = n_continuous          # quarter at index 6
+
+# GAM formula builder: 6 spline terms + 2 tensor product interactions + categorical quarter
 # Interaction 1: te(2, 3) = rl_pax_str × tot_pax_str
 # Interaction 2: te(4, 5) = large_ms × lf_ms
 def build_gam_formula(k):
     return (
         s(0, n_splines=k) + s(1, n_splines=k) + s(2, n_splines=k) +
         s(3, n_splines=k) + s(4, n_splines=k) + s(5, n_splines=k) +
-        te(2, 3, n_splines=k) + te(4, 5, n_splines=k)
+        te(2, 3, n_splines=k) + te(4, 5, n_splines=k) +
+        f(6)
     )
 
 # Hyperparameter tuning
@@ -44,12 +50,15 @@ for k in [15, 20, 25]:
         X_train, y_train = fold["train"]
         X_val, y_val = fold["val"]
 
-        # Standard scaling for ALL continuous features
-        scaler = StandardScaler().fit(X_train)
-        X_train_scaled = scaler.transform(X_train)
-        X_val_scaled = scaler.transform(X_val)
+        # Scale only continuous columns (0-5), leave quarter (6) unscaled
+        continuous_cols = list(range(n_continuous))
+        scaler = StandardScaler().fit(X_train[:, continuous_cols])
+        X_train_scaled = X_train.copy()
+        X_val_scaled = X_val.copy()
+        X_train_scaled[:, continuous_cols] = scaler.transform(X_train[:, continuous_cols])
+        X_val_scaled[:, continuous_cols] = scaler.transform(X_val[:, continuous_cols])
 
-        # GAM with spline + tensor product interaction terms
+        # GAM with spline + tensor product interaction + categorical terms
         gam = GammaGAM(build_gam_formula(k)).gridsearch(X=X_train_scaled, y=y_train)
 
         y_pred = gam.predict(X_val_scaled)
@@ -72,7 +81,8 @@ cv_results = {
     "interactions": [
         {"term": "te(rl_pax_str, tot_pax_str)", "indices": [2, 3]},
         {"term": "te(large_ms, lf_ms)", "indices": [4, 5]}
-    ]
+    ],
+    "categorical_features": time_features
 }
 
 cv_json_path = os.path.join(results_dir, f"{EXPERIMENT_PREFIX}_cv_results.json")
@@ -81,9 +91,12 @@ with open(cv_json_path, "w") as json_file:
 print(f"✅ Cross-validation results saved to: {cv_json_path}")
 
 # Fit final model on full training set
-scaler = StandardScaler().fit(X_all)
-X_all_scaled = scaler.transform(X_all)
-X_test_scaled = scaler.transform(X_test)
+continuous_cols = list(range(n_continuous))
+scaler = StandardScaler().fit(X_all[:, continuous_cols])
+X_all_scaled = X_all.copy()
+X_test_scaled = X_test.copy()
+X_all_scaled[:, continuous_cols] = scaler.transform(X_all[:, continuous_cols])
+X_test_scaled[:, continuous_cols] = scaler.transform(X_test[:, continuous_cols])
 
 gam = GammaGAM(build_gam_formula(best_k)).gridsearch(X=X_all_scaled, y=y_all)
 
@@ -112,14 +125,14 @@ print("\n" + "="*80)
 print("GENERATING COMBINED VISUALIZATIONS")
 print("="*80 + "\n")
 
-# Term titles: 6 main effects + 2 interactions (intercept filtered automatically)
-term_titles = feature_names + ["rl_pax_str × tot_pax_str", "large_ms × lf_ms"]
+# Term titles: 6 main effects + 2 interactions + quarter (intercept filtered automatically)
+term_titles = feature_names + ["rl_pax_str × tot_pax_str", "large_ms × lf_ms"] + time_features
 
 # 1. Partial dependence plots
 plot_gam_terms_plotly(
     gam,
     titles=term_titles,
-    plot_title=f"GAM Partial Dependence - Guided Interactions (n_splines={best_k})",
+    plot_title=f"GAM Partial Dependence - Quarter + Guided Interactions (n_splines={best_k})",
     save_path=get_save_path("partial_dependence")
 )
 
@@ -129,7 +142,7 @@ plot_gam_combined_dashboard_plotly(
     X_all_scaled, y_all, y_train_pred,
     X_test_scaled, y_test, y_test_pred,
     titles=term_titles,
-    plot_title=f"GAM Guided Interactions - Train RMSE: {train_rmse:.4f} | Test RMSE: {test_rmse:.4f}",
+    plot_title=f"GAM Quarter + Guided Interactions - Train RMSE: {train_rmse:.4f} | Test RMSE: {test_rmse:.4f}",
     save_path=get_save_path("combined_dashboard")
 )
 
@@ -137,20 +150,20 @@ plot_gam_combined_dashboard_plotly(
 plot_gam_feature_importance_plotly(
     gam,
     feature_names=term_titles,
-    plot_title=f"GAM Feature Importance - Guided Interactions (EDOF)",
+    plot_title=f"GAM Feature Importance - Quarter + Guided Interactions (EDOF)",
     save_path=get_save_path("feature_importance")
 )
 
 print("\n" + "="*80)
 print("VISUALIZATION SUMMARY")
 print("="*80)
-print(f"✅ Guided Interaction Analysis Complete!")
+print(f"✅ Quarter + Guided Interaction Analysis Complete!")
 print(f"   📁 Saved to: {results_dir}")
 print(f"   📊 Training RMSE: {train_rmse:.4f}")
 print(f"   📊 Test RMSE: {test_rmse:.4f}")
 print(f"   📈 Training Samples: {len(y_all):,}")
 print(f"   📈 Test Samples: {len(y_test):,}")
 print(f"   🔗 Interactions: te(rl_pax_str, tot_pax_str), te(large_ms, lf_ms)")
+print(f"   🗓️  Categorical: {time_features}")
 print(f"   📏 Generalization Ratio: {test_rmse/train_rmse:.2f}" + 
       (" ⚠️  (>1.2 indicates overfitting)" if test_rmse/train_rmse > 1.2 else " ✅ (good generalization)"))
-

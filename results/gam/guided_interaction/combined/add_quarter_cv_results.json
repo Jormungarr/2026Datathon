@@ -1,0 +1,37 @@
+{
+  "cv_scores": [
+    {
+      "n_splines": 15,
+      "mean_rmse": 35.52170047736317
+    },
+    {
+      "n_splines": 20,
+      "mean_rmse": 35.438342503423364
+    },
+    {
+      "n_splines": 25,
+      "mean_rmse": 35.3419152316729
+    }
+  ],
+  "selected_n_splines": 25,
+  "selected_mean_rmse": 35.3419152316729,
+  "interactions": [
+    {
+      "term": "te(rl_pax_str, tot_pax_str)",
+      "indices": [
+        2,
+        3
+      ]
+    },
+    {
+      "term": "te(large_ms, lf_ms)",
+      "indices": [
+        4,
+        5
+      ]
+    }
+  ],
+  "categorical_features": [
+    "quarter"
+  ]
+}

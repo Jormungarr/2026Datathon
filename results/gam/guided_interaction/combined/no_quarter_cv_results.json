@@ -1,0 +1,34 @@
+{
+  "cv_scores": [
+    {
+      "n_splines": 15,
+      "mean_rmse": 35.57109733209371
+    },
+    {
+      "n_splines": 20,
+      "mean_rmse": 35.487887572083174
+    },
+    {
+      "n_splines": 25,
+      "mean_rmse": 35.394275641761496
+    }
+  ],
+  "selected_n_splines": 25,
+  "selected_mean_rmse": 35.394275641761496,
+  "interactions": [
+    {
+      "term": "te(rl_pax_str, tot_pax_str)",
+      "indices": [
+        2,
+        3
+      ]
+    },
+    {
+      "term": "te(large_ms, lf_ms)",
+      "indices": [
+        4,
+        5
+      ]
+    }
+  ]
+}
