@@ -5,6 +5,8 @@
 import os
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.linear_model import lasso_path
 
 from sklearn.model_selection import StratifiedShuffleSplit, StratifiedKFold
 from sklearn.pipeline import Pipeline
@@ -42,7 +44,7 @@ def load_df(path=XLSX_PATH) -> pd.DataFrame:
 TARGET_COL = "fare"
 
 # ONLY use variables that already exist in the dataset (no constructed strength vars)
-FEATURE_COLS = [
+BASE_FEATURE_COLS = [
     "passengers",
     "nsmiles",
     "large_ms",
@@ -55,11 +57,20 @@ FEATURE_COLS = [
     "TotalPerPrem_city2",
 ]
 
+ENGINEERED_FEATURE_COLS = [
+    "city1_pax_strength",
+    "city2_pax_strength",
+    "rl_pax_str",
+    "tot_pax_str",
+]
+
+FEATURE_COLS = BASE_FEATURE_COLS + ENGINEERED_FEATURE_COLS
+
 # Split settings
 TEST_RATIO = 0.10
 N_SPLITS = 10
 SHUFFLE = True
-RANDOM_STATE = 42
+RANDOM_STATE = 63
 
 # Lasso grid
 ALPHAS = np.logspace(-3, 1, 60)
@@ -68,6 +79,22 @@ ALPHAS = np.logspace(-3, 1, 60)
 def main():
     # ---------- load ----------
     df = load_df()
+    # ---------- engineered features ----------
+    df["city1_pax_strength"] = (
+        df.groupby(["Year", "quarter", "citymarketid_1"])["passengers"].transform("sum")
+    )
+
+    df["city2_pax_strength"] = (
+        df.groupby(["Year", "quarter", "citymarketid_2"])["passengers"].transform("sum")
+    )
+
+    df["rl_pax_str"] = (
+        df["city1_pax_strength"] - df["city2_pax_strength"]
+    ).abs()
+
+    df["tot_pax_str"] = (
+        df["city1_pax_strength"] + df["city2_pax_strength"]
+    )
 
     # ---------- minimal cleaning ----------
     needed_cols = ["Year", "quarter"] + FEATURE_COLS + [TARGET_COL]
@@ -136,6 +163,50 @@ def main():
 
     lasso = pipe.named_steps["lasso"]
     best_alpha = float(lasso.alpha_)
+    # ---------- regularization path (coef vs alpha) ----------
+    # Reuse the fitted preprocessor to ensure consistency with the trained model
+    imputer = pipe.named_steps["imputer"]
+    scaler = pipe.named_steps["scaler"]
+    lasso = pipe.named_steps["lasso"]
+
+    X_imp = imputer.transform(X_rest)      # (n, p)
+    X_z = scaler.transform(X_imp)          # standardized features
+
+    # Use the same alpha grid as LassoCV used (already sorted descending typically)
+    alphas = lasso.alphas_
+    # Compute coefficient path
+    alphas_path, coefs_path, _ = lasso_path(X_z, y_rest, alphas=alphas)
+
+
+    # Ensure results_dir is defined before saving the plot
+    results_dir = os.path.join("results", "baseline_lasso")
+    os.makedirs(results_dir, exist_ok=True)
+
+    # Plot
+    plt.figure(figsize=(10, 6))
+    x = np.log10(alphas_path)
+
+    for j, name in enumerate(FEATURE_COLS):
+        plt.plot(x, coefs_path[j, :], linewidth=1, alpha=0.9)
+
+    # Mark chosen alpha
+    plt.axvline(np.log10(lasso.alpha_), linestyle="--", linewidth=2)
+    plt.xlabel("log10(alpha)")
+    plt.ylabel("Coefficient")
+    plt.title(f"Lasso Regularization Path (best alpha = {lasso.alpha_:.4g})")
+    plt.grid(True, which="both", linestyle="--", linewidth=0.5, alpha=0.5)
+
+    # Optional: legend only for non-zero-at-best features (avoids unreadable legend)
+    best_coef = lasso.coef_
+    nz = np.where(np.abs(best_coef) > 1e-12)[0]
+    if len(nz) > 0 and len(nz) <= 15:
+        plt.legend([FEATURE_COLS[i] for i in nz], loc="best", fontsize=8)
+
+    out_path = os.path.join(results_dir, "lasso_regularization_path.png")
+    plt.tight_layout()
+    plt.savefig(out_path, dpi=200)
+    plt.close()
+    print(f"Saved: {out_path}")
 
     # ----- CV report (approx): use mse_path_ at best alpha index -----
     best_i = int(np.argmin(np.abs(lasso.alphas_ - lasso.alpha_)))
@@ -154,9 +225,6 @@ def main():
     print(f"[TEST] RMSE={test_rmse:.6f} | MAE={test_mae:.6f} (test_n={len(df_test)})")
 
     # ---------- save predictions ----------
-    results_dir = os.path.join("results", "baseline_lasso")
-    os.makedirs(results_dir, exist_ok=True)
-
     out = df_test[["Year", "quarter", "citymarketid_1", "citymarketid_2"]].copy()
     out["y_true"] = y_test
     out["y_pred"] = y_pred

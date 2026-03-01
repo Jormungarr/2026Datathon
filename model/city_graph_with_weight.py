@@ -325,7 +325,20 @@ def make_geo_animation(edges_df: pd.DataFrame, nodes_df: pd.DataFrame, out_html:
     frames = []
     for y, q in frames_keys:
         fr_traces = build_traces(y, q)
-        frames.append(go.Frame(data=fr_traces, name=f"{y}Q{q}"))
+
+        frame_title = (
+            f"Geo Network "
+            f"{'' if carrier_filter is None else f'carrier={carrier_filter} '} "
+            f"({y} Q{q})"
+        )
+
+        frames.append(
+            go.Frame(
+                data=fr_traces,
+                name=f"{y}Q{q}",
+                layout=go.Layout(title=frame_title)
+            )
+        )
 
     fig.frames = frames
 
