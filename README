@@ -1,0 +1,70 @@
+# 2026 Datathon  
+## Airline Fare Market Structure Analysis
+
+---
+
+## 📌 Project Overview
+
+Airfare prices in the U.S. domestic market are shaped by a complex interaction of demand, distance, competition intensity, and market concentration.  
+
+While route distance and passenger volume are intuitive drivers of ticket prices, structural factors such as hub dominance, carrier market share, and city-level demand strength may systematically influence airfare variation across markets.
+
+Using the U.S. Department of Transportation Domestic Airline Consumer Airfare dataset (2021–2025 Q2), this project investigates the structural determinants of route-level fare differences and develops predictive models to explain and forecast airfare dynamics.
+
+---
+
+## 🎯 Objectives
+
+- Identify key structural drivers of airfare variation  
+- Reduce multicollinearity using PCA  
+- Compare interpretable statistical models with network-based models  
+- Generate actionable insights into market structure and pricing dynamics  
+
+---
+
+## 🔍 Methodology
+
+### 1️⃣ Exploratory Data Analysis (EDA)
+
+- Distribution analysis of fares  
+- Market share and competition patterns  
+- Construction of city-level demand indicators (e.g., *City Strength*)
+
+### 2️⃣ Principal Component Analysis (PCA)
+
+To summarize correlated market structure variables:
+
+- **PC1:** Overall market scale and competitiveness  
+- **PC2:** Route structure and hub dominance  
+- **PC3:** Traffic intensity and asymmetry  
+
+The first three principal components explain approximately **74% of total variance**.
+
+### 3️⃣ Modeling Approaches
+
+#### Lasso Regression (Baseline)
+- Handles multicollinearity  
+- Performs automatic variable selection  
+- Cross-validated regularization parameter  
+
+#### Generalized Additive Model (GAM)
+- Captures nonlinear relationships  
+- Maintains interpretability  
+
+#### Graph Neural Network (GNN)
+- Models airline markets as a graph  
+- Captures structural dependencies between cities  
+- Incorporates network topology into fare prediction  
+
+---
+
+## 📊 Evaluation Metrics
+
+- RMSE (Root Mean Squared Error)  
+- MAE (Mean Absolute Error)  
+- Cross-validation performance  
+- Out-of-sample test performance  
+
+---
+
+## 📁 Repository Structure
