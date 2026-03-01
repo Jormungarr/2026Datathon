@@ -23,6 +23,7 @@ import pandas as pd
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import matplotlib.pyplot as plt
 
 from torch_geometric.data import Data
 from torch_geometric.nn import MetaLayer
@@ -349,6 +350,13 @@ def evaluate(model: nn.Module, graphs: List[Data]) -> Dict[str, float]:
 
     rmse = math.sqrt(mean_squared_error(y, p))
     mae = float(np.mean(np.abs(y - p)))
+
+    df_out = pd.DataFrame({
+        "y_true": y,
+        "y_pred": p
+    })
+    df_out.to_csv("val_predictions.csv", index=False)
+
     return {"rmse": float(rmse), "mae": mae}
 
 
@@ -358,6 +366,8 @@ def evaluate(model: nn.Module, graphs: List[Data]) -> Dict[str, float]:
 
 def main():
     seed_everything(SEED)
+    train_losses = []
+    val_rmses = []
 
     df = basic_clean_for_graph_training(
         DATA_PATH,
@@ -384,13 +394,24 @@ def main():
     opt = torch.optim.Adam(model.parameters(), lr=1e-3, weight_decay=1e-4)
 
     best = float("inf")
+    best_path = "best_model.pt"
     for epoch in range(1, 51):
         tr_loss = train_one_epoch(model, train_graphs, opt, pax_weight=False)
         metrics = evaluate(model, val_graphs)
         if metrics["rmse"] < best:
             best = metrics["rmse"]
+            torch.save(model.state_dict(), best_path)
         if epoch % 5 == 0 or epoch == 1:
             print(f"[epoch {epoch:03d}] loss={tr_loss:.4f}  val_rmse={metrics['rmse']:.4f}  val_mae={metrics['mae']:.4f}  best={best:.4f}")
+        train_losses.append(tr_loss)
+        val_rmses.append(metrics["rmse"])
+
+    plt.figure()
+    plt.plot(train_losses, label="train_loss")
+    plt.plot(val_rmses, label="val_rmse")
+    plt.legend()
+    plt.savefig("training_curve.png")
+    plt.close()
 
 
 if __name__ == "__main__":
