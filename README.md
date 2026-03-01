@@ -91,8 +91,7 @@ All models are evaluated on held-out test data (10% random split) using **Root M
 
 > **Key Findings:**
 > - GAM with PCA-guided interaction terms achieves the best GAM performance (RMSE = 36.33), suggesting that PCA-informed feature engineering captures meaningful nonlinear market structure.
-> - Raw features consistently outperform PCA-only inputs, indicating that individual structural variables carry predictive signal lost during dimensionality reduction.
-> - The GNN captures network topology but does not yet outperform tabular models, highlighting the challenge of encoding sparse airline graphs.
+
 
 ---
 
