@@ -790,7 +790,7 @@ def plot_interactive_pca_scatter_full(
                 buttons=scale_buttons,
                 direction='down',
                 showactive=True,
-                x=0.36,
+                x=0.32,
                 xanchor='left',
                 y=1.13,
                 yanchor='top',
@@ -802,7 +802,7 @@ def plot_interactive_pca_scatter_full(
         annotations=[
             dict(text="<b>Time:</b>", x=0.0, xref="paper", y=1.17, yref="paper", showarrow=False, font=dict(size=11)),
             dict(text="<b>Color:</b>", x=0.18, xref="paper", y=1.17, yref="paper", showarrow=False, font=dict(size=11)),
-            dict(text="<b>Scale:</b>", x=0.36, xref="paper", y=1.17, yref="paper", showarrow=False, font=dict(size=11)),
+            dict(text="<b>Scale:</b>", x=0.32, xref="paper", y=1.17, yref="paper", showarrow=False, font=dict(size=11)),
         ]
     )
 
@@ -1132,7 +1132,7 @@ def plot_interactive_pc_vs_value(
     fig.update_layout(
         title=dict(
             text=f"{title} - {time_options[default_t]}",
-            y=0.96,
+            y=0.99,
             x=0.5,
             xanchor='center',
             yanchor='top',
@@ -1142,7 +1142,7 @@ def plot_interactive_pc_vs_value(
         yaxis_title=f"{value_columns[default_v]}",
         width=figsize[0],
         height=figsize[1],
-        margin=dict(t=120, l=80, r=120, b=80),
+        margin=dict(t=140, l=80, r=120, b=80),
         updatemenus=[
             dict(
                 buttons=time_buttons,
@@ -1172,7 +1172,7 @@ def plot_interactive_pc_vs_value(
                 buttons=scale_buttons,
                 direction='down',
                 showactive=True,
-                x=0.36,
+                x=0.32,
                 xanchor='left',
                 y=1.13,
                 yanchor='top',
@@ -1184,7 +1184,7 @@ def plot_interactive_pc_vs_value(
         annotations=[
             dict(text="<b>Time:</b>", x=0.0, xref="paper", y=1.17, yref="paper", showarrow=False, font=dict(size=11)),
             dict(text="<b>Y Value:</b>", x=0.18, xref="paper", y=1.17, yref="paper", showarrow=False, font=dict(size=11)),
-            dict(text="<b>Scale:</b>", x=0.36, xref="paper", y=1.17, yref="paper", showarrow=False, font=dict(size=11)),
+            dict(text="<b>Scale:</b>", x=0.32, xref="paper", y=1.17, yref="paper", showarrow=False, font=dict(size=11)),
         ]
     )
 
